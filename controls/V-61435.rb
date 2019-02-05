@@ -1,13 +1,13 @@
 control "V-61435" do
   title "System Privileges must not be granted to PUBLIC."
   desc  "System privileges can be granted to users and roles and to the user
-group PUBLIC. All privileges granted to PUBLIC are accessible to every user in
-the database. Many of these privileges convey considerable authority over the
-database and should be granted only to those persons responsible for
-administering the database. In general, these privileges should be granted to
-roles and then the appropriate roles should be granted to users. System
-privileges must never be granted to PUBLIC as this could allow users to
-compromise the database."
+  group PUBLIC. All privileges granted to PUBLIC are accessible to every user in
+  the database. Many of these privileges convey considerable authority over the
+  database and should be granted only to those persons responsible for
+  administering the database. In general, these privileges should be granted to
+  roles and then the appropriate roles should be granted to users. System
+  privileges must never be granted to PUBLIC as this could allow users to
+  compromise the database."
   impact 0.5
   tag "gtitle": "SRG-APP-000516-DB-999900"
   tag "gid": "V-61435"
@@ -15,7 +15,7 @@ compromise the database."
   tag "stig_id": "O121-BP-022400"
   tag "fix_id": "F-67351r1_fix"
   tag "cci": ["CCI-000366"]
-  tag "nist": ["Rev_4"]
+  tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -30,16 +30,16 @@ compromise the database."
 
   select privilege from dba_sys_privs where grantee = 'PUBLIC';
 
-If any records are returned, this is a finding."
+  If any records are returned, this is a finding."
   tag "fix": "Revoke any system privileges assigned to PUBLIC:
 
-From SQL*Plus:
+  From SQL*Plus:
 
   revoke [system privilege] from PUBLIC;
 
-Replace [system privilege] with the named system privilege.
+  Replace [system privilege] with the named system privilege.
 
-Note:  System privileges are not granted to PUBLIC by default and would
-indicate a custom action."
+  Note:  System privileges are not granted to PUBLIC by default and would
+  indicate a custom action."
 end
 

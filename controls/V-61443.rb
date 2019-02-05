@@ -1,10 +1,10 @@
 control "V-61443" do
   title "Application role permissions must not be assigned to the Oracle PUBLIC
-role."
+  role."
   desc  "Permissions granted to PUBLIC are granted to all users of the
-database. Custom roles must be used to assign application permissions to
-functional groups of application users. The installation of Oracle does not
-assign role permissions to PUBLIC."
+  database. Custom roles must be used to assign application permissions to
+  functional groups of application users. The installation of Oracle does not
+  assign role permissions to PUBLIC."
   impact 0.5
   tag "gtitle": "SRG-APP-000516-DB-999900"
   tag "gid": "V-61443"
@@ -12,7 +12,7 @@ assign role permissions to PUBLIC."
   tag "stig_id": "O121-BP-022800"
   tag "fix_id": "F-67359r1_fix"
   tag "cci": ["CCI-000366"]
-  tag "nist": ["Rev_4"]
+  tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -27,12 +27,12 @@ assign role permissions to PUBLIC."
 
   select granted_role from dba_role_privs where grantee = 'PUBLIC';
 
-If any roles are listed, this is a finding."
+  If any roles are listed, this is a finding."
   tag "fix": "Revoke role grants from PUBLIC.
 
-Do not assign role privileges to PUBLIC.
+  Do not assign role privileges to PUBLIC.
 
-From SQL*Plus:
+  From SQL*Plus:
 
   revoke [role name] from PUBLIC;"
 end

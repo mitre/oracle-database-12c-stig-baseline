@@ -1,11 +1,11 @@
 control "V-61431" do
   title "The Oracle REMOTE_LOGIN_PASSWORDFILE parameter must be set to
-EXCLUSIVE or NONE."
+  EXCLUSIVE or NONE."
   desc  "The REMOTE_LOGIN_PASSWORDFILE setting of \"NONE\" disallows remote
-administration of the database. The REMOTE_LOGIN_PASSWORDFILE setting of
-\"EXCLUSIVE\" allows for auditing of individual DBA logons to the SYS account.
-If not set to \"EXCLUSIVE\", remote connections to the database as \"internal\"
-or \"as SYSDBA\" are not logged to an individual account."
+  administration of the database. The REMOTE_LOGIN_PASSWORDFILE setting of
+  \"EXCLUSIVE\" allows for auditing of individual DBA logons to the SYS account.
+  If not set to \"EXCLUSIVE\", remote connections to the database as \"internal\"
+  or \"as SYSDBA\" are not logged to an individual account."
   impact 0.5
   tag "gtitle": "SRG-APP-000516-DB-999900"
   tag "gid": "V-61431"
@@ -13,7 +13,7 @@ or \"as SYSDBA\" are not logged to an individual account."
   tag "stig_id": "O121-BP-022200"
   tag "fix_id": "F-67347r2_fix"
   tag "cci": ["CCI-000366"]
-  tag "nist": ["Rev_4"]
+  tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -28,22 +28,22 @@ or \"as SYSDBA\" are not logged to an individual account."
 
   select value from v$parameter where upper(name) = 'REMOTE_LOGIN_PASSWORDFILE';
 
-If the value returned does not equal 'EXCLUSIVE' or 'NONE', this is a finding."
+  If the value returned does not equal 'EXCLUSIVE' or 'NONE', this is a finding."
   tag "fix": "Disable use of the REMOTE_LOGIN_PASSWORDFILE where remote
-administration is not authorized by specifying a value of NONE.
+  administration is not authorized by specifying a value of NONE.
 
-If authorized, restrict use of a password file to exclusive use by each
-database by specifying a value of EXCLUSIVE.
+  If authorized, restrict use of a password file to exclusive use by each
+  database by specifying a value of EXCLUSIVE.
 
-From SQL*Plus:
+  From SQL*Plus:
 
- alter system set REMOTE_LOGIN_PASSWORDFILE = 'EXCLUSIVE' scope = spfile;
+   alter system set REMOTE_LOGIN_PASSWORDFILE = 'EXCLUSIVE' scope = spfile;
 
-  OR
+    OR
 
- alter system set REMOTE_LOGIN_PASSWORDFILE = 'NONE' scope = spfile;
+  alter system set REMOTE_LOGIN_PASSWORDFILE = 'NONE' scope = spfile;
 
-The above SQL*Plus command will set the parameter to take effect at next system
-startup."
+  The above SQL*Plus command will set the parameter to take effect at next system
+  startup."
 end
 
