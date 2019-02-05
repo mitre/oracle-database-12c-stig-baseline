@@ -1,21 +1,21 @@
 control "V-61581" do
   title "The DBMS must restrict grants to sensitive information to authorized
-user roles."
+  user roles."
   desc  "Applications employ the concept of least privilege for specific duties
-and information systems (including specific functions, ports, protocols, and
-services). The concept of least privilege is also applied to information system
-processes, ensuring that the processes operate at privilege levels no higher
-than necessary to accomplish required organizational missions and/or functions.
-Organizations consider the creation of additional processes, roles, and
-information system accounts as necessary to achieve least privilege.
-Organizations also apply least privilege concepts to the design, development,
-implementation, and operations of information systems.
+  and information systems (including specific functions, ports, protocols, and
+  services). The concept of least privilege is also applied to information system
+  processes, ensuring that the processes operate at privilege levels no higher
+  than necessary to accomplish required organizational missions and/or functions.
+  Organizations consider the creation of additional processes, roles, and
+  information system accounts as necessary to achieve least privilege.
+  Organizations also apply least privilege concepts to the design, development,
+  implementation, and operations of information systems.
 
-    Unauthorized access to sensitive data may compromise the confidentiality of
-personnel privacy, threaten national security, or compromise a variety of other
-sensitive operations. Access controls are best managed by defining requirements
-based on distinct job functions and assigning access based on the job function
-assigned to the individual user.
+      Unauthorized access to sensitive data may compromise the confidentiality of
+  personnel privacy, threaten national security, or compromise a variety of other
+  sensitive operations. Access controls are best managed by defining requirements
+  based on distinct job functions and assigning access based on the job function
+  assigned to the individual user.
   "
   impact 0.5
   tag "gtitle": "SRG-APP-000062-DB-000011"
@@ -24,7 +24,8 @@ assigned to the individual user.
   tag "stig_id": "O121-C2-003500"
   tag "fix_id": "F-67497r1_fix"
   tag "cci": ["CCI-000366", "CCI-002220"]
-  tag "nist": ["Rev_4"]
+  tag "nist": ['CM-6 b', 'Rev_4']
+  tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -36,18 +37,18 @@ assigned to the individual user.
   tag "responsibility": nil
   tag "ia_controls": nil
   tag "check": "Obtain a list of privileges assigned to user accounts. If
-access to sensitive information is granted to roles not authorized to access
-sensitive information, this is a finding.
+  access to sensitive information is granted to roles not authorized to access
+  sensitive information, this is a finding.
 
-If access to sensitive information is granted to individual accounts rather
-than to a role, this is a finding."
+  If access to sensitive information is granted to individual accounts rather
+  than to a role, this is a finding."
   tag "fix": "Define application user roles based on privilege and job function
-requirements.
+  requirements.
 
-Assign the required privileges to the role and assign the role to authorized
-application user accounts.
+  Assign the required privileges to the role and assign the role to authorized
+  application user accounts.
 
-Revoke any privileges to sensitive information directly assigned to application
-user accounts."
+  Revoke any privileges to sensitive information directly assigned to application
+  user accounts."
 end
 

@@ -1,9 +1,9 @@
 control "V-61519" do
   title "Changes to configuration options must be audited."
   desc  "The AUDIT_SYS_OPERATIONS parameter is used to enable auditing of
-actions taken by the user SYS. The SYS user account is a shared account by
-definition and holds all privileges in the Oracle database. It is the account
-accessed by users connecting to the database with SYSDBA or SYSOPER privileges."
+  actions taken by the user SYS. The SYS user account is a shared account by
+  definition and holds all privileges in the Oracle database. It is the account
+  accessed by users connecting to the database with SYSDBA or SYSOPER privileges."
   impact 0.5
   tag "gtitle": "SRG-APP-000516-DB-999900"
   tag "gid": "V-61519"
@@ -11,7 +11,7 @@ accessed by users connecting to the database with SYSDBA or SYSOPER privileges."
   tag "stig_id": "O121-BP-025800"
   tag "fix_id": "F-67435r1_fix"
   tag "cci": ["CCI-000366"]
-  tag "nist": ["Rev_4"]
+  tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -26,12 +26,12 @@ accessed by users connecting to the database with SYSDBA or SYSOPER privileges."
 
   select value from v$parameter where name = 'audit_sys_operations';
 
-If the value returned is FALSE, this is a finding."
+  If the value returned is FALSE, this is a finding."
   tag "fix": "From SQL*Plus:
 
   alter system set audit_sys_operations = TRUE scope = spfile;
 
-The above SQL*Plus command will set the parameter to take effect at next system
-startup."
+  The above SQL*Plus command will set the parameter to take effect at next system
+  startup."
 end
 

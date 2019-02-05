@@ -22,7 +22,7 @@ unauthorized access to database installations.
   tag "stig_id": "O121-C1-015000"
   tag "fix_id": "F-67457r1_fix"
   tag "cci": ["CCI-000199"]
-  tag "nist": ["Rev_4"]
+  tag "nist": ['IA-5 (1) (d)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -34,18 +34,18 @@ unauthorized access to database installations.
   tag "responsibility": nil
   tag "ia_controls": nil
   tag "check": "Use this query to identify the Oracle-supplied accounts that
-still have their default passwords:
-SELECT * FROM SYS.DBA_USERS_WITH_DEFPWD;
+  still have their default passwords:
+  SELECT * FROM SYS.DBA_USERS_WITH_DEFPWD;
 
-If any accounts other than XS$NULL are listed, this is a finding.
+  If any accounts other than XS$NULL are listed, this is a finding.
 
-(XS$NULL is an internal account that represents the absence of a user in a
-session. Because XS$NULL is not a user, this account can only be accessed by
-the Oracle Database instance. XS$NULL has no privileges and no one can
-authenticate as XS$NULL, nor can authentication credentials ever be assigned to
-XS$NULL.)"
+  (XS$NULL is an internal account that represents the absence of a user in a
+  session. Because XS$NULL is not a user, this account can only be accessed by
+  the Oracle Database instance. XS$NULL has no privileges and no one can
+  authenticate as XS$NULL, nor can authentication credentials ever be assigned to
+  XS$NULL.)"
   tag "fix": "Change passwords for DBMS accounts to non-default values. Where
-necessary, unlock or enable accounts to change the password, and then return
-the account to disabled or locked status."
+  necessary, unlock or enable accounts to change the password, and then return
+  the account to disabled or locked status."
 end
 
