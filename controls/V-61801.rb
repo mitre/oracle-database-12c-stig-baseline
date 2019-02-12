@@ -31,7 +31,7 @@ control "V-61801" do
   tag "stig_id": "O121-C2-020600"
   tag "fix_id": "F-67717r1_fix"
   tag "cci": ["CCI-001685"]
-  tag "nist": ['AC-2 (4)', 'Rev_4']]
+  tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false

@@ -25,7 +25,7 @@ control "V-61591" do
   tag "fix_id": "F-67507r1_fix"
   tag "cci": ["CCI-000366", "CCI-002220"]
   tag "nist": ['CM-6 b', 'Rev_4']
-  tag "nist": ['AC-5 c', 'Rev_4']]
+  tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
