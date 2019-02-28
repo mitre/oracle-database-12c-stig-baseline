@@ -56,5 +56,15 @@ control "V-61465" do
   Ensure the file is directed to a writable location.
 
   [SID] is equal to the oracle SID or database instance ID."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  parameter = sql.query("select value from v$parameter where name = '_trace_files_public';").column('value')
+
+  describe 'The oracle database _TRACE_FILES_PUBLIC parameter' do
+    subject { parameter }
+    it { should_not cmp 'TRUE' }
+  end
 end
 

@@ -37,5 +37,8 @@ control "V-61513" do
 
   Create and use custom replication accounts assigned least privileges for
   supporting replication operations."
+  describe 'A manual review is required to ensure replication accounts are not be granted DBA privileges' do
+    skip 'A manual review is required to ensure replication accounts are not be granted DBA privileges'
+  end
 end
 

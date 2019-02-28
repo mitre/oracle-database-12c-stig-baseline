@@ -31,8 +31,9 @@ control "V-61457" do
   not available, this is a finding."
   tag "fix": "Develop, document and implement policy and procedures to monitor
   audit trail data daily."
-  describe 'A manual review is required to esnure audit trail data is reviewed daily or more frequently' do
-    skip 'A manual review is required to esnure audit trail data is reviewed daily or more frequently'
+  describe 'A manual review is required to ensure audit trail data is reviewed daily or more frequently' do
+    skip 'A manual review is required to ensure audit trail data is reviewed daily or more frequently'
   end
 end
 
+ 

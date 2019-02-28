@@ -37,5 +37,14 @@ control "V-61529" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  parameter = sql.query("select value from v$parameter where name = 'global_names';").column('value')
+
+  describe 'The oracle database GLOBAL_NAMES parameter' do
+    subject { parameter }
+    it { should_not cmp 'FALSE' }
+  end
 end
 

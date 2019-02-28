@@ -267,5 +267,23 @@ control "V-61655" do
 
   Apply the same process used in standard auditing to the tables with AUDSYS as
   the owner."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  ALLOWED_AUDIT_USERS = ['a', 'b']
+  users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
+      FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
+  if users_allowed_access_to_audit_info.empty?
+    impact 0.0
+    describe 'There are no oracle users allowed access to audit information, control N/A' do
+      skip 'There are no oracle users allowed access to audit information'
+    end
+  else
+    users_allowed_access_to_audit_info.each do |user|
+      describe "oracle users: #{user} allowed access to audit information" do
+        subject { user }
+        it { should be_in ALLOWED_AUDIT_USERS }
+      end
+    end
+  end 
 end
 

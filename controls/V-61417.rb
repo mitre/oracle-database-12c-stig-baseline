@@ -67,5 +67,23 @@ control "V-61417" do
 
   Consult and follow the instructions for creating control files in the Oracle
   Database Administrator's Guide, under Steps for Creating New Control Files."
-end
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
+  controlfiles = sql.query("select name from v$controlfile;").column("name")
+  partitions = []
+  
+  controlfiles.each do |files|
+    file = files[1..-1]
+    get_pos_slash = file.index('/')
+    partition = file[0..get_pos_slash]
+    partitions.push(partition)
+  end
+
+  control_file1_partition = partitions[0]
+  control_file2_partition = partitions[1]
+
+  describe "The oracable control file permission: #{control_file1_partition}" do
+    subject {control_file1_partition}
+    it { should_not cmp control_file2_partition}
+  end
+end

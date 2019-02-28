@@ -76,5 +76,43 @@ control "V-61467" do
   to maintain performance, consider allowing a special purpose account to own the
   index or enable the application owner account for the duration of the routine
   maintenance function only."
-end
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  ALLOWED_DBADMIN_USERS = ['a', 'b']
+  dba_users = sql.query("select grantee from dba_sys_privs
+  where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
+  if  dba_users.empty?
+    impact 0.0
+    describe 'There are no oracle DBA users, control N/A' do
+      skip 'There are no oracle DBA users, control N/A'
+    end
+  else
+    dba_users.each do |user|
+      describe "oracle DBA users: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_DBADMIN_USERS }
+      end
+    end
+  end 
+
+  ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS = ['a', 'b']
+  unlocked_accounts = sql.query("select distinct o.owner from dba_objects o, dba_users u
+  where
+   o.object_type <> 'SYNONYM'
+   and o.owner = username
+   and upper(account_status) not like '%LOCKED%';").column('owner').uniq
+  if  unlocked_accounts.empty?
+    impact 0.0
+    describe 'There are no unlocked oracle accounts, control N/A' do
+      skip 'There are no unlocked oracle accounts, control N/A'
+    end
+  else
+    unlocked_accounts.each do |user|
+      describe "oracle user: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS }
+      end
+    end
+  end 
+end

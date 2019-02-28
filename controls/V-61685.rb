@@ -208,5 +208,15 @@ control "V-61685" do
 
   See the Oracle Net Services Administrators Guides, External Procedures section
   for detailed configuration information."
-end
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
+  describe file ("#{oracle_home}/rdbms/admin/externaljob.ora") do
+    its('content') { should_not include 'run_user = nobody' }
+    its('content') { should_not include 'run_group = nobody' }
+  end
+
+  describe file ("#{oracle_home}/hs/admin/extproc.ora") do
+    it { should exist }
+    its('content') { should match /^EXTPROC_DLLS=ONLY:\s*\w*/ }
+  end
+end

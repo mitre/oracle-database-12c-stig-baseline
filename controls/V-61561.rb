@@ -60,7 +60,7 @@ control "V-61561" do
   identified by the value PASSWORD_LIFE_TIME in the RESOURCE_NAME column.
 
   SQL>select
-  profile,
+  profile, 
   resource_name,
   resource_type,
   limit
@@ -77,5 +77,23 @@ control "V-61561" do
 
   Create a job to lock accounts under this profile that are more than n days old,
   where n is the organization-defined time period."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_LIFE_TIME'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+
+    user_profiles.each do |profile|
+      password_life_time = sql.query(format(query, profile: profile)).column('limit') 
+
+      describe 'The oracle database account password life time for profile: #{profile}' do
+        subject { password_life_time }
+        it { should cmp <= 35}
+      end
+    end
 end
 

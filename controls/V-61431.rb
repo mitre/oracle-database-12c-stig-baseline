@@ -45,5 +45,22 @@ control "V-61431" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  parameter = sql.query("select value from v$parameter where upper(name) = 'REMOTE_LOGIN_PASSWORDFILE';").column('value')
+
+  describe.one do
+    describe 'The oracle database REMOTE_LOGIN_PASSWORDFILE parameter' do
+      subject { parameter }
+      it { should cmp 'EXCLUSIVE' }
+    end
+
+    describe 'The oracle database REMOTE_LOGIN_PASSWORDFILE parameter' do
+      subject { parameter }
+      it { should cmp 'NONE' }
+    end
+  end
 end
 

@@ -90,5 +90,38 @@ control "V-61739" do
 
   Where a password lifetime longer than “60” is needed, document the reasons and
   obtain ISSO approval."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  get_effective_life_time = sql.query("SELECT p1.profile,
+  CASE p1.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
+  CASE p2.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
+  CASE p3.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
+  CASE p4.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
+  TO_CHAR(DECODE(p1.limit, 'DEFAULT', p3.limit, p1.limit) + DECODE(p2.limit,
+  'DEFAULT', p4.limit, p2.limit))
+  END
+  END
+  END
+  END effective_life_time
+  FROM dba_profiles p1, dba_profiles p2, dba_profiles p3, dba_profiles p4
+  WHERE p1.profile=p2.profile
+  AND p3.profile='DEFAULT'
+  AND p4.profile='DEFAULT'
+  AND p1.resource_name='PASSWORD_LIFE_TIME'
+  AND p2.resource_name='PASSWORD_GRACE_TIME'
+  AND p3.resource_name='PASSWORD_LIFE_TIME' -- from DEFAULT profile
+  AND p4.resource_name='PASSWORD_GRACE_TIME' -- from DEFAULT profile
+  order by 1;").column('effective_life_time') 
+
+  get_effective_life_time.each do |effective_life_time|
+
+    describe 'The oracle database account effective life time limit' do
+      subject { effective_life_time }
+      it { should cmp >= 60}
+    end
+  end
+  describe get_effective_life_time do
+    it {should_not be_empty }
+  end
 end
 

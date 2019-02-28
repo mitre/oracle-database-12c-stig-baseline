@@ -279,5 +279,26 @@ control "V-61815" do
   The logfile may contain TNS-01169, TNS-01189, TNS-01190, or TNS-12508 errors,
   which may signify attacks or inappropriate activity. Monitor the logfile and
   generate an alert whenever these errors are encountered."
-end
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
+  describe file ("#{oracle_home}/network/admin/listener.ora") do
+    its('content') { should include 'LISTENER=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST=)(PORT = 0)))' }
+    its('content') { should include 'LISTENER=
+    (ADDRESS_LIST=
+      (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1521)(RATE_LIMIT=yes))
+      (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1522)(RATE_LIMIT=yes))
+      (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1526))' }
+    its('content') { should include 'CONNECTION_RATE_LISTENER=10' }
+    its('content') { should include 'SEC_MAX_FAILED_LOGIN_ATTEMPTS=3' }
+    its('content') { should include 'ADMIN_RESTRICTIONS_LISTENER=ON' }
+    its('content') { should include 'SEC_PROTOCOL_ERROR_TRACE_ACTION=TRACE' }
+    its('content') { should include 'TCP.INVITED_NODES=' }
+    its('content') { should include 'TCP.EXCLUDED_NODES=' }
+  end
+
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'TCP.VALIDNODE_CHECKING=yes' }
+  end
+end

@@ -43,5 +43,10 @@ control "V-61787" do
 
   (Using Oracle Configuration Manager with Enterprise Manager, configured to
   perform this verification, is one possible way of satisfying this requirement.)"
+  describe 'A manual review is required to ensure the system verifies there have not been unauthorized changes to the
+    DBMS software and information' do
+    skip 'A manual review is required to ensure the system verifies there have not been unauthorized changes to the
+    DBMS software and information'
+    end
   end
 

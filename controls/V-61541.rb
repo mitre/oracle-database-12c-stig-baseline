@@ -47,5 +47,22 @@ unauthorized access to database installations.
   tag "fix": "Change passwords for DBMS accounts to non-default values. Where
   necessary, unlock or enable accounts to change the password, and then return
   the account to disabled or locked status."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  sys_dba_users_with_defpwd = sql.query(" SELECT username FROM SYS.DBA_USERS_WITH_DEFPWD;").column('username').uniq
+
+  sys_dba_users_with_defpwd.each do |user|
+    describe "The oracle system database user: #{user} with a default password" do
+      subject { user }
+      it { should cmp 'XS$NULL' }
+    end
+  end
+  if sys_dba_users_with_defpwd.empty?
+    describe 'There are no sysdba users with default passwords, therefore this control is NA' do
+      skip 'There are no sysdba users with default passwords, therefore this control is NA'
+    end
+  end
 end
+
 

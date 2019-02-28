@@ -113,5 +113,30 @@ control "V-61761" do
 
   FIPS 140-2 documentation can be downloaded from
   http://csrc.nist.gov/publications/PubsFIPS.html#140-2"
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  parameter = sql.query("select * from v$parameter where name = 'DBFIPS_140c';").column('value')
+
+  describe 'The oracle database DBFIPS_140c parameter' do
+    subject { parameter }
+    it { should_not be_empty}
+  end
+
+
+  encrypted_tablespaces = sql.query("SELECT * FROM V$ENCRYPTED_TABLESPACES;").column('MASTERKEYID')
+
+  describe 'The oracle tablespaces that are encrypted' do
+    subject { encrypted_tablespaces }
+    it { should_not be_empty}
+  end
+
+  encrypted_colums = sql.query("SELECT * FROM DBA_ENCRYPTED_COLUMNS;").column('COLUMN_NAME')
+
+  describe 'The oracle table columns that are encrypted' do
+    subject { encrypted_colums }
+    it { should_not be_empty }
+  end
 end
 

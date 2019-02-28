@@ -2,7 +2,7 @@ control "V-61617" do
   title "Databases utilizing Discretionary Access Control (DAC) must enforce a
   policy that limits propagation of access rights."
   desc  "Discretionary Access Control (DAC) is based on the premise that
-  individual users are \"owners\" of objects and therefore have discretion over
+  individual users are owners of objects and therefore have discretion over
   who should be authorized to access the object and in which mode (e.g., read or
   write). Ownership is usually acquired as a consequence of creating the object
   or via specified ownership assignment.
@@ -60,5 +60,10 @@ control "V-61617" do
   When a user is granted access to an object with the GRANT option, then they can
   provide permissions to others.  Without the GRANT option, a user cannot grant
   access to an object.  No configuration is required."
+  describe 'A manaul review is required to ensure the Databases utilizing Discretionary Access Control (DAC) enforce a
+    policy that limits propagation of access rights' do
+    skip 'A manaul review is required to ensure the Databases utilizing Discretionary Access Control (DAC) enforce a
+    policy that limits propagation of access rights'
+  end
 end
 

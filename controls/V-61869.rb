@@ -65,5 +65,22 @@ control "V-61869" do
   SQL> select * from dba_role_privs where granted_role = 'DBA';"
   tag "fix": "Restrict access to the DBMS software libraries to accounts that
   require access based on job function."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+    ORACLE_DBAS = ['a', 'b']
+  dba_users = sql.query("select * from dba_role_privs where granted_role = 'DBA';").column('grantee').uniq
+  if  dba_users.empty?
+    impact 0.0
+    describe "There are no oracle DBA's, control N/A" do
+      skip "There are no oracle DBA's, control N/A" 
+    end
+  else
+    dba_users.each do |user|
+      describe "oracle DBA's users: #{user}" do
+        subject { user }
+        it { should be_in ORACLE_DBAS }
+      end
+    end
+  end 
 end
 

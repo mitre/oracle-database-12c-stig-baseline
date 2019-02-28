@@ -56,5 +56,23 @@ control "V-61461" do
   this is a finding."
   tag "fix": "Create and assign dedicated tablespaces for the storage of data
   by each application using the CREATE TABLESPACE command."
-end
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+   ALLOWED_APPLICATION_OWNERS = ['a', 'b']
+  application_owners = sql.query("select distinct owner
+  from dba_SEGMENTS;").column('owner').uniq
+  if  application_owners.empty?
+    impact 0.0
+    describe 'There are no oracle db application owners, therefore control N/A' do
+      skip 'There are no oracle db application owners, therefore control N/A'
+    end
+  else
+    application_owners.each do |user|
+      describe "oracle db application owners: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_APPLICATION_OWNERS }
+      end
+    end
+  end
+end

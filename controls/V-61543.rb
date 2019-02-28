@@ -1,6 +1,6 @@
 control "V-61543" do
   title "The DBMS, when using PKI-based authentication, must enforce authorized
- access to the corresponding private key."
+  access to the corresponding private key."
   desc  "The cornerstone of the PKI is the private key used to encrypt or
   digitally sign information.
 
@@ -81,5 +81,37 @@ control "V-61543" do
   Configure the database to support Transport Layer Security (TLS) protocols and
   the Oracle Wallet to store authentication and signing credentials, including
   private keys."
-end
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.AUTHENTICATION_SERVICES= (BEQ, TCPS)' }
+  end
+
+  describe.one do 
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.2' }
+    end
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.1' }
+    end
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'WALLET_LOCATION =
+  (SOURCE =
+  (METHOD = FILE)
+  (METHOD_DATA =
+  (DIRECTORY = /u01/app/oracle/product/12.1.0/dbhome_1/owm/wallets)
+  )
+  )' }
+  end 
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CIPHER_SUITES= (SSL_RSA_WITH_AES_256_CBC_SHA384)' }
+  end
+end
+ 

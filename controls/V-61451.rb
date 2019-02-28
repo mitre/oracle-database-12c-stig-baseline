@@ -69,5 +69,22 @@ control "V-61451" do
   12c. Use Oracle GoldenGate to replace all features of Advanced Replication,
   including multimaster replication, updatable materialized views, hierarchical
   materialized views, and deployment templates."
-end
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
+  ALLOWED_DB_LINKS = ['a', 'b']
+  db_links = sql.query("SELECT DB_LINK FROM DBA_DB_LINKS;").column('db_link').uniq
+  if  db_links.empty?
+    impact 0.0
+    describe 'There are no oracle database links defined, control N/A' do
+      skip 'There are no oracle database links defined, control N/A'
+    end
+  else
+    db_links.each do |link|
+      describe "The defined oracle database link: #{link}" do
+        subject { link }
+        it { should be_in ALLOWED_DB_LINKS }
+      end
+    end
+  end 
+end
+ 

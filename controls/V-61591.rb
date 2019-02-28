@@ -82,5 +82,46 @@ control "V-61591" do
   necessary privileges for the administrative functions to a role.  Do not assign
   administrative privileges directly to users, except for those that Oracle does
   not permit to be assigned via roles."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  database_accounts_with_administrative_privs =  unified_auditing_events = sql.query("SELECT grantee
+  FROM   dba_sys_privs
+  WHERE  grantee IN
+  (
+  SELECT username
+  FROM   dba_users
+  WHERE  username NOT IN
+  (
+  'XDB', 'SYSTEM', 'SYS', 'LBACSYS',
+  'DVSYS', 'DVF', 'SYSMAN_RO',
+  'SYSMAN_BIPLATFORM', 'SYSMAN_MDS',
+  'SYSMAN_OPSS', 'SYSMAN_STB', 'DBSNMP',
+  'SYSMAN', 'APEX_040200', 'WMSYS',
+  'SYSDG', 'SYSBACKUP', 'SPATIAL_WFS_ADMIN_USR',
+  'SPATIAL_CSW_ADMIN_US', 'GSMCATUSER',
+  'OLAPSYS', 'SI_INFORMTN_SCHEMA',
+  'OUTLN', 'ORDSYS', 'ORDDATA', 'OJVMSYS',
+  'ORACLE_OCM', 'MDSYS', 'ORDPLUGINS',
+  'GSMADMIN_INTERNAL', 'MDDATA', 'FLOWS_FILES',
+  'DIP', 'CTXSYS', 'AUDSYS',
+  'APPQOSSYS', 'APEX_PUBLIC_USER', 'ANONYMOUS',
+  'SPATIAL_CSW_ADMIN_USR', 'SYSKM',
+  'SYSMAN_TYPES', 'MGMT_VIEW',
+  'EUS_ENGINE_USER', 'EXFSYS', 'SYSMAN_APM'
+  )
+  )
+  AND privilege NOT IN ('UNLIMITED TABLESPACE'
+                   , 'REFERENCES', 'INDEX', 'SYSDBA', 'SYSOPER'
+  );").column('grantee').uniq
+
+  describe 'Database accounts with administrative privileges' do
+    subject {database_accounts_with_administrative_privs}
+    it {should be_empty}
+  end
 end
+
+
+
+
 

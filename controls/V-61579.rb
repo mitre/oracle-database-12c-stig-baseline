@@ -89,5 +89,18 @@ control "V-61579" do
   oracle    2137  2125  0 13:25 pts/1    00:00:00 grep ora_"
   tag "fix": "Create an OS account dedicated to Oracle DBMS processes, and
   allow only Oracle DBMS processes to run under the account."
-end
 
+  oracle_file_owners = command("ls -l  $ORACLE_HOME|awk '{ print $3; }' | sort -u").stdout.strip.split("\n")
+
+  oracle_file_owners.each do |owner|
+    describe 'The file and directory inside the Oracle Home directory' do
+      subject {owner}
+      it { should cmp 'oracle'}
+    end
+  end
+  if oracle_file_owners.empty?
+    describe 'There are no oracle file owners, therefore this control is NA' do
+      skip 'There are no oracle file owners, therefore this control is NA'
+    end
+  end
+end

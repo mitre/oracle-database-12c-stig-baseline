@@ -45,5 +45,10 @@ control "V-61509" do
 
   The operating system may reside on a virtual host machine where supported by
   the DBMS vendor."
+  describe 'A manual review is required to ensure the DBMS does not share a host supporting an independent security
+  service' do
+   skip 'A manual review is required to ensure the DBMS does not share a host supporting an independent security
+  service'
+  end
 end
 

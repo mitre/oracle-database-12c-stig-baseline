@@ -50,5 +50,10 @@ control "V-61581" do
 
   Revoke any privileges to sensitive information directly assigned to application
   user accounts."
+  describe 'A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized
+    user roles' do
+    skip  'A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized
+    user roles'
+  end
 end
 

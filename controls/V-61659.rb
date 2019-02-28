@@ -30,7 +30,7 @@ control "V-61659" do
   tag "cci": ["CCI-001493"]
   tag "nist": ['AU-9', 'Rev_4']
   tag "false_negatives": nil
-  tag "false_positives": nil
+  tag "false_positives": nil 
   tag "documentable": false
   tag "mitigations": nil
   tag "severity_override_guidance": false

@@ -62,5 +62,12 @@ control "V-61593" do
   objects, from non-DBA accounts.
 
   Provide separate accounts to DBA for database administration."
+  describe 'A manual review is required to ensure administrators must utilize a separate, distinct administrative
+    account when performing administrative activities, accessing database security
+    functions, or accessing security-relevant information' do
+    skip 'A manual review is required to ensure administrators must utilize a separate, distinct administrative
+    account when performing administrative activities, accessing database security
+    functions, or accessing security-relevant information'
+  end
 end
 

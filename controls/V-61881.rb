@@ -45,5 +45,10 @@ control "V-61881" do
   is a finding."
   tag "fix": "Configure DBMS settings to uniquely identify and authenticate all
   non-organizational users who log onto the system."
+  describe 'A manual review is required to ensure the DBMS uniquely identifies and authenticates non-organizational
+  users (or processes acting on behalf of non-organizational users).' do
+    skip 'A manual review is required to ensure the DBMS uniquely identifies and authenticates non-organizational
+    users (or processes acting on behalf of non-organizational users).'
+  end
 end
 

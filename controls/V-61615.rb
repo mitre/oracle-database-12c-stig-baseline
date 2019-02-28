@@ -69,5 +69,8 @@ control "V-61615" do
 
   Ensure that audit tables are in their own tablespaces and that the tablespaces
   have enough room for the volume of log data that will be produced."
+  describe 'A manual review is required to ensure the DBMS has allocated audit record storage capacity' do
+    skip 'A manual review is required to ensure the DBMS has allocated audit record storage capacity'
+  end
 end
 

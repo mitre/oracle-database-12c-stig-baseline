@@ -75,8 +75,9 @@ control "V-61715" do
   multiple and/or differently located sqlnet.ora files.) If encryption is set,
   entries like the following will be present:
 
-  SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)SQLNET.ENCRYPTION_TYPES_SERVER=
-  (AES256)SQLNET.CRYPTO_CHECKSUM_SERVER = required
+  SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)
+  SQLNET.ENCRYPTION_TYPES_SERVER=(AES256)
+  SQLNET.CRYPTO_CHECKSUM_SERVER = required
 
   SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)
   SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)
@@ -91,5 +92,30 @@ control "V-61715" do
 
   If appropriate, apply Oracle Data Network Encryption to protect against replay
   mechanisms."
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_SERVER=(AES256)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_SERVER = required' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_CLIENT = requested' }
+  end
 end
 

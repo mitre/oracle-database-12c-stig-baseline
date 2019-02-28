@@ -36,5 +36,11 @@ control "V-61533" do
   Include the following line in the file:
 
   REMOTE_ADMIN = NO"
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/cman.ora") do
+    its('content') { should include 'REMOTE_ADMIN = NO' }
+    it { should exist }
+  end
 end
 

@@ -73,5 +73,38 @@ control "V-61721" do
 
   Using PPPPPP as an example, the statement to do this is:
   ALTER PROFILE PPPPPP LIMIT PASSWORD_REUSE_MAX 5 PASSWORD_REUSE_TIME 5;"
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query_password_max_reuse = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_REUSE_MAX'
+  )
+
+  query_password_reuse_time = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_REUSE_TIME'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+  user_profiles.each do |profile|
+    password_reuse_max = sql.query(format(query_password_max_reuse, profile: profile)).column('limit') 
+    password_reuse_time = sql.query(format(query_password_reuse_time, profile: profile)).column('limit') 
+
+    describe 'The oracle database account password reuse max for profile: #{profile}' do
+      subject { password_reuse_max }
+      it { should_not cmp "UNLIMITED"}
+    end
+
+    describe "The oracle database account password reuse time for profile: #{profile}" do
+      subject { password_reuse_time }
+      it { should_not cmp "UNLIMITED"}
+    end
+  end
+  if user_profiles.empty?
+    describe 'There are no user profiles, therefore this control is NA' do
+      skip 'There are no user profiles, therefore this control is NA'
+    end
+  end
 end
 

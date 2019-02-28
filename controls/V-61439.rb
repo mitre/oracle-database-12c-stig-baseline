@@ -56,7 +56,7 @@ control "V-61439" do
   Run the SQL query:
 
   select owner ||'.'|| table_name ||':'|| privilege from dba_tab_privs
-  where grantee = 'PUBLIC'
+  where grantee = 'PUBLIC';
   and owner not in
   (<list of non-applicable accounts>);
 
@@ -82,5 +82,24 @@ control "V-61439" do
   From SQL*Plus:
 
   grant [privilege name] to [user role] on [object name];"
+
+   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  USERS_ALLOWED_ACCEESS_TO_PUBLIC = ['a', 'b']
+   users_with_public_access = sql.query("select DISTINCT owner from dba_tab_privs where grantee = 'PUBLIC';").column('owner').uniq
+  
+  if users_with_public_access.empty?
+    impact 0.0
+    describe 'There are no oracle users with access to PUBLIC, control N/A' do
+      skip 'There are no oracle users with access to PUBLIC'
+    end
+  else
+    users_with_public_access.each do |user|
+      describe "oracle user: #{user} with access to PUBLIC" do
+        subject { user }
+        it { should be_in USERS_ALLOWED_ACCEESS_TO_PUBLIC }
+      end
+    end
+  end 
 end
 

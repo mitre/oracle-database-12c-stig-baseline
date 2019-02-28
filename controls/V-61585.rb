@@ -56,5 +56,8 @@ control "V-61585" do
   objects) as part of their development activities, provide dedicated
   tablespaces, and revoke any rights that allowed them to use production
   tablespaces for this purpose."
+  describe 'A manual review is required to ensure the DBMS is protected from unauthorized access by developers' do
+    skip 'A manual review is required to ensure the DBMS is protected from unauthorized access by developers'
+  end
 end
 

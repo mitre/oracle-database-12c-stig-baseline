@@ -114,5 +114,15 @@ control "V-61643" do
      78,190,592       12
   USERS                                   1,048,576          26,624          3
                       26,624        1"
+
+  describe 'A manual review is required to ensure the DBMS itself, or the logging or alerting mechanism the application
+    utilizes, provides a warning when allocated audit record storage volume
+    reaches an organization-defined percentage of maximum audit record storage
+    capacity.' do 
+    skip 'A manual review is required to ensure the DBMS itself, or the logging or alerting mechanism the application
+    utilizes, provides a warning when allocated audit record storage volume
+    reaches an organization-defined percentage of maximum audit record storage
+    capacity.'
+  end
 end
 

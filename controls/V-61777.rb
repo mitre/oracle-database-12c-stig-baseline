@@ -65,5 +65,10 @@ control "V-61777" do
   DBMS, OS, and/or enterprise-level authentication/access mechanisms, or
   implement custom code, to terminate accounts with this profile after an
   organization-defined time period."
+  describe 'A manual review is required to ensure the DBMS automatically terminates emergency accounts after an
+    organization-defined time period for each type of account' do
+    skip 'A manual review is required to ensure the DBMS automatically terminates emergency accounts after an
+    organization-defined time period for each type of account'
+  end
 end
 

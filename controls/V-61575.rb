@@ -142,5 +142,10 @@ control "V-61575" do
   following documents:
   Database Vault Administrator's  Guide:
   https://docs.oracle.com/database/121/DVADM/toc.htm"
+  describe 'A manual review is required to ensure the DBMS enforces approved authorizations for logical access to
+    the system in accordance with applicable policy' do
+    skip 'A manual review is required to ensure the DBMS enforces approved authorizations for logical access to
+    the system in accordance with applicable policy'
+  end
 end
 

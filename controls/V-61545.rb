@@ -72,5 +72,17 @@ control "V-61545" do
   tag "fix": "Configure DBMS and/or operating system to use cryptographic
   mechanisms to prevent unauthorized disclosure of information during
   transmission where physical measures are not being utilized."
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_SERVER= (AES256)' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_CLIENT = requested' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_SERVER = required' }
+  end
+
+    
 end
 

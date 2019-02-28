@@ -73,10 +73,7 @@ control "V-61741" do
   If the $ORACLE_HOME/network/admin/sqlnet.ora contains the following entries,
   TLS is installed.
 
-  WALLET_LOCATION = (SOURCE=
-  (METHOD = FILE)
-  (METHOD_DATA =
-  DIRECTORY=/wallet)
+  WALLET_LOCATION = (SOURCE= (METHOD = FILE) (METHOD_DATA = DIRECTORY=/wallet)
 
   SSL_CIPHER_SUITES=(SSL_cipher_suiteExample)
   SSL_VERSION = 1.2 or 1.1
@@ -95,5 +92,28 @@ control "V-61741" do
   Configure the database to support Transport Layer Security (TLS) protocols and
   the Oracle Wallet to store authentication and signing credentials, including
   private keys."
+
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'WALLET_LOCATION = (SOURCE= (METHOD = FILE) (METHOD_DATA = DIRECTORY=/wallet)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should match /SSL_CIPHER_SUITES=\(\w*\)/ }
+  end
+
+  describe.one do 
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.2' }
+    end
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.1' }
+    end
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CLIENT_AUTHENTICATION=TRUE)' }
+  end
 end
 

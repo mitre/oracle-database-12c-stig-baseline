@@ -181,5 +181,10 @@ control "V-61559" do
   password complexity verification script be passed as an argument to the CREATE
   PROFILE statement. Oracle Database provides a default script, but can create
   your own routine or use third-party software instead."
+  describe 'A manual review is required to ensure the DBMS provides a mechanism to automatically identify accounts
+    designated as temporary or emergency accounts' do
+    skip 'A manual review is required to ensure the DBMS provides a mechanism to automatically identify accounts
+    designated as temporary or emergency accounts'
+  end
 end
 

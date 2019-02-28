@@ -109,5 +109,19 @@ control "V-61819" do
   CPU_PER_SESSION    100
   CPU_PER_CALL       100
   CONNECT_TIME       600;"
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  limit = sql.query("select 
+    DISTINCT b.limit
+  from dba_users a,
+       dba_profiles b
+  where b.resource_type is not null and
+        a.profile = b.profile;").column('limit')
+
+  describe 'The oracle database user limit' do
+    subject { limit }
+    it { should_not include 'UNLIMITED' }
+  end
 end
 

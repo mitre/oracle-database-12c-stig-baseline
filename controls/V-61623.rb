@@ -56,5 +56,10 @@ control "V-61623" do
   http://docs.oracle.com/database/121/DBSEG/part_6.htm#CCHEHCGI
   \"DBMS_AUDIT_MGMT\" in the Oracle Database PL/SQL Packages and Types Reference:
   http://docs.oracle.com/database/121/ARPLS/d_audit_mgmt.htm#ARPLS241"
+  describe 'A manual review is required to ensure the DBMS allows designated organizational personnel to select
+    which auditable events are to be audited by the database' do
+    skip 'A manual review is required to ensure the DBMS allows designated organizational personnel to select
+    which auditable events are to be audited by the database'
+  end
 end
 

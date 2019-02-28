@@ -90,5 +90,27 @@ control "V-61537" do
 
   Document all DBA group accounts and individual DBA account-assigned privileges
   in the System Security Plan."
+
+  get_dba_users = command('cat /etc/group | grep -i dba').stdout.strip.split("\n")
+  get_members_root_group = command('groups root').stdout.strip.split("\n")
+
+  get_dba_users.each do |user|
+    describe "The dba user: #{user} in /etc/group" do
+      subject {user}
+      it { should_not cmp 'root'}
+    end
+
+    get_members_root_group.each do |member|
+      describe "The user: #{member} in the root group" do
+        subject {member}
+        it { should_not cmp "#{user}"}
+      end
+    end
+  end
+  if get_dba_users.empty?
+    describe 'There are no dba users, therefore this control is NA' do
+      skip 'There are no dba users, therefore this control is NA'
+    end
+  end
 end
 

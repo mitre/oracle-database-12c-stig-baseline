@@ -68,5 +68,39 @@ control "V-61463" do
 
   Restrict access to the Oracle process and software owner accounts, DBAs, and
   backup operator accounts."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  log_mode = sql.query("select log_mode from v$database;").column('log_mode')
+
+  describe 'The oracle database log_mode parameter' do
+    subject { log_mode }
+    it { should_not cmp 'NOARCHIVELOG' }
+  end
+
+  log_archive_dest = sql.query("select value from v$parameter where name = 'log_archive_dest';").column('value')
+
+  describe 'The oracle database log_archive_dest parameter' do
+    subject { log_archive_dest }
+    it { should_not cmp [" "]}
+  end
+
+  parameter = sql.query("select DISTINCT value from v$parameter where name LIKE 'log_archive_dest_%';").column('value')
+
+  describe 'The oracle database value for log_archive_dest parameter' do
+    subject { parameter }
+    it { should_not cmp [" "]}
+  end
+
+
+  db_recovery_file_dest = sql.query("select value from v$parameter where name = 'db_recovery_file_dest';").column('value').uniq
+
+  describe 'The oracle database db_recovery_file_dest parameter' do
+    subject { db_recovery_file_dest }
+    it { should_not cmp [" "]}
+  end
+
+
 end
 

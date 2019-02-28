@@ -236,5 +236,10 @@ control "V-61667" do
   TABLE_NAME TABLESPACE_NAME
   ---------------------------- ------------------------
   AUD$ SECURESPACE"
+  describe 'A manual review is required to ensure the DBMS must protect audit data records and integrity by using
+    cryptographic mechanisms' do
+    skip 'A manual review is required to ensure the DBMS must protect audit data records and integrity by using
+    cryptographic mechanisms'
+  end
 end
 

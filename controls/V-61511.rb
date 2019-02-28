@@ -95,5 +95,11 @@ control "V-61511" do
 
   Document authorized access controls and justify any access grants that do not
   fall under DBA, DBMS process, ownership, or SA accounts."
-end
+  umask = command('umask').stdout.strip
+
+  describe 'The system umask' do
+    subject {umask}
+    it {should be >= '0022'}
+  end
+end 
 

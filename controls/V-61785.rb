@@ -209,5 +209,8 @@ control "V-61785" do
 
   When enabling a UNIQUE or PRIMARY KEY constraint, an associated index is
   created."
+  describe 'A manual review is required to ensure the DBMS checks the validity of data inputs' do
+    skip 'A manual review is required to ensure the DBMS checks the validity of data inputs'
+  end
 end
 

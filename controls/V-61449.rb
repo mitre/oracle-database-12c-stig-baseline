@@ -68,5 +68,10 @@ control "V-61449" do
 
   Use auditing to capture use of the DBMS_JOB package in the audit trail. Review
   the audit trail for unauthorized use of the DBMS_JOB package."
+  describe 'A manual review is required to ensure database job/batch queues are reviewed regularly to detect
+    unauthorized database job submissions' do
+    skip 'A manual review is required to ensure database job/batch queues are reviewed regularly to detect
+    unauthorized database job submissions'
+  end
 end
 

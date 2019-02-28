@@ -100,5 +100,23 @@ control "V-61679" do
 
   2) Plug the non-CDB database into a CDB database, creating a new PDB.  If
   wanted, can then create additional clones from the new PDB."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  ALLOWED_ORACLEDB_COMPONENTS = ['a', 'b']
+  list_of_installed_components = sql.query("SELECT comp_id, comp_name, version, status from dba_registry where comp_id not in ('CATALOG','CATPROC','XDB');").column('comp_name').uniq
+  if list_of_installed_components.empty?
+    impact 0.0
+    describe 'There are no oracle database components installed, control N/A' do
+      skip 'TThere are no oracle database components installed, control N/A'
+    end
+  else
+    list_of_installed_components.each do |component|
+      describe "The installed oracle database components: #{component}" do
+        subject { component }
+        it { should be_in ALLOWED_ORACLEDB_COMPONENTS }
+      end
+    end
+  end 
 end
 

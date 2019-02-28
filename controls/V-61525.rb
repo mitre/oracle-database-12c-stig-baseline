@@ -42,5 +42,10 @@ control "V-61525" do
 
   Details for key management requirements are provided by FIPS 140-2 key
   management standards available from NIST."
+  describe 'A manual review is required to ensure the DBMS symmetric keys are protected in accordance with NSA or
+    NIST-approved key management technology or processes.' do
+    skip 'A manual review is required to ensure the DBMS symmetric keys are protected in accordance with NSA or
+    NIST-approved key management technology or processes.'
+  end
 end
 

@@ -35,7 +35,7 @@ control "V-61717" do
   tag "potential_impacts": nil
   tag "third_party_tools": nil
   tag "mitigation_controls": nil
-  tag "responsibility": nil
+  tag "responsibility": nil 
   tag "ia_controls": nil
   tag "check": "If all user accounts are managed and authenticated by the OS or
   an enterprise-level authentication/access mechanism, and not by Oracle, this is
@@ -75,5 +75,28 @@ control "V-61717" do
   If password changes every 35 days or fewer are unacceptable or impractical,
   implement an alternative method, such as a stored procedure run daily, to
   disable accounts inactive for more than 35 days."
-end
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_LIFE_TIME'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+  user_profiles.each do |profile|
+    password_life_time = sql.query(format(query, profile: profile)).column('limit') 
+
+    describe 'The oracle database account password life time for profile: #{profile}' do
+      subject { password_life_time }
+      it { should cmp <= 35}
+    end
+  end
+  if user_profiles.empty?
+    describe 'There are no user profiles, therefore this control is NA' do
+      skip 'There are no user profiles, therefore this control is NA'
+    end
+  end
+end
+ 

@@ -89,5 +89,17 @@ control "V-61441" do
   no longer supported. This does not cause a loss of security because
   authentication is enforced through local operating system authentication. Refer
   to Oracle Database Net Services Reference for additional information."
-end
 
+  listener_name = command("ps -ef | grep tnslsnr | grep -v grep|awk '{ print $9; }'").stdout.strip
+
+  listener_status = command("lsnrctl status #{listener_name}").stdout.strip
+
+  describe 'The Oracle Listener status' do
+    subject {listener_status}
+    it {should_not include 'Security                  OFF'}
+    it {should_not include 'Security                  ON: Password or Local OS Authentication'}
+  end
+  describe listener_status do
+    it {should_not be_empty}
+  end
+end

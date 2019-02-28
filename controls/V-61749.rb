@@ -42,5 +42,35 @@ control "V-61749" do
   tag "fix": "Configure DBMS to utilize cryptographic mechanisms to protect the
   integrity and confidentiality of nonlocal maintenance and diagnostic
   communications."
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.AUTHENTICATION_SERVICES= (BEQ, TCPS)' }
+  end
+
+  describe.one do 
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.2' }
+    end
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.1' }
+    end
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE)' }
+  end
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CIPHER_SUITES= (SSL_RSA_WITH_AES_256_CBC_SHA384)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_SERVER= (AES256)' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_CLIENT = requested' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_SERVER = required' }
+  end
 end
 

@@ -59,5 +59,23 @@ control "V-61535" do
   For more information on sqlnet.ora parameters refer to the following document:
   \"Database Net Services Reference\"
   http://docs.oracle.com/database/121/NETRF/sqlnet.htm#NETRF006"
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe.one do
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'sqlnet.allowed_logon_version_server=11' }
+      its('content') { should include 'sqlnet.allowed_logon_version_client=11' }
+    end
+
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'sqlnet.allowed_logon_version_server=12' }
+      its('content') { should include 'sqlnet.allowed_logon_version_client=12' }
+    end
+
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'sqlnet.allowed_logon_version_server=12a' }
+      its('content') { should include 'sqlnet.allowed_logon_version_client=12a' }
+    end
+  end
 end
 

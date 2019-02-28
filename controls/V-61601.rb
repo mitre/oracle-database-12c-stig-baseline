@@ -73,5 +73,11 @@ control "V-61601" do
   DBA_ROLE_PRIVS"
   tag "fix": "Limit privileges to DBMS-related OS accounts to those required to
   perform their DBMS specific functionality."
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/rdbms/admin/externaljob.ora") do
+    its('content') { should include 'run_user = nobody' }
+    its('content') { should include 'run_group = nobody' }
+  end
 end
 

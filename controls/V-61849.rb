@@ -1,18 +1,18 @@
 control "V-61849" do
   title "DBMS default accounts must be protected from misuse."
-  desc  "The Security Requirements Guide says, \"Default accounts are usually
+  desc  "The Security Requirements Guide says, Default accounts are usually
   accounts that have special privileges required to administer the database.
   Well-known DBMS account names are targeted most frequently by attackers and are
   thus more prone to providing unauthorized access to the database.
 
-      \"If default account names are not changed, an attacker has a predefined
+      If default account names are not changed, an attacker has a predefined
   list of accounts to target.  Since most default accounts are administrative in
   nature, the compromise of a default account can have catastrophic consequences,
-  including the complete loss of control over the information system.\"
+  including the complete loss of control over the information system.
 
       However, Oracle does not provide for changing user names directly.
   Workarounds to achieve the effect of a name change are cumbersome.  In
-  addition, names of essential system accounts such as SYS are \"baked into\" the
+  addition, names of essential system accounts such as SYS are baked into the
   product, with thousands of dependencies involved.  Making such a change would
   risk making the DBMS inoperative, and would interfere with getting support from
   Oracle.
@@ -55,5 +55,8 @@ control "V-61849" do
   available only to authorized administrators and tightly guarded to avoid
   misuse.  Ensure that these accounts are kept locked except when it is
   specifically necessary to use them."
+  describe 'A manual review is required to ensure the DBMS default accounts are protected from misuse' do
+    skip 'A manual review is required to ensure the DBMS default accounts are protected from misuse'
+  end
 end
 

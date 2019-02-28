@@ -60,6 +60,8 @@ control "V-61789" do
   without creating a custom solution.   It is possible to set up notifications
   and alerts in Enterprise Manager as well, and if either of these alternatives
   is not available, a custom solution will be necessary."
-  
+  describe 'A manual review is required to ensure the DBMS must identifies potentially security-relevant error conditions' do
+    skip 'A manual review is required to ensure the DBMS must identifies potentially security-relevant error conditions'
+  end
 end
 

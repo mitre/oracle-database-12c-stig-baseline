@@ -91,5 +91,10 @@ control "V-61711" do
   authentication of applications front-ending Oracle Databases and using shared
   accounts.  After installation, use x509 Authentication modules provided out of
   the box."
+  describe 'A manual review is required to ensure the DBMS ensures users are authenticated with an individual
+    authenticator prior to using a shared authenticator' do
+    skip 'A manual review is required to ensure the DBMS ensures users are authenticated with an individual
+    authenticator prior to using a shared authenticator'
+  end
 end
 

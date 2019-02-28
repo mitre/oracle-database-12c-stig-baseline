@@ -50,4 +50,4 @@ control "V-61665" do
     organization-defined frequency'
   end
 end
-
+ 

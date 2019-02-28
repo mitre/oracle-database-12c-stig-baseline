@@ -31,7 +31,7 @@ control "V-61965" do
   tag "ia_controls": nil
   tag "check": "If Standard Auditing is used:
 
-  From SQL*Plus:
+  From SQL*Plus: 
 
   select value from v$parameter where name = 'audit_trail';
   select value from v$parameter where name = 'audit_file_dest';
@@ -85,5 +85,22 @@ control "V-61965" do
 
   Authorize and document user access requirements to the directory outside of the
   Oracle, DBA, and SA account list in the System Security Plan."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
+
+  describe 'The oracle database audit trail' do
+    subject { audit_trail }
+    it { should_not cmp 'NONE' }
+  end
+
+  get_audit_file_dest = sql.query("select value from v$parameter where name = 'audit_file_dest';").column('value')
+
+  audit_file_dest = "#{get_audit_file_dest}".delete('[""]')
+
+  describe command("ls -ld #{audit_file_dest}/ |awk '{ print $1; }'") do
+    its('stdout') { should match /\w*---.$/}
+  end
 end
 

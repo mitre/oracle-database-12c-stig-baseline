@@ -120,5 +120,10 @@ control "V-61853" do
   78,190,592       12
   USERS                                 1,048,576       26,624        3
   26,624        1"
+  describe 'A manual review is required to ensure the Disk space used by audit trail(s) is monitored, and that audit records
+    are regularly or continuously off-loaded to a centralized log management system' do
+    skip 'A manual review is required to ensure the Disk space used by audit trail(s) is monitored, and that audit records
+    are regularly or continuously off-loaded to a centralized log management system'
+  end
 end
 

@@ -100,12 +100,63 @@ control "V-61683" do
      and oa.obj#=obj.obj#
      and ge.user#=oa.grantee#
      and tpm.privilege=oa.privilege#
-     and l.file_spec is not null
+     and l.file_spec is not null;
   /"
   tag "fix": "Disable use of or remove any external application executable
   object definitions that are not authorized.
 
   Revoke privileges granted to users that are not authorized access to external
   applications."
-  end
 
+
+   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+    ALLOWED_DBADMIN_USERS = ['a', 'b']
+  dba_users = sql.query("select library_name,owner,  '' grantee, '' privilege
+  from dba_libraries where file_spec is not null
+  minus
+  (
+  select library_name,o.name owner,  '' grantee, '' privilege
+    from dba_libraries l,
+         sys.user$ o,
+         sys.user$ ge,
+         sys.obj$ obj,
+         sys.objauth$ oa
+   where l.owner=o.name
+     and obj.owner#=o.user#
+     and obj.name=l.library_name
+     and oa.obj#=obj.obj#
+     and ge.user#=oa.grantee#
+     and l.file_spec is not null
+  )
+  union all
+  select library_name,o.name owner, --obj.obj#,oa.privilege#,
+         ge.name grantee,
+         tpm.name privilege
+    from dba_libraries l,
+         sys.user$ o,
+         sys.user$ ge,
+         sys.obj$ obj,
+         sys.objauth$ oa,
+         sys.table_privilege_map tpm
+   where l.owner=o.name
+     and obj.owner#=o.user#
+     and obj.name=l.library_name
+     and oa.obj#=obj.obj#
+     and ge.user#=oa.grantee#
+     and tpm.privilege=oa.privilege#
+     and l.file_spec is not null;").column('owner').uniq
+  if  dba_users.empty?
+    impact 0.0
+    describe 'There are no oracle DBA users, control N/A' do
+      skip 'There are no oracle DBA users, control N/A'
+    end
+  else
+    dba_users.each do |user|
+      describe "oracle DBA users: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_DBADMIN_USERS }
+      end
+    end
+  end 
+end

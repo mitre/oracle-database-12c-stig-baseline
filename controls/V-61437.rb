@@ -57,10 +57,7 @@ control "V-61437" do
   Run the SQL statement:
 
     select grantee||': '||granted_role from dba_role_privs
-    where grantee not in
-    (<list of non-applicable accounts>)
-    and admin_option = 'YES'
-    and grantee not in
+    where admin_option = 'YES' and grantee not in
     (select distinct owner from dba_objects)
     and grantee not in
     (select grantee from dba_role_privs
@@ -87,5 +84,28 @@ control "V-61437" do
 
   Document authorized role assignments with the WITH ADMIN OPTION in the System
   Security Plan."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+   ALLOWED_USERS_WITH_ADMIN_OPTION = ['a', 'b']
+  users_with_admin_option = sql.query("select grantee from dba_role_privs
+    where admin_option = 'YES' and grantee not in
+    (select distinct owner from dba_objects)
+    and grantee not in
+    (select grantee from dba_role_privs
+     where granted_role = 'DBA')
+    order by grantee;").column('grantee').uniq
+  if  users_with_admin_option.empty?
+    impact 0.0
+    describe 'There are no oracle users with the admin option, therefore control N/A' do
+      skip 'There are no oracle users with the admin option, therefore control N/A'
+    end
+  else
+    users_with_admin_option.each do |user|
+      describe "oracle users with admin option: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_USERS_WITH_ADMIN_OPTION }
+      end
+    end
+  end
 end
 

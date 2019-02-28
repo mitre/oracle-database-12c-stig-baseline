@@ -53,5 +53,26 @@ control "V-61589" do
   and grantee = '<applicable account>';"
   tag "fix": "Restrict accessibility of Oracle system tables and other
   configuration information or metadata to DBAs or other authorized users."
+
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  USERS_ALLOWED_ACCESS_TO_DICTIONARY_TABLE = ['a', 'b']
+  users_with_dictionary_table_access = sql.query("SELECT unique grantee from dba_tab_privs where table_name in
+  (select table_name from dictionary)
+  order by grantee;").column('grantee').uniq
+  if  users_with_dictionary_table_access.empty?
+    impact 0.0
+    describe 'There are no oracle users allowed access to the dictionary table, control N/A' do
+      skip 'There are no oracle users allowed access to the dictionary table, control N/A'
+    end
+  else
+    users_with_dictionary_table_access.each do |user|
+      describe "oracle users: #{user} with access to the dictionary table" do
+        subject { user }
+        it { should be_in USERS_ALLOWED_ACCESS_TO_DICTIONARY_TABLE }
+      end
+    end
+  end
 end
 

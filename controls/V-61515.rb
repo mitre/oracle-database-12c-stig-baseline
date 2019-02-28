@@ -71,5 +71,12 @@ control "V-61515" do
   the System Security Plan are allowed access to the DBMS."
   tag "fix": "Configure the database listener to restrict access by IP address
   or set up an external device to restrict network access to the DBMS."
-end
+  
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'tcp.validnode_checking=YES' }
+    its('content') { should match /tcp.invited_nodes=(\W*)/ }
+  end
+end
+ 

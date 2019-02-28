@@ -44,7 +44,7 @@ control "V-61747" do
   To see if Oracle is configured for FIPS 140-2 SSL/TLS authentication and/or
   Encryption:
 
-  Verify the DBMS version:
+  Verify the DBMS version: 
   select * from V_$VERSION;
   If the version displayed for Oracle Database is lower than 12.1.0.2, this is a
   finding.
@@ -109,5 +109,21 @@ control "V-61747" do
 
   FIPS 140-2 documentation can be downloaded from
   http://csrc.nist.gov/publications/PubsFIPS.html#140-2  "
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  version = sql.query("select version from v$instance;").column('version')
+
+  describe 'The oracle database version' do
+    subject { version }
+    it { should cmp >= '12.1.0.2' }
+  end
+
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/ldap/admin/fips.ora") do
+    its('content') { should include 'SSLFIPS_140=TRUE' }
+    it { should exist }
+  end
 end
 

@@ -74,5 +74,9 @@ control "V-61687" do
   $ lsnrctl reload
   Then check the status again to see that the changes have taken place.
   $ lsnrctl stat"
+  describe 'A manual review is required to ensure the DBMS supports the organizational requirements to specifically
+    prohibit or restrict the use of unauthorized functions, ports, protocols, and/or services' do
+    skip 'A manual review is required to ensure the DBMS supports the organizational requirements to specifically
+    prohibit or restrict the use of unauthorized functions, ports, protocols, and/or services'
+  end
 end
-

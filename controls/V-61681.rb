@@ -87,5 +87,31 @@ control "V-61681" do
   Restart the Oracle service.
 
   (See My Oracle Support Document 948061.1 for more on the chopt command.)"
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS = ['a', 'b']
+  list_of_installed_components_integrated_into_dbms = sql.query("SELECT parameter, value
+  from v$option
+  where parameter in
+  (
+  'Data Mining',
+  'Oracle Database Extensions for .NET',
+  'OLAP',
+  'Partitioning',
+  'Real Application Testing'
+  );").column('parameter').uniq
+  if list_of_installed_components_integrated_into_dbms.empty?
+    impact 0.0
+    describe 'There are no oracle database components integrated into the DBMS, control N/A' do
+      skip 'TThere are no oracle database components integrated into the DBMS, control N/A'
+    end
+  else
+    list_of_installed_components_integrated_into_dbms.each do |component|
+      describe "The installed oracle database components integrated into the DBMS: #{component}" do
+        subject { component }
+        it { should be_in ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS }
+      end
+    end
+  end 
 end
 

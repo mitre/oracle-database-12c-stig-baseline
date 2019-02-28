@@ -55,5 +55,11 @@ control "V-61671" do
   caused problems when patching the environment.  If changes are to be made, they
   should be reverted to the status they were in before the modification for
   patching and upgrades."
+  umask = command('umask').stdout.strip
+
+  describe 'The system umask' do
+    subject {umask}
+    it {should be >= '0022'}
+  end
 end
 

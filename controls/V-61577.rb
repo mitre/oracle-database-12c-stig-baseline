@@ -62,5 +62,14 @@ control "V-61577" do
 
   (Note:  In most cases, no fix will be necessary.  This is default functionality
   for Oracle.)"
+  describe 'A manual review is required to ensure the DBMS enforces Discretionary Access Control (DAC) policy
+  allowing users to specify and control sharing by named individuals, groups of
+  individuals, or by both, limiting propagation of access rights and including or
+  excluding access to the granularity of a single user.' do
+    skip 'A manual review is required to ensure the DBMS enforces Discretionary Access Control (DAC) policy
+    allowing users to specify and control sharing by named individuals, groups of
+    individuals, or by both, limiting propagation of access rights and including or
+    excluding access to the granularity of a single user.'
+  end
 end
 

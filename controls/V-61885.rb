@@ -48,5 +48,12 @@ control "V-61885" do
   general user functionality.  Provide those who have both administrative and
   general-user responsibilities with separate accounts for these separate
   functions."
+  describe 'A manual review is required to ensure the DBMS prevents the presentation of information system
+    management-related functionality at an interface utilized by general (i.e.,
+    non-privileged) users.' do
+    skip 'A manual review is required to ensure the DBMS prevents the presentation of information system
+    management-related functionality at an interface utilized by general (i.e.,
+    non-privileged) users.'
+  end
 end
 

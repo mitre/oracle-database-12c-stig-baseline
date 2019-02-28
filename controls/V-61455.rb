@@ -45,4 +45,4 @@ control "V-61455" do
     frequently to ensure compliance with least privilege and documented policy.'
   end
 end
-
+ 

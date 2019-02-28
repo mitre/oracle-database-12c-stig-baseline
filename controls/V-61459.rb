@@ -60,5 +60,46 @@ control "V-61459" do
   Replace <temporary_tablespace_name> with the new default temporary tablespace
   name (typically TEMP).
   Repeat the \"alter user\" for each affected user account."
-end
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  property_name = sql.query("select property_name
+  from database_properties
+  where property_name in
+  ('DEFAULT_PERMANENT_TABLESPACE','DEFAULT_TEMP_TABLESPACE');").column('property_name')
+
+  describe 'The oracle database property_name' do
+    subject { property_name }
+    it { should_not include 'SYSTEM' }
+  end
+ 
+  property_value = sql.query("select property_value
+  from database_properties
+  where property_name in
+  ('DEFAULT_PERMANENT_TABLESPACE','DEFAULT_TEMP_TABLESPACE');").column('property_value')
+
+  describe 'The oracle database property_value' do
+    subject { property_name }
+    it { should_not include 'SYSTEM' }
+  end
+
+   ALLOWED_USERS_SYSTEM_TABLESPACE = ['XS$NULL', 'OJVMSYS', 'SYS$UMF']
+  users_with_system_tablespace = sql.query("select username from dba_users
+  where (default_tablespace = 'SYSTEM' or temporary_tablespace = 'SYSTEM')
+  and username not in
+  ('LBACSYS','OUTLN','SYS','SYSTEM');").column('username').uniq
+  if  users_with_system_tablespace.empty?
+    impact 0.0
+    describe 'There are no oracle users granted system tablespace, therefore control N/A' do
+      skip 'There are no oracle users granted system tablespace, therefore control N/A'
+    end
+  else
+    users_with_system_tablespace.each do |user|
+      describe "oracle users with system tablespace: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_USERS_SYSTEM_TABLESPACE }
+      end
+    end
+  end
+end

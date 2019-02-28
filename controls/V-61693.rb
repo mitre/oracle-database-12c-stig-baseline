@@ -45,5 +45,8 @@ control "V-61693" do
   on-going jobs, this view displays progress and status.)"
   tag "fix": "Configure the Oracle DBMS to back up user-level data on a defined
   frequency."
+  describe 'A manual review is required to ensure Oracle backs up user-level information per a defined frequency' do
+    skip 'A manual review is required to ensure Oracle backs up user-level information per a defined frequency'
+  end
 end
 

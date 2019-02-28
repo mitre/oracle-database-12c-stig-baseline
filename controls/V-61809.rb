@@ -32,7 +32,7 @@ control "V-61809" do
   tag "stig_id": "O121-C3-003300"
   tag "fix_id": "F-67725r1_fix"
   tag "cci": ["CCI-000366", "CCI-002220"]
-  tag "nist": ['CM-6 b', 'Rev_4']
+  tag "nist": ['CM-6 b', 'Rev_4'] 
   tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -208,12 +208,17 @@ control "V-61809" do
     review.  Similarly, the lists of privileges and roles excluded from the
     subqueries may be modified according to circumstances.)"
   tag "fix": "Define DBMS user roles based on privilege and job function
-    requirements.
+  requirements.
 
-    Assign the required privileges to the role, and assign the role to authorized
-    DBMS user accounts.
+  Assign the required privileges to the role, and assign the role to authorized
+  DBMS user accounts.
 
-    Revoke any privileges directly assigned to DBMS user accounts, and assign them
-    to a role the DBMS user already has assigned."
+  Revoke any privileges directly assigned to DBMS user accounts, and assign them
+  to a role the DBMS user already has assigned."
+  describe 'A manual review is required to ensure the DBMS implements separation of duties through assigned
+    information access authorizations' do
+    skip 'A manual review is required to ensure the DBMS implements separation of duties through assigned
+    information access authorizations'
+  end
 end
 

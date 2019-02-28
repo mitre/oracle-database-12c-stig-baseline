@@ -15,7 +15,7 @@ control "V-61447" do
   tag "stig_id": "O121-BP-023000"
   tag "fix_id": "F-67363r2_fix"
   tag "cci": ["CCI-000366"]
-  tag "nist": ['CM-6 b', 'Rev_4']
+  tag "nist": ['CM-6 b', 'Rev_4'] 
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -34,10 +34,35 @@ control "V-61447" do
   this is a finding."
   tag "fix": "Configure communications between the DBMS and remote
   applications/application servers to use DoD-approved encryption."
-  describe 'A manual review is required to ensure connections by mid-tier web and application systems to the Oracle DBMS
-  from a DMZ or external network are encrypted' do 
-    skip 'A manual review is required to ensure connections by mid-tier web and application systems to the Oracle DBMS
-  from a DMZ or external network are encrypted'
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.AUTHENTICATION_SERVICES= (BEQ, TCPS)' }
   end
-end
+
+  describe.one do 
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.2' }
+    end
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.1' }
+    end
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE)' }
+  end
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SSL_CIPHER_SUITES= (SSL_RSA_WITH_AES_256_CBC_SHA384)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }
+    its('content') { should include 'SQLNET.ENCRYPTION_TYPES_SERVER= (AES256)' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_CLIENT = requested' }
+    its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_SERVER = required' }
+  end
+end 
 

@@ -43,5 +43,12 @@ control "V-61745" do
   If any such account (other than SYS, SYSBACKUP, SYSDG, and SYSKM) is not
   certificate-based, this is a finding."
   tag "fix": "For each such account, use DoD certificate-based authentication."
+  describe 'A manual review is required to ensure processes (services, applications, etc.) that connect to the DBMS
+    independently of individual users, must use valid, current DoD-issued PKI
+    certificates for authentication to the  DBMS' do
+    skip 'A manual review is required to ensure processes (services, applications, etc.) that connect to the DBMS
+    independently of individual users, must use valid, current DoD-issued PKI
+    certificates for authentication to the  DBMS'
+  end
 end
 

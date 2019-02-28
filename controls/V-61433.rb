@@ -84,5 +84,23 @@ control "V-61433" do
 
   Document authorized privilege assignments with the WITH ADMIN OPTION in the
   System Security Plan."
-end
+    sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
+    ALLOWED_DBADMIN_USERS = ['a', 'b']
+  dba_users = sql.query("select grantee from dba_sys_privs
+  where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
+  if  dba_users.empty?
+    impact 0.0
+    describe 'There are no oracle DBA users, control N/A' do
+      skip 'There are no oracle DBA users, control N/A'
+    end
+  else
+    dba_users.each do |user|
+      describe "oracle DBA users: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_DBADMIN_USERS }
+      end
+    end
+  end 
+end
+  

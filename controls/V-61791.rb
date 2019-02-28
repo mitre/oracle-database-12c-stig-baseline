@@ -64,5 +64,14 @@ control "V-61791" do
   tag "fix": "Configure DBMS and custom database and application code not to
   divulge sensitive information or information useful for system identification
   in error information."
+  describe 'A manual review is required to ensure the DBMS only generates error messages that provide information
+    necessary for corrective actions without revealing organization-defined
+    sensitive or potentially harmful information in error logs and administrative
+    messages that could be exploited.' do
+    skip 'A manual review is required to ensure the DBMS only generates error messages that provide information
+    necessary for corrective actions without revealing organization-defined
+    sensitive or potentially harmful information in error logs and administrative
+    messages that could be exploited.'
+  end
 end
 

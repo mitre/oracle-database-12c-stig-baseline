@@ -97,5 +97,16 @@ control "V-61677" do
 
   To remove objects without removing their owner, use the appropriate DROP
   statement (DROP TABLE, DROP VIEW, etc.)."
+
+   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  sample_schema_user_accounts = sql.query("select distinct(username) from dba_users where username in
+  ('BI','HR','OE','PM','IX','SH','SCOTT');").column('username')
+
+  describe 'The list of oracle default sample schema user accounts' do
+    subject { sample_schema_user_accounts }
+    it { should be_empty }
+  end
 end
 

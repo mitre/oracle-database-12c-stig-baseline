@@ -55,5 +55,15 @@ control "V-61531" do
 
   Authorize and document user access requirements to the directory outside of the
   Oracle, DBA and SA account list."
-end
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  get_diagnostic_dest = sql.query("select value from v$parameter where name = 'diagnostic_dest';").column('value')
+
+  diagnostic_dest = "#{get_diagnostic_dest}".delete('[""]')
+
+  describe command("ls -ld #{diagnostic_dest}/diag |awk '{ print $1; }'") do
+    its('stdout') { should match /\w*---.$/}
+  end
+end
+ 

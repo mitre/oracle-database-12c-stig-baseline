@@ -112,5 +112,10 @@ control "V-61763" do
   statement was issued. If a transaction started before the statement remains
   active, but rolls back to a savepoint, rolling back its changes to the
   tablespace, then the statement no longer waits for this active transaction."
+  describe 'A manual review is required to ensure the DBMS protects the integrity of publicly available information
+    and applications.' do
+    skip 'A manual review is required to ensure the DBMS protects the integrity of publicly available information
+    and applications.'
+  end
 end
 

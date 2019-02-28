@@ -70,9 +70,10 @@ control "V-61553" do
   SQL*Plus command:
   SHOW PARAMETER AUDIT_TRAIL
   or the following SQL query:
-  SELECT * FROM SYS.V$PARAMETER WHERE NAME = 'audit_trail';
+  SELECT * FROM SYS V$PARAMETER WHERE NAME = 'audit_trail';
+  select value from v$parameter where name='audit_trail';
   If Oracle returns the value 'NONE', this is a finding.
-
+ 
   To confirm that Oracle audit is capturing information on the required events,
   review the contents of the SYS.AUD$ table or the audit file, whichever is in
   use. If auditable events are not listed, this is a finding.
@@ -124,5 +125,51 @@ control "V-61553" do
   If the site-specific audit requirements are not covered by the default audit
   options, deploy and configure Fine-Grained Auditing.  For details, refer to
   Oracle documentation at the locations above."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+
+   standard_auditing_used = attribute('standard_auditing_used')
+  unified_auditing_used = attribute('unified_auditing_used')
+
+
+  describe.one do
+    describe 'Standard auditing is in use for audit purposes' do
+      subject { standard_auditing_used }
+      it { should be true }
+    end
+
+    describe 'Unified auditing is in use for audit purposes' do
+      subject { unified_auditing_used }
+      it { should be true }
+    end
+  end
+
+ 
+  audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
+  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
+
+
+
+  if standard_auditing_used
+    describe 'The oracle database audit_trail parameter' do
+      subject { audit_trail }
+      it { should_not cmp 'NONE' }
+    end
+  end
+
+  unified_auditing = sql.query("SELECT value FROM V$OPTION WHERE PARAMETER = 'Unified Auditing';").column('value')
+
+  if unified_auditing_used
+    describe 'The oracle database unified auditing parameter' do
+      subject { unified_auditing }
+      it { should_not cmp 'FALSE' }
+    end
+
+    describe 'The oracle database unified auditing events captured' do
+      subject { audit_info_captured }
+      it { should_not be_empty}
+    end
+
+  end
 end
 

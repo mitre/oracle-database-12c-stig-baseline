@@ -49,5 +49,10 @@ control "V-61883" do
   general user functionality.  Provide those who have both administrative and
   general-user responsibilities with separate accounts for these separate
   functions."
+  describe 'A manual review is required to ensure the DBMS separates user functionality (including user interface
+    services) from database management functionality' do
+    skip 'A manual review is required to ensure the DBMS separates user functionality (including user interface
+    services) from database management functionality'
+  end
 end
 

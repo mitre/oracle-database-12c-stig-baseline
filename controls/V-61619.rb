@@ -50,5 +50,10 @@ control "V-61619" do
   the granularity of a single user.
 
   (This is default Oracle behavior.)"
+  describe 'A manual review is required to ensure a DBMS utilizing Discretionary Access Control (DAC) enforces a
+    policy that includes or excludes access to the granularity of a single user' do
+    skip 'A manual review is required to ensure a DBMS utilizing Discretionary Access Control (DAC) enforces a
+    policy that includes or excludes access to the granularity of a single user'
+  end
 end
 

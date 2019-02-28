@@ -70,5 +70,10 @@ control "V-61587" do
   objects) as part of their development activities, provide dedicated
   tablespaces, and revoke any rights that allowed them to use production
   tablespaces for this purpose."
+  describe 'A manual review is required to ensure the DBMS is protected from unauthorized access by developers on
+   shared production/development host systems.' do
+    skip 'A manual review is required to ensure the DBMS is protected from unauthorized access by developers on
+   shared production/development host systems.'
+ end
 end
 

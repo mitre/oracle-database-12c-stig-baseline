@@ -121,5 +121,46 @@ control "V-61637" do
   http://docs.oracle.com/database/121/ARPLS/d_audit_mgmt.htm#ARPLS241
   Oracle Database Upgrade Guide:
   http://docs.oracle.com/database/121/UPGRD/afterup.htm#UPGRD52810"
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  standard_auditing_used = attribute('standard_auditing_used')
+  unified_auditing_used = attribute('unified_auditing_used')
+
+  describe.one do
+    describe 'Standard auditing is in use for audit purposes' do
+      subject { standard_auditing_used }
+      it { should be true }
+    end
+
+    describe 'Unified auditing is in use for audit purposes' do
+      subject { unified_auditing_used }
+      it { should be true }
+    end
+  end
+
+  audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
+  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
+
+  if standard_auditing_used
+    describe 'The oracle database audit_trail parameter' do
+      subject { audit_trail }
+      it { should_not cmp 'NONE' }
+    end
+  end
+
+  unified_auditing = sql.query("SELECT value FROM V$OPTION WHERE PARAMETER = 'Unified Auditing';").column('value')
+
+  if unified_auditing_used
+    describe 'The oracle database unified auditing parameter' do
+      subject { unified_auditing }
+      it { should_not cmp 'FALSE' }
+    end
+
+    describe 'The oracle database unified auditing events captured' do
+      subject { audit_info_captured }
+      it { should_not be_empty}
+    end
+
+  end
 end
 

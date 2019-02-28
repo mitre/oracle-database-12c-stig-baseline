@@ -40,5 +40,21 @@ control "V-61595" do
   insure that the activity of administrative users is being logged."
   tag "fix": "Configure DBMS auditing so that all use of privileged accounts is
   recorded in the audit log."
-end
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  unified_auditing_policies_defined = sql.query("SELECT unique policy_name from AUDIT_UNIFIED_POLICIES;").column('policy_name')
+
+  describe 'The list of unified auditing policies defined' do
+    subject { unified_auditing_policies_defined }
+    it { should_not be_empty }
+  end
+
+  users_being_audited = sql.query("SELECT unique user_name from AUDIT_UNIFIED_ENABLED_POLICIES;").column('user_name')
+
+  describe 'The list of users being audited' do
+    subject { users_being_audited }
+    it { should include 'ALL USERS' }
+  end
+end

@@ -40,5 +40,16 @@ control "V-61421" do
   accounts that do not own application objects.
 
   Re-grant privileges without specifying WITH GRANT OPTION."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  describe sql.query("select grantee||': '||owner||'.'||table_name
+  from dba_tab_privs
+  where grantable = 'YES'
+  and grantee not in (select distinct owner from dba_objects)
+  and grantee not in (select grantee from dba_role_privs where granted_role =
+  'DBA')
+  order by grantee;").row(0).column("grantee||': '||owner||'.'||table_name") do
+    its('value') { should be_empty }
+  end
 end
 

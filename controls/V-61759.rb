@@ -126,5 +126,22 @@ control "V-61759" do
   but excluding any system that is to be used for routine administrative and
   business applications (including payroll, finance, logistics, and personnel
   management applications)."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  version = sql.query("select version from v$instance;").column('version')
+
+  describe 'The oracle database version' do
+    subject { version }
+    it { should cmp >= '12.1.0.2' }
+  end
+
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/ldap/admin/fips.ora") do
+    its('content') { should include 'SSLFIPS_140=TRUE' }
+    it { should exist }
+  end
 end
 

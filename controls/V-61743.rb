@@ -73,5 +73,33 @@ control "V-61743" do
   use one or the other."
   tag "fix": "Configure the DBMS to map the authenticated identity directly to
   the DBMS user account."
+
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should include 'WALLET_LOCATION = (SOURCE= (METHOD = FILE) (METHOD_DATA = DIRECTORY=/wallet)' }
+  end
+
+  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    its('content') { should match /SSL_CIPHER_SUITES=\(\w*\)/ }
+  end
+
+  describe.one do 
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.2' }
+    end
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_VERSION = 1.1' }
+    end
+  end
+
+  describe.one do
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_CLIENT_AUTHENTICATION=TRUE)' }
+    end
+    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+      its('content') { should include 'SSL_CLIENT_AUTHENTICATION=FALSE)' }
+    end
+  end
 end
 

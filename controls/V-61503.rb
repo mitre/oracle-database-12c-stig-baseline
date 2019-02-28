@@ -48,5 +48,10 @@ control "V-61503" do
 
   Include data that appear to be sensitive with a discussion as to why it is not
   marked as such."
+  describe 'A manual review is required to ensure sensitive data stored in the database is identified in the System
+    Security Plan and AIS Functional Architecture documentation' do
+    skip 'A manual review is required to ensure sensitive data stored in the database is identified in the System
+    Security Plan and AIS Functional Architecture documentation'
+  end
 end
 

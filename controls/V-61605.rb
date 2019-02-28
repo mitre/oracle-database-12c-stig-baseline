@@ -71,5 +71,28 @@ control "V-61605" do
   Note: It remains necessary to create a customized replacement for the password
   validation function, ORA12C_STRONG_VERIFY_FUNCTION, if relying on this
   technique to verify password complexity.)"
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'FAILED_LOGIN_ATTEMPTS'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+  user_profiles.each do |profile|
+    password_lock_time = sql.query(format(query, profile: profile)).column('limit') 
+
+    describe 'The oracle database limit for failed login attempts' do
+      subject { password_lock_time }
+      it { should cmp <= 3}
+    end
+  end
+  if user_profiles.empty?
+    describe 'There are no user profiles, therefore this control is NA' do
+      skip 'There are no user profiles, therefore this control is NA'
+    end
+  end
 end
 

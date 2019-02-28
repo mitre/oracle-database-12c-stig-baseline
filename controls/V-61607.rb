@@ -72,5 +72,28 @@ control "V-61607" do
   Configure the DBMS settings to specify the maximum number of consecutive failed
   logon attempts to 3 (or less):
   ALTER PROFILE ORA_STIG_PROFILE LIMIT FAILED_LOGIN_ATTEMPTS 3;"
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'FAILED_LOGIN_ATTEMPTS'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+  user_profiles.each do |profile|
+    password_lock_time = sql.query(format(query, profile: profile)).column('limit') 
+
+    describe 'The oracle database limit for failed login attempts' do
+      subject { password_lock_time }
+      it { should cmp <= 3}
+    end
+  end
+  if user_profiles.empty?
+    describe 'There are no user profiles, therefore this control is NA' do
+      skip 'There are no user profiles, therefore this control is NA'
+    end
+  end
 end
 

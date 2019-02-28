@@ -43,5 +43,10 @@ control "V-61879" do
   mechanism to uniquely identify and authenticate all organizational users who
   log on to the system.  Ensure that each user has a separate account from all
   other users."
+  describe 'A manual review is required to ensure the DBMS uniquely identifies and authenticates organizational users
+    (or processes acting on behalf of organizational users).' do
+    skip 'A manual review is required to ensure the DBMS uniquely identifies and authenticates organizational users
+    (or processes acting on behalf of organizational users).'
+  end
 end
 

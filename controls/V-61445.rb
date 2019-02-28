@@ -55,5 +55,34 @@ control "V-61445" do
   If the user has more than one application administration role assigned, then
   remove assigned roles from default assignment and assign individually the
   appropriate default roles."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+   ALLOWED_USERS_DBA_ROLE = ['a', 'b']
+  users_with_dba_role = sql.query("select grantee from dba_role_privs
+  where default_role='YES'
+  and granted_role in
+  (select grantee from dba_sys_privs where upper(privilege) like '%USER%')
+  and grantee not in (select distinct owner from dba_tables)
+  and grantee not in
+  (select distinct username from dba_users where upper(account_status) like
+   '%LOCKED%');").column('grantee').uniq
+  if  users_with_dba_role.empty?
+    impact 0.0
+    describe 'There are no oracle users with the dba role, therefore control N/A' do
+      skip 'There are no oracle users with the dba role, therefore control N/A'
+    end
+  else
+    users_with_dba_role.each do |user|
+      describe "oracle users with admin option: #{user}" do
+        subject { user }
+        it { should be_in ALLOWED_USERS_DBA_ROLE }
+      end
+    end
+  end
 end
+
+
+
+  
 

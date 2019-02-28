@@ -69,7 +69,7 @@ control "V-61887" do
   If Standard Auditing is used:
   To ensure that user activities other than SELECT, INSERT, UPDATE, and DELETE
   are also monitored and attributed to individuals, verify that Oracle auditing
-  is enabled. To see if Oracle is configured to capture audit data, enter the
+  is enabled. To see if Oracle is configured to capture audit data, enter the 
   following SQL*Plus command:
   SHOW PARAMETER AUDIT_TRAIL
   or the following SQL query:
@@ -128,5 +128,42 @@ control "V-61887" do
   option from Oracle made specifically for performing the audit functions.  It
   has reporting capabilities as well as user-defined rules that provide
   additional flexibility for complex auditing requirements."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+
+  standard_auditing_used = attribute('standard_auditing_used')
+  unified_auditing_used = attribute('unified_auditing_used')
+
+  describe.one do
+    describe 'Standard auditing is in use for audit purposes' do
+      subject { standard_auditing_used }
+      it { should be true }
+    end
+
+    describe 'Unified auditing is in use for audit purposes' do
+      subject { unified_auditing_used }
+      it { should be true }
+    end
+  end
+
+ 
+  audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
+
+  if standard_auditing_used
+    describe 'The oracle database audit_trail parameter' do
+      subject { audit_trail }
+      it { should_not cmp 'NONE' }
+    end
+  end
+
+  unified_auditing = sql.query("SELECT value FROM V$OPTION WHERE PARAMETER = 'Unified Auditing';").column('value')
+
+  if unified_auditing_used
+    describe 'The oracle database unified auditing parameter' do
+      subject { unified_auditing }
+      it { should_not cmp 'FALSE' }
+    end
+  end
 end
 

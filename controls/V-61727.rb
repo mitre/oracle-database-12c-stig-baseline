@@ -69,5 +69,27 @@ control "V-61727" do
   script file
   <oracle_home>/RDBMS/ADMIN/utlpwdmg.sql.  This can be used as the starting point
   for a customized function.)"
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+  user_profiles.each do |profile|
+    password_verify_function = sql.query(format(query, profile: profile)).column('limit') 
+
+    describe 'The oracle database account password verify function for profile: #{profile}' do
+      subject { password_verify_function }
+      it { should_not eq ["NULL"]}
+    end
+  end
+  if user_profiles.empty?
+    describe 'There are no user profiles, therefore this control is NA' do
+      skip 'There are no user profiles, therefore this control is NA'
+    end
+  end
 end
 

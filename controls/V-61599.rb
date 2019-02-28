@@ -82,7 +82,7 @@ control "V-61599" do
   SELECT grantee, granted_role
   FROM dba_role_privs
   UNION
-  SELECT grantee, privilege
+  SELECT grantee, privilege 
   FROM dba_sys_privs
   )
   START WITH grantee IS NULL
@@ -141,5 +141,58 @@ control "V-61599" do
   system_privilege_map"
   tag "fix": "Remove permissions from DBAs and other administrative users
   beyond those required for administrative functions."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  ALLOWED_USERS_WITH_ADMIN_PRIVS = ['a', 'b']
+  users_with_admin_privs = sql.query("SELECT
+  username,
+  rp.granted_role,
+  privilege
+  FROM
+  dba_users u,
+  dba_role_privs rp,
+  dba_sys_privs sp
+  WHERE username = rp.grantee
+  AND rp.granted_role = sp.grantee
+  AND privilege NOT IN
+  (
+  'CREATE SEQUENCE', 'CREATE TRIGGER',
+  'SET CONTAINER', 'CREATE CLUSTER',
+  'CREATE PROCEDURE', 'CREATE TYPE',
+  'CREATE SESSION', 'CREATE OPERATOR',
+  'CREATE TABLE', 'CREATE INDEXTYPE'
+  )
+  AND username NOT IN
+  (
+  'XDB', 'SYSTEM', 'SYS', 'LBACSYS',
+  'DVSYS', 'DVF', 'SYSMAN_RO', 'SYSMAN_BIPLATFORM',
+  'SYSMAN_MDS', 'SYSMAN_OPSS', 'SYSMAN_STB', 'DBSNMP',
+  'SYSMAN', 'APEX_040200', 'WMSYS', 'SYSDG',
+  'SYSBACKUP', 'SPATIAL_WFS_ADMIN_USR',
+  'SPATIAL_CSW_ADMIN_US','GSMCATUSER',
+  'OLAPSYS', 'SI_INFORMTN_SCHEMA', 'OUTLN', 'ORDSYS',
+  'ORDDATA', 'OJVMSYS', 'ORACLE_OCM', 'MDSYS',
+  'ORDPLUGINS', 'GSMADMIN_INTERNAL', 'MDDATA',
+  'FLOWS_FILES', 'DIP', 'CTXSYS', 'AUDSYS', 'APPQOSSYS',
+  'APEX_PUBLIC_USER', 'ANONYMOUS',
+  'SPATIAL_CSW_ADMIN_USR', 'SYSKM',
+  'SYSMAN_TYPES', 'MGMT_VIEW', 'EUS_ENGINE_USER',
+  'EXFSYS', 'SYSMAN_APM','IX','OWBSYS'
+  )
+  ORDER by 1, 2, 3;").column('username').uniq
+  if  users_with_admin_privs.empty?
+    impact 0.0
+    describe 'There are no oracle database users with administative privileges, control N/A' do
+      skip 'There are no oracle database users with administative privileges, control N/A'
+    end
+  else
+    users_with_admin_privs.each do |user|
+      describe "oracle database users: #{user} with administative privileges" do
+        subject { user }
+        it { should be_in ALLOWED_USERS_WITH_ADMIN_PRIVS }
+      end
+    end
+  end
 end
 

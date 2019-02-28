@@ -74,6 +74,16 @@ control "V-61539" do
   $ opatch lsinventory -detail
 
   Windows:
-  > opatch lsinventory –detail"
-end
+  opatch lsinventory –detail"
 
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+ patches = sql.query("SELECT patch_id from dba_registry_sqlpatch;").column('patch_id')
+
+ describe 'The oracle database installed patches' do
+  subject { patches }
+  it { should_not cmp nil }
+ end
+end
+ 

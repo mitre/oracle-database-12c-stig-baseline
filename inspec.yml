@@ -23,4 +23,15 @@ attributes:
     description: 'instance name MSSQL DB Server'
     default: Null
 
+  - name: standard_auditing_used
+    description: 'Set to true if standard auditing is used'
+    type: boolean
+    default: true 
+
+  - name: unified_auditing_used
+    description: 'Set to true if unified auditing is used'
+    type: boolean
+    default: false
+
+
 

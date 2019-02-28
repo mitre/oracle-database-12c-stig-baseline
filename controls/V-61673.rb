@@ -55,5 +55,28 @@ control "V-61673" do
   authorized for object ownership.
 
   Re-assign ownership of authorized objects to authorized object owner accounts."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  ALLOWED_DBAOBJECT_OWNERS = ['a', 'b']
+  dba_object_owners = sql.query("select DISTINCT owner from dba_objects;").column('owner').uniq
+  if  dba_object_owners .empty?
+    impact 0.0
+    describe 'There are no oracle dba object owners, control N/A' do
+      skip 'There are no oracle dba object owners, control N/A'
+    end
+  else
+    dba_object_owners .each do |owner|
+      describe "oracle datbase object owner: #{owner}" do
+        subject { owner }
+        it { should be_in ALLOWED_DBAOBJECT_OWNERS }
+      end
+    end
+  end
 end
+
+
+
+
+
 

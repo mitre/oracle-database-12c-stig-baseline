@@ -63,5 +63,12 @@ control "V-61783" do
   types of Denial of Service attacks.
 
   Modify the $ORACLE_HOME/network/admin/listener.ora to establish a Rate Limit."
+
+  oracle_home = command('echo $ORACLE_HOME').stdout.strip
+
+  describe file ("#{oracle_home}/network/admin/listener.ora") do
+    its('content') { should include 'RATE_LIMIT=' }
+    its('content') { should match /CONNECTION_RATE_LISTENER=\d*/ }
+  end
 end
 

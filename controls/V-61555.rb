@@ -179,5 +179,10 @@ control "V-61555" do
   (ADDRESS=(PROTOCOL=tcp)(HOST=sales2-svr)(PORT=1521))
   (CONNECT_DATA=
   (SERVICE_NAME=sales.us.example.com)))"
+  describe 'A manual review is required to ensure the DBMS supports the disabling of network protocols deemed by the
+    organization to be nonsecure' do
+    skip 'A manual review is required to ensure the DBMS supports the disabling of network protocols deemed by the
+    organization to be nonsecure'
+  end
 end
 

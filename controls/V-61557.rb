@@ -25,7 +25,7 @@ control "V-61557" do
   authentication/access mechanisms include, but are not limited to, Active
   Directory and LDAP. This requirement applies to cases where it is necessary to
   have accounts directly managed by Oracle.
-  "
+  " 
   impact 0.5
   tag "gtitle": "SRG-APP-000023-DB-000001"
   tag "gid": "V-61557"

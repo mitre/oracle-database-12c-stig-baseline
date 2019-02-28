@@ -171,5 +171,50 @@ control "V-61765" do
   does not have default values.) Failure resulting from
   sqlnet.inbound_connect_timeout will throw an ORA-03136 inbound connection timed
   out error.   "
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  query_idle_time = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'IDLE_TIME'
+  )
+
+  query_sessions_per_user = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'SESSIONS_PER_USER'
+  )
+
+  query_connect_time = %(
+    SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
+  '%<profile>s' AND RESOURCE_NAME = 'CONNECT_TIME'
+  )
+
+  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+
+  user_profiles.each do |profile|
+    idle_time = sql.query(format(query_idle_time, profile: profile)).column('limit')
+    sessions_per_user = sql.query(format(query_sessions_per_user, profile: profile)).column('limit') 
+    connect_time = sql.query(format(query_connect_time, profile: profile)).column('limit') 
+
+    describe 'The oracle database idle time for profile: #{profile}' do
+      subject { idle_time }
+      it { should cmp <= 15}
+    end
+
+    describe 'The oracle database number of sessions per user for profile: #{profile}' do
+      subject { sessions_per_user }
+      it { should cmp <= 3}
+    end
+
+    describe 'The oracle database connect time for profile: #{profile}' do
+      subject { connect_time }
+      it { should cmp <= 15}
+    end
+  end
+  if user_profiles.empty?
+    describe 'There are no user profiles, therefore this control is NA' do
+      skip 'There are no user profiles, therefore this control is NA'
+    end
+  end
 end
 

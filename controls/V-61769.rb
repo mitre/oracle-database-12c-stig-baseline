@@ -110,5 +110,14 @@ control "V-61769" do
   recorded to transport to another database or being re-applied if the database
   becomes corrupt and needs to be restored from the last backup. Use the redo
   logs to replay transactions not captured in the backup."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  log_mode = sql.query("select log_mode from v$database;").column('log_mode')
+
+  describe 'The list of oracle database log mode' do
+    subject { log_mode }
+    it { should cmp 'ARCHIVELOG' }
+  end
 end
 

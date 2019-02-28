@@ -53,5 +53,10 @@ control "V-61419" do
   Replace diska, diskb, diskc with valid, different disk drive specifications.
 
   Replace log#.log file with valid or custom names for the log files."
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  describe sql.query("select count(*) from V$LOG;").column('count(*)') do
+    it { should cmp >= 2 }
+  end
 end
 

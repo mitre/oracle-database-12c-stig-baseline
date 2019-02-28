@@ -64,5 +64,10 @@ control "V-61801" do
   Create and deploy a mechanism, such as a frequently-run job, to monitor the
   SYS.UNIFIED_AUDIT_TRAIL view for these records and notify the appropriate
   individuals."
+  describe 'A manual review is required to ensure the DBMS notifies the appropriate individuals when account disabling
+    actions are taken' do
+    skip 'A manual review is required to ensure the DBMS notifies the appropriate individuals when account disabling
+    actions are taken'
+  end
 end
 

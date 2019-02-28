@@ -36,5 +36,18 @@ control "V-61413" do
   tag "fix": "Follow the instructions in Oracle MetaLink Note 15390.1 (and
   related documents) to change the SID for the database without re-creating the
   database to a value that does not identify the Oracle version."
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+ version = sql.query("select version from v$instance;").column('version')
+ db_instance_name =  sql.query("select instance_name from v$instance;").column('instance_name')
+
+ describe 'The oracle database instance name' do
+  subject { db_instance_name }
+  it { should_not include "#{version}" }
+ end
+
+ 
 end
 

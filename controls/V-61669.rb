@@ -81,5 +81,12 @@ control "V-61669" do
 
   If Unified Auditing is used:
   Grant the correct Audit roles to authorized users."
-end
+  describe 'A manual review is required to ensure the DBMS must protect the audit records generated, as a result of
+    remote access to privileged accounts, and the execution of privileged
+    functions' do
+    skip 'A manual review is required to ensure the DBMS must protect the audit records generated, as a result of
+    remote access to privileged accounts, and the execution of privileged
+    functions'
+  end
+end 
 

@@ -151,7 +151,7 @@ control "V-61845" do
   to /private/ora12, then need to enter the following into the client sqlnet.ora
   file:
 
-      WALLET_LOCATION =
+      WALLET_LOCATION = 
              (SOURCE =
                (METHOD = FILE)
                (METHOD_DATA =
@@ -198,24 +198,11 @@ control "V-61845" do
 
   Note: SSL_VERSION = 1.2 or 1.1 is the actual value, not a suggestion to
   use one or the other."
-
- # query = %{
-  #   SELECT name, open_mode FROM v$pdbs;
-  #  }
- 
-  
-
- # sql_session = oracledb_session(user: attribute('user'),
-                  #            password: attribute('password'),
-                 #             host: attribute('host'),
-                #              sid: attribute('sid'))
-
-  #  describe 'List defined traces for the SQL server instance' do
-  #   subject { sql_session.query(query) }
-  #    it { should be_empty }
-  #  end
-
-
-     
+  describe 'A manual review is required to ensure when using command-line tools such as Oracle SQL*Plus, which can
+    accept a plain-text password, users must use an alternative logon method that
+    does not expose the password' do
+    skip 'A manual review is required to ensure when using command-line tools such as Oracle SQL*Plus, which can
+    accept a plain-text password, users must use an alternative logon method that
+    does not expose the password'
+  end
 end
-

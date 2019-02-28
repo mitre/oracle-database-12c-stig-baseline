@@ -124,5 +124,10 @@ control "V-61695" do
   SVR4 Error: 2: No such file or directory
   Additional information: 3"
   tag "fix": "Develop, document, and implement database backup procedures."
+  describe 'A manual review is required to ensure database backup procedures are defined, documented, and
+    implemented.' do
+    skip 'A manual review is required to ensure database backup procedures are defined, documented, and
+    implemented.'
+  end
 end
 
