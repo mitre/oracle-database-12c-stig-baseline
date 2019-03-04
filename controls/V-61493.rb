@@ -39,10 +39,12 @@ control "V-61493" do
 
   Require and store an acknowledgement of receipt and confirmation of review for
   the log report."
-  describe 'A manual review is required to ensure remote administrative access to the database is monitored by the
-    ISSO or ISSM' do
-    skip 'A manual review is required to ensure remote administrative access to the database is monitored by the
-    ISSO or ISSM'
+  describe sshd_config do
+    its('PermitRootLogin') { should eq 'no' }
+  end
+  describe service('auditd') do
+    it { should be_enabled }
+    it { should be_running }
   end
 end
 

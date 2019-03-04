@@ -42,8 +42,34 @@ control "V-61489" do
 
   Ensure all accounts with administrator privileges are monitored for DBMS host
   on Windows OS platforms."
-  describe 'A manual review is required to ensure the use of the DBMS installation account is logged.' do
-    skip 'A manual review is required to ensure the use of the DBMS installation account is logged.'
+  describe command("grep -ie '^[^#]*NOPASSWD' /etc/sudoers /etc/sudoers.d/*") do
+    its('stdout') { should be_empty }
+  end
+
+  describe command("grep -ie '^[^#]*!authenticate' /etc/sudoers /etc/sudoers.d/*") do
+    its('stdout') { should be_empty }
+  end
+
+  describe file("/etc/audit/audit.rules") do
+    its("content") { should match(/^\-w\s+\/etc\/sudoers\s+\-p\s+wa\s+\-k\s+[-\w]+\s*$/) }
+  end
+  describe sshd_config do
+    its('PrintLastLog') { should be_nil.or eq 'yes' }
+  end 
+  describe file("/etc/audit/audit.rules") do
+    its("content") { should match(/^\-w\s+\/etc\/group\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  end
+  describe file("/etc/audit/audit.rules") do
+    its("content") { should match(/^\-w\s+\/etc\/passwd\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  end
+  describe file("/etc/audit/audit.rules") do
+    its("content") { should match(/^\-w\s+\/etc\/gshadow\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  end
+  describe file("/etc/audit/audit.rules") do
+    its("content") { should match(/^\-w\s+\/etc\/shadow\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  end
+  describe file("/etc/audit/audit.rules") do
+    its("content") { should match(/^\-w\s+\/etc\/security\/opasswd\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
   end
 end
 

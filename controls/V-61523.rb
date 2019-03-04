@@ -49,10 +49,12 @@ control "V-61523" do
 
   Where remote administration is to be performed from outside the DoDIN,
   configure an approved VPN client for this purpose."
-  describe 'A manual review is required to ensure remote DBMS administration is documented and authorized or
-    disabled' do
-    skip 'A manual review is required to ensure remote DBMS administration is documented and authorized or
-    disabled'
+  describe sshd_config do
+    its('PermitRootLogin') { should eq 'no' }
+  end
+  describe service('auditd') do
+    it { should be_enabled }
+    it { should be_running }
   end
 end
 

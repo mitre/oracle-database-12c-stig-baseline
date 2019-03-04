@@ -47,10 +47,12 @@ control "V-61675" do
   finding."
   tag "fix": "Configure DBMS settings to ensure access control and auditing
   requirements for remote connections are enforced by the DBMS."
-  describe 'A manual review is required to ensure the DBMS enforces requirements for remote connections to the
-    information system' do
-    skip 'A manual review is required to ensure the DBMS enforces requirements for remote connections to the
-    information system'
+  describe sshd_config do
+    its('PermitRootLogin') { should eq 'no' }
+  end
+  describe service('auditd') do
+    it { should be_enabled }
+    it { should be_running }
   end
 end
 

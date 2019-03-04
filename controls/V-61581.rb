@@ -50,10 +50,14 @@ control "V-61581" do
 
   Revoke any privileges to sensitive information directly assigned to application
   user accounts."
-  describe 'A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized
-    user roles' do
-    skip  'A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized
-    user roles'
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  database_roles = sql.query("select * from dba_roles;").column('role')
+
+  describe "A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized user roles. The database roles to review are: #{database_roles}" do
+    skip  "A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized user roles. The database roles to review are: #{database_roles}"
   end
 end
 

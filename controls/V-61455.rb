@@ -39,10 +39,14 @@ control "V-61455" do
 
   Include methods to provide evidence of review in the procedures to verify
   reviews occur in accordance with the procedures."
-  describe 'A manual review is required to ensure application user privilege assignment are reviewed monthly or more
-  frequently to ensure compliance with least privilege and documented policy.' do 
-  skip 'A manual review is required to ensure application user privilege assignment are reviewed monthly or more
-    frequently to ensure compliance with least privilege and documented policy.'
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+ 
+  database_roles = sql.query("select * from dba_roles;").column('role')
+
+  describe "A manual review is required to ensure application user privilege assignment are reviewed monthly or more frequently to ensure compliance with least privilege and documented policy. The database roles to review are: #{database_roles}" do 
+    skip "A manual review is required to ensure application user privilege assignment are reviewed monthly or more frequently to ensure compliance with least privilege and documented policy. The database roles to review are: #{database_roles}"
   end
 end
  

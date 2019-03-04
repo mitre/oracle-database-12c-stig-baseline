@@ -36,8 +36,12 @@ control "V-61497" do
 
   Include in the procedures methods that provide evidence of monitoring and
   notification."
-  describe 'A manual review is required to ensure the ISSM reviews changes to DBA role assignments' do
-    skip 'A manual review is required to ensure the ISSM reviews changes to DBA role assignments'
+   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  database_roles = sql.query("select * from dba_roles;").column('role')
+
+  describe "A manual review is required to ensure the ISSM reviews changes to DBA role assignments. The database roles to review are: #{database_roles}" do
+    skip "A manual review is required to ensure the ISSM reviews changes to DBA role assignments. The database roles to review are: #{database_roles}"
   end
 end
 

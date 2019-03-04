@@ -48,10 +48,8 @@ control "V-61867" do
 
   File hashes or checksums should be used for comparisons since file dates may be
   manipulated by malicious users."
-  describe 'A manual review is required to ensure database software, applications, and configuration files are
-    monitored to discover unauthorized changes' do
-    skip 'A manual review is required to ensure database software, applications, and configuration files are
-    monitored to discover unauthorized changes'
+  describe command('grep aide /etc/crontab /etc/cron.*/*') do
+    its('stdout.strip') { should_not be_empty }
   end
 end
 

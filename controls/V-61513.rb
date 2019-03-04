@@ -37,8 +37,24 @@ control "V-61513" do
 
   Create and use custom replication accounts assigned least privileges for
   supporting replication operations."
-  describe 'A manual review is required to ensure replication accounts are not be granted DBA privileges' do
-    skip 'A manual review is required to ensure replication accounts are not be granted DBA privileges'
+
+  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+
+  is_oracle_replication_used = sql.query("select count(*) from all_tables
+  where table_name like 'REPCAT%';").column('count(*)')
+
+  oracle_replication_accounts = sql.query("select * from sys.dba_repcatlog;").column('gname')
+
+
+  if !is_oracle_replication_used.include?('0')
+    describe "The ISSO or DBA must manually ensure the following replication accounts are justified and are not granted DBA privileges: #{oracle_replication_accounts}" do
+      skip "The ISSO or DBA must manually ensure the following replication accounts are justified and are not granted DBA privileges: #{oracle_replication_accounts}"
+    end
+  else
+    describe 'The number of replication accounts defined' do
+      subject { (is_oracle_replication_used) }
+      it {should cmp 0}
+    end
   end
 end
 

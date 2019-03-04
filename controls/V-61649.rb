@@ -66,10 +66,9 @@ control "V-61649" do
   tag "fix": "Utilize a tool, application or service that provides the ability
   to automatically process audit records for events based on selectable event
   criteria."
-  describe 'A manual review is required to ensure the system provides the capability to automatically process audit
-    records for events of interest based upon selectable event criteria' do
-    skip 'A manual review is required to ensure the system provides the capability to automatically process audit
-    records for events of interest based upon selectable event criteria'
+   describe service('auditd') do
+    it { should be_enabled }
+    it { should be_running }
   end
 end
 
