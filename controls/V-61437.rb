@@ -1,3 +1,5 @@
+ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
+
 control "V-61437" do
   title "Oracle roles granted using the WITH ADMIN OPTION must not be granted
   to unauthorized accounts."
@@ -84,9 +86,9 @@ control "V-61437" do
 
   Document authorized role assignments with the WITH ADMIN OPTION in the System
   Security Plan."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
-   ALLOWED_USERS_WITH_ADMIN_OPTION = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   users_with_admin_option = sql.query("select grantee from dba_role_privs
     where admin_option = 'YES' and grantee not in
     (select distinct owner from dba_objects)
@@ -103,7 +105,7 @@ control "V-61437" do
     users_with_admin_option.each do |user|
       describe "oracle users with admin option: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_USERS_WITH_ADMIN_OPTION }
+        it { should be_in ALLOWED_DBADMIN_USERS }
       end
     end
   end

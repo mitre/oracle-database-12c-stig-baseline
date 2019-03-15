@@ -1,3 +1,4 @@
+ALLOWED_USERS_WITH_ADMIN_PRIVS = attribute('allowed_users_with_admin_privs')
 control "V-61599" do
   title "The DBA role must not be assigned excessive or unauthorized
   privileges."
@@ -142,9 +143,8 @@ control "V-61599" do
   tag "fix": "Remove permissions from DBAs and other administrative users
   beyond those required for administrative functions."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-  ALLOWED_USERS_WITH_ADMIN_PRIVS = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   users_with_admin_privs = sql.query("SELECT
   username,
   rp.granted_role,
@@ -181,7 +181,7 @@ control "V-61599" do
   'EXFSYS', 'SYSMAN_APM','IX','OWBSYS'
   )
   ORDER by 1, 2, 3;").column('username').uniq
-  if  users_with_admin_privs.empty?
+  if users_with_admin_privs.empty?
     impact 0.0
     describe 'There are no oracle database users with administative privileges, control N/A' do
       skip 'There are no oracle database users with administative privileges, control N/A'

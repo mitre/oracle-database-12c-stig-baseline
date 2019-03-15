@@ -1,3 +1,4 @@
+USERS_ALLOWED_ACCESS_TO_DICTIONARY_TABLE = attribute('users_allowed_access_to_dictionary_table')
 control "V-61589" do
   title "The DBMS must restrict access to system tables and other configuration
   information or metadata to DBAs or other authorized users."
@@ -54,10 +55,9 @@ control "V-61589" do
   tag "fix": "Restrict accessibility of Oracle system tables and other
   configuration information or metadata to DBAs or other authorized users."
 
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-  USERS_ALLOWED_ACCESS_TO_DICTIONARY_TABLE = ['a', 'b']
+  
   users_with_dictionary_table_access = sql.query("SELECT unique grantee from dba_tab_privs where table_name in
   (select table_name from dictionary)
   order by grantee;").column('grantee').uniq

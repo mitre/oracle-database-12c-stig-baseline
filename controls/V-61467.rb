@@ -1,3 +1,6 @@
+ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
+ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS = attribute('allowed_unlocked_oracledb_accounts')
+
 control "V-61467" do
   title "Application object owner accounts must be disabled when not performing
   installation or maintenance actions."
@@ -77,9 +80,8 @@ control "V-61467" do
   index or enable the application owner account for the duration of the routine
   maintenance function only."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  ALLOWED_DBADMIN_USERS = ['a', 'b']
   dba_users = sql.query("select grantee from dba_sys_privs
   where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
   if  dba_users.empty?
@@ -96,7 +98,6 @@ control "V-61467" do
     end
   end 
 
-  ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS = ['a', 'b']
   unlocked_accounts = sql.query("select distinct o.owner from dba_objects o, dba_users u
   where
    o.object_type <> 'SYNONYM'

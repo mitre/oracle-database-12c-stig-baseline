@@ -69,15 +69,8 @@ control "V-61463" do
   Restrict access to the Oracle process and software owner accounts, DBAs, and
   backup operator accounts."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
  
-  log_mode = sql.query("select log_mode from v$database;").column('log_mode')
-
-  describe 'The oracle database log_mode parameter' do
-    subject { log_mode }
-    it { should_not cmp 'NOARCHIVELOG' }
-  end
 
   log_archive_dest = sql.query("select value from v$parameter where name = 'log_archive_dest';").column('value')
 

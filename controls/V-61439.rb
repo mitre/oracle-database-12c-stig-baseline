@@ -1,3 +1,4 @@
+USERS_ALLOWED_ACCEESS_TO_PUBLIC = attribute('users_allowed_access_to_public')
 control "V-61439" do
   title "Object permissions granted to PUBLIC must be restricted."
   desc  "Permissions on objects may be granted to the user group PUBLIC.
@@ -83,9 +84,9 @@ control "V-61439" do
 
   grant [privilege name] to [user role] on [object name];"
 
-   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  USERS_ALLOWED_ACCEESS_TO_PUBLIC = ['a', 'b']
+ 
    users_with_public_access = sql.query("select DISTINCT owner from dba_tab_privs where grantee = 'PUBLIC';").column('owner').uniq
   
   if users_with_public_access.empty?

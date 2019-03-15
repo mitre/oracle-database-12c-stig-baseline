@@ -1,3 +1,4 @@
+ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
 control "V-61683" do
   title "Use of external executables must be authorized."
   desc  "Information systems are capable of providing a wide variety of
@@ -108,10 +109,8 @@ control "V-61683" do
   Revoke privileges granted to users that are not authorized access to external
   applications."
 
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-    ALLOWED_DBADMIN_USERS = ['a', 'b']
   dba_users = sql.query("select library_name,owner,  '' grantee, '' privilege
   from dba_libraries where file_spec is not null
   minus

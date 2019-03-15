@@ -87,8 +87,8 @@ control "V-61967" do
   To assign the user to the profile do the following:
   ALTER USER <username> PROFILE ORA_STIG_PROFILE;"
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   concurrent_sessions = sql.query("SELECT limit FROM SYS.DBA_PROFILES WHERE RESOURCE_NAME = 'SESSIONS_PER_USER';").column('limit')
 
   describe 'The oracle database number of concurrent sessions allowed' do

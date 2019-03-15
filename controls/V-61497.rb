@@ -36,8 +36,9 @@ control "V-61497" do
 
   Include in the procedures methods that provide evidence of monitoring and
   notification."
-   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   database_roles = sql.query("select * from dba_roles;").column('role')
 
   describe "A manual review is required to ensure the ISSM reviews changes to DBA role assignments. The database roles to review are: #{database_roles}" do

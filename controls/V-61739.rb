@@ -90,8 +90,9 @@ control "V-61739" do
 
   Where a password lifetime longer than “60” is needed, document the reasons and
   obtain ISSO approval."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   get_effective_life_time = sql.query("SELECT p1.profile,
   CASE p1.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
   CASE p2.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE

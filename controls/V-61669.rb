@@ -1,3 +1,4 @@
+ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
 control "V-61669" do
   title "The DBMS must protect the audit records generated, as a result of
   remote access to privileged accounts, and the execution of privileged
@@ -81,9 +82,9 @@ control "V-61669" do
 
   If Unified Auditing is used:
   Grant the correct Audit roles to authorized users."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
-  ALLOWED_AUDIT_USERS = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
   if users_allowed_access_to_audit_info.empty?

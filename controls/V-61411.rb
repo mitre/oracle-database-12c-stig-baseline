@@ -62,7 +62,7 @@ control "V-61411" do
   materialized views, and deployment templates."
   tag "fix": "Change the password for default and custom replication accounts
   and provide the password to ISSO-authorized users only."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   is_oracle_replication_used = sql.query("select count(*) from all_tables
   where table_name like 'REPCAT%';").column('count(*)')

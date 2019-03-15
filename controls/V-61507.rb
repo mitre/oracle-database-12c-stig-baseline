@@ -1,3 +1,4 @@
+ALLOWED_DB_LINKS = attribute('allowed_db_links')
 control "V-61507" do
   title "Credentials stored and used by the DBMS to access remote databases or
   applications must be authorized and restricted to authorized users."
@@ -40,9 +41,9 @@ control "V-61507" do
 
   Document all database links access authorizations in the System Security Plan."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-  ALLOWED_DB_LINKS = ['a', 'b']
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   db_links = sql.query("SELECT DB_LINK FROM DBA_DB_LINKS;").column('db_link').uniq
   if  db_links.empty?
     impact 0.0

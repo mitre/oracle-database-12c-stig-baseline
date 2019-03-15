@@ -47,8 +47,8 @@ unauthorized access to database installations.
   tag "fix": "Change passwords for DBMS accounts to non-default values. Where
   necessary, unlock or enable accounts to change the password, and then return
   the account to disabled or locked status."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
  
   sys_dba_users_with_defpwd = sql.query(" SELECT username FROM SYS.DBA_USERS_WITH_DEFPWD;").column('username').uniq
 

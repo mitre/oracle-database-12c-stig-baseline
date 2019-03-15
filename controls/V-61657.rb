@@ -1,3 +1,4 @@
+ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
 control "V-61657" do
   title "The system must protect audit information from unauthorized deletion."
   desc  "If audit data were to become compromised, then competent forensic
@@ -269,9 +270,9 @@ control "V-61657" do
 
   Apply the same process used in standard auditing to the tables with AUDSYS as
   the owner."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-  ALLOWED_AUDIT_USERS = ['a', 'b']
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
   if users_allowed_access_to_audit_info.empty?

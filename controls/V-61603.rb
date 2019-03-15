@@ -68,7 +68,7 @@ control "V-61603" do
   duration:
   ALTER PROFILE ORA_STIG_PROFILE LIMIT PASSWORD_LOCK_TIME UNLIMITED;"
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   query = %(
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
@@ -82,7 +82,7 @@ control "V-61603" do
 
     describe 'The oracle database account password lock time' do
       subject { password_lock_time }
-      it { should_not include 'UNLIMITED'}
+      it { should cmp 'UNLIMITED'}
     end
   end
   if user_profiles.empty?

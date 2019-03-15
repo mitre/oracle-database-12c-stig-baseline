@@ -67,7 +67,8 @@ control "V-61417" do
 
   Consult and follow the instructions for creating control files in the Oracle
   Database Administrator's Guide, under Steps for Creating New Control Files."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   controlfiles = sql.query("select name from v$controlfile;").column("name")
   partitions = []

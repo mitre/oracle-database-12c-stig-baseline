@@ -1,3 +1,5 @@
+ALLOWED_DB_LINKS = attribute('allowed_db_links')
+
 control "V-61415" do
   title "Fixed user and public database links must be authorized for use."
   desc  "Database links define connections that may be used by the local
@@ -52,9 +54,9 @@ control "V-61415" do
   Review remote database connection definitions periodically and confirm their
   use is still required and authorized."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  ALLOWED_DB_LINKS = ['a', 'b']
   db_links = sql.query("SELECT DB_LINK FROM DBA_DB_LINKS;").column('db_link').uniq
   if  db_links.empty?
     impact 0.0

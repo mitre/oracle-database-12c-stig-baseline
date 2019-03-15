@@ -97,7 +97,7 @@ control "V-61543" do
   end
 
   describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
-    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE)' }
+    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE' }
   end
 
   describe file ("#{oracle_home}/network/admin/sqlnet.ora") do

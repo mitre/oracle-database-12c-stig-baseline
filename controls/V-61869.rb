@@ -1,3 +1,4 @@
+ORACLE_DBAS = attribute('oracle_dbas')
 control "V-61869" do
   title "The OS must limit privileges to change the DBMS software resident
   within software libraries (including privileged programs)."
@@ -65,9 +66,9 @@ control "V-61869" do
   SQL> select * from dba_role_privs where granted_role = 'DBA';"
   tag "fix": "Restrict access to the DBMS software libraries to accounts that
   require access based on job function."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
-    ORACLE_DBAS = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   dba_users = sql.query("select * from dba_role_privs where granted_role = 'DBA';").column('grantee').uniq
   if  dba_users.empty?
     impact 0.0

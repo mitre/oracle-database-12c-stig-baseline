@@ -56,7 +56,7 @@ control "V-61531" do
   Authorize and document user access requirements to the directory outside of the
   Oracle, DBA and SA account list."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   get_diagnostic_dest = sql.query("select value from v$parameter where name = 'diagnostic_dest';").column('value')
 

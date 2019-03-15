@@ -1,3 +1,4 @@
+ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS = attribute('allowed_oracledb_components_integrated_into_dbms')
 control "V-61681" do
   title "Unused database components that are integrated in the DBMS and cannot
   be uninstalled must be disabled."
@@ -87,9 +88,10 @@ control "V-61681" do
   Restart the Oracle service.
 
   (See My Oracle Support Document 948061.1 for more on the chopt command.)"
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
-  ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS = ['a', 'b']
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   list_of_installed_components_integrated_into_dbms = sql.query("SELECT parameter, value
   from v$option
   where parameter in

@@ -1,3 +1,4 @@
+ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
 control "V-61653" do
   title "The system must protect audit information from any type of
   unauthorized access."
@@ -107,9 +108,9 @@ control "V-61653" do
   tag "fix": "Add controls and modify permissions to protect database audit log
   data from unauthorized access, whether stored in the database itself or at the
   OS level."
- sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
-  ALLOWED_AUDIT_USERS = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
   if users_allowed_access_to_audit_info.empty?

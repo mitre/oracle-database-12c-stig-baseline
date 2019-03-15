@@ -1,3 +1,4 @@
+ALLOWED_USERS_SYSTEM_TABLESPACE = attribute('allowed_users_system_tablespace')
 control "V-61459" do
   title "Only authorized system accounts must have the SYSTEM tablespace
  specified as the default tablespace."
@@ -61,8 +62,8 @@ control "V-61459" do
   name (typically TEMP).
   Repeat the \"alter user\" for each affected user account."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
  
   property_name = sql.query("select property_name
   from database_properties
@@ -84,7 +85,7 @@ control "V-61459" do
     it { should_not include 'SYSTEM' }
   end
 
-   ALLOWED_USERS_SYSTEM_TABLESPACE = ['XS$NULL', 'OJVMSYS', 'SYS$UMF']
+   
   users_with_system_tablespace = sql.query("select username from dba_users
   where (default_tablespace = 'SYSTEM' or temporary_tablespace = 'SYSTEM')
   and username not in

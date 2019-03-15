@@ -1,3 +1,5 @@
+ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
+
 control "V-61433" do
   title "System privileges granted using the WITH ADMIN OPTION must not be
   granted to unauthorized user accounts."
@@ -84,9 +86,9 @@ control "V-61433" do
 
   Document authorized privilege assignments with the WITH ADMIN OPTION in the
   System Security Plan."
-    sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-    ALLOWED_DBADMIN_USERS = ['a', 'b']
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+ 
   dba_users = sql.query("select grantee from dba_sys_privs
   where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
   if  dba_users.empty?

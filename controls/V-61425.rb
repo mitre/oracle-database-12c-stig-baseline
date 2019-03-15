@@ -40,7 +40,8 @@ control "V-61425" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
  
   parameter = sql.query("select value from v$parameter where name = 'remote_os_authent';").column('value')

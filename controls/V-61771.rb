@@ -89,8 +89,7 @@ control "V-61771" do
 
   If ASO is not an option, use site-specific procedures to secure data at rest."
 
-   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
  
   parameter = sql.query("select * from v$parameter where name = 'DBFIPS_140c';").column('value')
 

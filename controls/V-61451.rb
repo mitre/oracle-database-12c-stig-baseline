@@ -1,3 +1,4 @@
+ALLOWED_DB_LINKS = attribute('allowed_db_links')
 control "V-61451" do
   title "Unauthorized database links must not be defined and active."
   desc  "DBMS links provide a communication and data transfer path definition
@@ -69,9 +70,9 @@ control "V-61451" do
   12c. Use Oracle GoldenGate to replace all features of Advanced Replication,
   including multimaster replication, updatable materialized views, hierarchical
   materialized views, and deployment templates."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
-  ALLOWED_DB_LINKS = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   db_links = sql.query("SELECT DB_LINK FROM DBA_DB_LINKS;").column('db_link').uniq
   if  db_links.empty?
     impact 0.0

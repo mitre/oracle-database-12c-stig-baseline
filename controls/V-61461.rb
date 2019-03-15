@@ -1,3 +1,4 @@
+ALLOWED_APPLICATION_OWNERS = attribute('allowed_application_owners')
 control "V-61461" do
   title "Application owner accounts must have a dedicated application
   tablespace."
@@ -57,9 +58,9 @@ control "V-61461" do
   tag "fix": "Create and assign dedicated tablespaces for the storage of data
   by each application using the CREATE TABLESPACE command."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   ALLOWED_APPLICATION_OWNERS = ['a', 'b']
+   
   application_owners = sql.query("select distinct owner
   from dba_SEGMENTS;").column('owner').uniq
   if  application_owners.empty?

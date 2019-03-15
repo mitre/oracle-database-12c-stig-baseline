@@ -126,9 +126,8 @@ control "V-61759" do
   but excluding any system that is to be used for routine administrative and
   business applications (including payroll, finance, logistics, and personnel
   management applications)."
-
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
+ 
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
  
   version = sql.query("select version from v$instance;").column('version')
 

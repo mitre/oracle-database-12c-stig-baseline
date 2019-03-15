@@ -1,3 +1,4 @@
+ALLOWED_ORACLEDB_COMPONENTS = attribute('allowed_oracledb_components')
 control "V-61679" do
   title "Unused database components, DBMS software, and database objects must
   be removed."
@@ -101,9 +102,9 @@ control "V-61679" do
   2) Plug the non-CDB database into a CDB database, creating a new PDB.  If
   wanted, can then create additional clones from the new PDB."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-  ALLOWED_ORACLEDB_COMPONENTS = ['a', 'b']
+  
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  
   list_of_installed_components = sql.query("SELECT comp_id, comp_name, version, status from dba_registry where comp_id not in ('CATALOG','CATPROC','XDB');").column('comp_name').uniq
   if list_of_installed_components.empty?
     impact 0.0

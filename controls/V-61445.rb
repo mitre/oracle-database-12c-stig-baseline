@@ -1,3 +1,5 @@
+ALLOWED_USERS_DBA_ROLE = attribute('allowed_users_dba_role')
+
 control "V-61445" do
   title "Oracle application administration roles must be disabled if not
   required and authorized."
@@ -56,9 +58,8 @@ control "V-61445" do
   remove assigned roles from default assignment and assign individually the
   appropriate default roles."
 
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
-
-   ALLOWED_USERS_DBA_ROLE = ['a', 'b']
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+   
   users_with_dba_role = sql.query("select grantee from dba_role_privs
   where default_role='YES'
   and granted_role in

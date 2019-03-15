@@ -103,8 +103,8 @@ control "V-61817" do
   It remains necessary to create a customized replacement for the password
   validation function, ORA12C_STRONG_VERIFY_FUNCTION, if relying on this
   technique to verify password complexity."
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
+  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
  
   limit = sql.query("select DISTINCT b.limit from dba_users a, dba_profiles b where a.profile = b.profile and resource_type='KERNEL';").column('limit')
 

@@ -50,7 +50,7 @@ control "V-61447" do
   end
 
   describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
-    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE)' }
+    its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE' }
   end
   describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
     its('content') { should include 'SSL_CIPHER_SUITES= (SSL_RSA_WITH_AES_256_CBC_SHA384)' }
