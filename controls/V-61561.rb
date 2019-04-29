@@ -86,7 +86,13 @@ control "V-61561" do
 
   user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
 
+  if user_profiles.empty?
+    describe 'There are no oracle user profiles, therefore this control is N/A' do
+      skip 'There are no oracle user profiles, therefore this control is N/A'
+    end
+  end
 
+  if !user_profiles.empty?
     user_profiles.each do |profile|
       password_life_time = sql.query(format(query, profile: profile)).column('limit') 
 
@@ -95,5 +101,6 @@ control "V-61561" do
         it { should cmp <= 35}
       end
     end
+  end
 end
 

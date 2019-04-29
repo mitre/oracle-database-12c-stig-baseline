@@ -1,6 +1,7 @@
 control "V-61531" do
   title "The /diag subdirectory under the directory assigned to the
   DIAGNOSTIC_DEST parameter must be protected from unauthorized access."
+  desc "<DIAGNOSTIC_DEST>/diag indicates the directory where trace, alert, core and incident directories and files are located. The files may contain sensitive data or information that could prove useful to potential attackers."
   impact 0.5
   tag "gtitle": "SRG-APP-000516-DB-999900"
   tag "gid": "V-61531"
