@@ -1,4 +1,3 @@
-ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
 control 'V-61653' do
   title "The system must protect audit information from any type of
   unauthorized access."
@@ -122,7 +121,7 @@ control 'V-61653' do
     users_allowed_access_to_audit_info.each do |user|
       describe "oracle users: #{user} allowed access to audit information" do
         subject { user }
-        it { should be_in ALLOWED_AUDIT_USERS }
+        it { should be_in attribute('allowed_audit_users') }
       end
     end
   end

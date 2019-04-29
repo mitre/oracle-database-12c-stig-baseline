@@ -1,4 +1,3 @@
-ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS = attribute('allowed_oracledb_components_integrated_into_dbms')
 control 'V-61681' do
   title "Unused database components that are integrated in the DBMS and cannot
   be uninstalled must be disabled."
@@ -110,7 +109,7 @@ control 'V-61681' do
     list_of_installed_components_integrated_into_dbms.each do |component|
       describe "The installed oracle database components integrated into the DBMS: #{component}" do
         subject { component }
-        it { should be_in ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS }
+        it { should be_in attribute('allowed_oracledb_components_integrated_into_dbms') }
       end
     end
   end

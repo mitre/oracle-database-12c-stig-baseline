@@ -1,5 +1,3 @@
-ALLOWED_DB_LINKS = attribute('allowed_db_links')
-
 control 'V-61415' do
   title 'Fixed user and public database links must be authorized for use.'
   desc  "Database links define connections that may be used by the local
@@ -66,7 +64,7 @@ control 'V-61415' do
     db_links.each do |link|
       describe "The defined oracle database link: #{link}" do
         subject { link }
-        it { should be_in ALLOWED_DB_LINKS }
+        it { should be_in attribute('allowed_db_links') }
       end
     end
   end

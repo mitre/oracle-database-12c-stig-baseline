@@ -1,4 +1,3 @@
-ALLOWED_USERS_WITH_ADMIN_PRIVS = attribute('allowed_users_with_admin_privs')
 control 'V-61599' do
   title "The DBA role must not be assigned excessive or unauthorized
   privileges."
@@ -190,7 +189,7 @@ control 'V-61599' do
     users_with_admin_privs.each do |user|
       describe "oracle database users: #{user} with administative privileges" do
         subject { user }
-        it { should be_in ALLOWED_USERS_WITH_ADMIN_PRIVS }
+        it { should be_in attribute('allowed_users_with_admin_privs')}
       end
     end
   end

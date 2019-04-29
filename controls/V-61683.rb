@@ -1,4 +1,3 @@
-ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
 control 'V-61683' do
   title 'Use of external executables must be authorized.'
   desc  "Information systems are capable of providing a wide variety of
@@ -154,7 +153,7 @@ control 'V-61683' do
     dba_users.each do |user|
       describe "oracle DBA users: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_DBADMIN_USERS }
+        it { should be_in attribute('allowed_dbadmin_users') }
       end
     end
   end

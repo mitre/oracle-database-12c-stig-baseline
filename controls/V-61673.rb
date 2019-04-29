@@ -69,7 +69,7 @@ control 'V-61673' do
     dba_object_owners .each do |owner|
       describe "oracle datbase object owner: #{owner}" do
         subject { owner }
-        it { should be_in ALLOWED_DBAOBJECT_OWNERS }
+        it { should be_in attribute('allowed_dbaobject_owners') }
       end
     end
   end

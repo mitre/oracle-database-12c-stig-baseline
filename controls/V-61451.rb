@@ -1,4 +1,3 @@
-ALLOWED_DB_LINKS = attribute('allowed_db_links')
 control 'V-61451' do
   title 'Unauthorized database links must not be defined and active.'
   desc  "DBMS links provide a communication and data transfer path definition
@@ -83,7 +82,7 @@ control 'V-61451' do
     db_links.each do |link|
       describe "The defined oracle database link: #{link}" do
         subject { link }
-        it { should be_in ALLOWED_DB_LINKS }
+        it { should be_in attribute('allowed_db_links') }
       end
     end
   end

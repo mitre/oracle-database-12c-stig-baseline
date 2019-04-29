@@ -1,4 +1,3 @@
-USERS_ALLOWED_ACCEESS_TO_PUBLIC = attribute('users_allowed_access_to_public')
 control 'V-61439' do
   title 'Object permissions granted to PUBLIC must be restricted.'
   desc  "Permissions on objects may be granted to the user group PUBLIC.
@@ -97,7 +96,7 @@ control 'V-61439' do
     users_with_public_access.each do |user|
       describe "oracle user: #{user} with access to PUBLIC" do
         subject { user }
-        it { should be_in USERS_ALLOWED_ACCEESS_TO_PUBLIC }
+        it { should be_in attribute('users_allowed_access_to_public')}
       end
     end
   end

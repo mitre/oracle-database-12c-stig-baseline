@@ -1,4 +1,3 @@
-ALLOWED_APPLICATION_OWNERS = attribute('allowed_application_owners')
 control 'V-61461' do
   title "Application owner accounts must have a dedicated application
   tablespace."
@@ -71,7 +70,7 @@ control 'V-61461' do
     application_owners.each do |user|
       describe "oracle db application owners: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_APPLICATION_OWNERS }
+        it { should be_in attribute('allowed_application_owners') }
       end
     end
   end

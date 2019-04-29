@@ -1,4 +1,3 @@
-ORACLE_DBAS = attribute('oracle_dbas')
 control 'V-61869' do
   title "The OS must limit privileges to change the DBMS software resident
   within software libraries (including privileged programs)."
@@ -79,7 +78,7 @@ control 'V-61869' do
     dba_users.each do |user|
       describe "oracle DBA's users: #{user}" do
         subject { user }
-        it { should be_in ORACLE_DBAS }
+        it { should be_in attribute('oracle_dbas') }
       end
     end
   end

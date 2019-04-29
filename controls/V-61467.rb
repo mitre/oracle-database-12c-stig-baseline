@@ -1,6 +1,3 @@
-ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
-ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS = attribute('allowed_unlocked_oracledb_accounts')
-
 control 'V-61467' do
   title "Application object owner accounts must be disabled when not performing
   installation or maintenance actions."
@@ -93,7 +90,7 @@ control 'V-61467' do
     dba_users.each do |user|
       describe "oracle DBA users: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_DBADMIN_USERS }
+        it { should be_in attribute('allowed_dbadmin_users') }
       end
     end
   end
@@ -112,7 +109,7 @@ control 'V-61467' do
     unlocked_accounts.each do |user|
       describe "oracle user: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS }
+        it { should be_in attribute('allowed_unlocked_oracledb_accounts') }
       end
     end
   end

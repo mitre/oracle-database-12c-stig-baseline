@@ -1,4 +1,3 @@
-ALLOWED_USERS_SYSTEM_TABLESPACE = attribute('allowed_users_system_tablespace')
 control 'V-61459' do
   title "Only authorized system accounts must have the SYSTEM tablespace
  specified as the default tablespace."
@@ -97,7 +96,7 @@ control 'V-61459' do
     users_with_system_tablespace.each do |user|
       describe "oracle users with system tablespace: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_USERS_SYSTEM_TABLESPACE }
+        it { should be_in attribute('allowed_users_system_tablespace') }
       end
     end
   end

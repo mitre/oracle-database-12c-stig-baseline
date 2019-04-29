@@ -1,4 +1,3 @@
-ALLOWED_ORACLEDB_COMPONENTS = attribute('allowed_oracledb_components')
 control 'V-61679' do
   title "Unused database components, DBMS software, and database objects must
   be removed."
@@ -114,7 +113,7 @@ control 'V-61679' do
     list_of_installed_components.each do |component|
       describe "The installed oracle database components: #{component}" do
         subject { component }
-        it { should be_in ALLOWED_ORACLEDB_COMPONENTS }
+        it { should be_in attribute('allowed_oracledb_components') }
       end
     end
   end

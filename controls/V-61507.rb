@@ -1,4 +1,3 @@
-ALLOWED_DB_LINKS = attribute('allowed_db_links')
 control 'V-61507' do
   title "Credentials stored and used by the DBMS to access remote databases or
   applications must be authorized and restricted to authorized users."
@@ -53,7 +52,7 @@ control 'V-61507' do
     db_links.each do |link|
       describe "The defined oracle database link: #{link}" do
         subject { link }
-        it { should be_in ALLOWED_DB_LINKS }
+        it { should be_in attribute('allowed_db_links') }
       end
     end
   end
