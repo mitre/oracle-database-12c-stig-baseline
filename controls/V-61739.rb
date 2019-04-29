@@ -1,5 +1,5 @@
-control "V-61739" do
-  title "The DBMS must enforce password maximum lifetime restrictions."
+control 'V-61739' do
+  title 'The DBMS must enforce password maximum lifetime restrictions.'
   desc  "Password maximum lifetime is the maximum period of time, (typically in
   days) a user's password may be in effect before the user is forced to change it.
 
@@ -24,12 +24,12 @@ control "V-61739" do
   where it is necessary to have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000174-DB-000080"
-  tag "gid": "V-61739"
-  tag "rid": "SV-76229r3_rule"
-  tag "stig_id": "O121-C2-015200"
-  tag "fix_id": "F-67655r5_fix"
-  tag "cci": ["CCI-000199"]
+  tag "gtitle": 'SRG-APP-000174-DB-000080'
+  tag "gid": 'V-61739'
+  tag "rid": 'SV-76229r3_rule'
+  tag "stig_id": 'O121-C2-015200'
+  tag "fix_id": 'F-67655r5_fix'
+  tag "cci": ['CCI-000199']
   tag "nist": ['IA-5 (1) (d)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -92,7 +92,7 @@ control "V-61739" do
   obtain ISSO approval."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   get_effective_life_time = sql.query("SELECT p1.profile,
   CASE p1.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
   CASE p2.limit WHEN 'UNLIMITED' THEN 'UNLIMITED' ELSE
@@ -112,17 +112,16 @@ control "V-61739" do
   AND p2.resource_name='PASSWORD_GRACE_TIME'
   AND p3.resource_name='PASSWORD_LIFE_TIME' -- from DEFAULT profile
   AND p4.resource_name='PASSWORD_GRACE_TIME' -- from DEFAULT profile
-  order by 1;").column('effective_life_time') 
+  order by 1;").column('effective_life_time')
 
   get_effective_life_time.each do |effective_life_time|
 
     describe 'The oracle database account effective life time limit' do
       subject { effective_life_time }
-      it { should cmp >= 60}
+      it { should cmp >= 60 }
     end
   end
   describe get_effective_life_time do
-    it {should_not be_empty }
+    it { should_not be_empty }
   end
 end
-

@@ -1,8 +1,8 @@
-control "V-61607" do
+control 'V-61607' do
   title "The DBMS, when the maximum number of unsuccessful logon attempts is
   exceeded, must automatically lock the account/node until released by an
   administrator."
-  desc  "Anytime an authentication method is exposed,  to allow for the
+  desc "Anytime an authentication method is exposed,  to allow for the
   utilization of an application, there is a risk that attempts will be made to
   obtain unauthorized access.
 
@@ -21,12 +21,12 @@ control "V-61607" do
   have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000067-DB-000026"
-  tag "gid": "V-61607"
-  tag "rid": "SV-76097r2_rule"
-  tag "stig_id": "O121-C2-005200"
-  tag "fix_id": "F-67523r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000067-DB-000026'
+  tag "gid": 'V-61607'
+  tag "rid": 'SV-76097r2_rule'
+  tag "stig_id": 'O121-C2-005200'
+  tag "fix_id": 'F-67523r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -75,19 +75,19 @@ control "V-61607" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  query = %(
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'FAILED_LOGIN_ATTEMPTS'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    password_lock_time = sql.query(format(query, profile: profile)).column('limit') 
+    password_lock_time = sql.query(format(query, profile: profile)).column('limit')
 
     describe 'The oracle database limit for failed login attempts' do
       subject { password_lock_time }
-      it { should cmp <= 3}
+      it { should cmp <= 3 }
     end
   end
   if user_profiles.empty?
@@ -96,4 +96,3 @@ control "V-61607" do
     end
   end
 end
-

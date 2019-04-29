@@ -1,8 +1,8 @@
-control "V-61759" do
+control 'V-61759' do
   title "The DBMS must implement required cryptographic protections using
   cryptographic modules complying with applicable federal laws, Executive Orders,
   directives, policies, regulations, standards, and guidance."
-  desc  "Use of cryptography to provide confidentiality and non-repudiation is
+  desc "Use of cryptography to provide confidentiality and non-repudiation is
   not effective unless strong methods are employed. Many earlier encryption
   methods and modules have been broken and/or overtaken by increasing computing
   power. The NIST FIPS 140-2 cryptographic standards provide proven methods and
@@ -16,12 +16,12 @@ control "V-61759" do
   satisfy the prevailing standards.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000196-DB-000140"
-  tag "gid": "V-61759"
-  tag "rid": "SV-76249r3_rule"
-  tag "stig_id": "O121-C2-016600"
-  tag "fix_id": "F-67675r2_fix"
-  tag "cci": ["CCI-002450"]
+  tag "gtitle": 'SRG-APP-000196-DB-000140'
+  tag "gid": 'V-61759'
+  tag "rid": 'SV-76249r3_rule'
+  tag "stig_id": 'O121-C2-016600'
+  tag "fix_id": 'F-67675r2_fix'
+  tag "cci": ['CCI-002450']
   tag "nist": ['SC-13', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -126,10 +126,10 @@ control "V-61759" do
   but excluding any system that is to be used for routine administrative and
   business applications (including payroll, finance, logistics, and personnel
   management applications)."
- 
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  version = sql.query("select version from v$instance;").column('version')
+
+  version = sql.query('select version from v$instance;').column('version')
 
   describe 'The oracle database version' do
     subject { version }
@@ -138,9 +138,8 @@ control "V-61759" do
 
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/ldap/admin/fips.ora") do
+  describe file "#{oracle_home}/ldap/admin/fips.ora" do
     its('content') { should include 'SSLFIPS_140=TRUE' }
     it { should exist }
   end
 end
-

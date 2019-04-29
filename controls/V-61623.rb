@@ -1,4 +1,4 @@
-control "V-61623" do
+control 'V-61623' do
   title "The DBMS must allow designated organizational personnel to select
   which auditable events are to be audited by the database."
   desc  "The list of audited events is the set of events for which audits are
@@ -13,12 +13,12 @@ control "V-61623" do
   overlooked.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000090-DB-000065"
-  tag "gid": "V-61623"
-  tag "rid": "SV-76113r1_rule"
-  tag "stig_id": "O121-C2-006900"
-  tag "fix_id": "F-67539r2_fix"
-  tag "cci": ["CCI-000171"]
+  tag "gtitle": 'SRG-APP-000090-DB-000065'
+  tag "gid": 'V-61623'
+  tag "rid": 'SV-76113r1_rule'
+  tag "stig_id": 'O121-C2-006900'
+  tag "fix_id": 'F-67539r2_fix'
+  tag "cci": ['CCI-000171']
   tag "nist": ['AU-12 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -62,4 +62,3 @@ control "V-61623" do
     which auditable events are to be audited by the database'
   end
 end
-

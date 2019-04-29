@@ -1,4 +1,4 @@
-control "V-61881" do
+control 'V-61881' do
   title "The DBMS must uniquely identify and authenticate non-organizational
   users (or processes acting on behalf of non-organizational users)."
   desc  "Non-organizational users include all information system users other
@@ -21,12 +21,12 @@ control "V-61881" do
   organizations, and the Nation.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000180-DB-000115"
-  tag "gid": "V-61881"
-  tag "rid": "SV-76371r1_rule"
-  tag "stig_id": "O121-P2-015800"
-  tag "fix_id": "F-67797r1_fix"
-  tag "cci": ["CCI-000804"]
+  tag "gtitle": 'SRG-APP-000180-DB-000115'
+  tag "gid": 'V-61881'
+  tag "rid": 'SV-76371r1_rule'
+  tag "stig_id": 'O121-P2-015800'
+  tag "fix_id": 'F-67797r1_fix'
+  tag "cci": ['CCI-000804']
   tag "nist": ['IA-8', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -51,4 +51,3 @@ control "V-61881" do
     users (or processes acting on behalf of non-organizational users).'
   end
 end
-

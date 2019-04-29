@@ -1,6 +1,6 @@
 USERS_ALLOWED_ACCEESS_TO_PUBLIC = attribute('users_allowed_access_to_public')
-control "V-61439" do
-  title "Object permissions granted to PUBLIC must be restricted."
+control 'V-61439' do
+  title 'Object permissions granted to PUBLIC must be restricted.'
   desc  "Permissions on objects may be granted to the user group PUBLIC.
   Because every database user is a member of the PUBLIC group, granting object
   permissions to PUBLIC gives all users in the database access to that object. In
@@ -9,12 +9,12 @@ control "V-61439" do
   require object permissions assigned to PUBLIC by the installation of Oracle
   Database server components be revoked."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61439"
-  tag "rid": "SV-75929r3_rule"
-  tag "stig_id": "O121-BP-022600"
-  tag "fix_id": "F-67355r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61439'
+  tag "rid": 'SV-75929r3_rule'
+  tag "stig_id": 'O121-BP-022600'
+  tag "fix_id": 'F-67355r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -86,9 +86,8 @@ control "V-61439" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
- 
-   users_with_public_access = sql.query("select DISTINCT owner from dba_tab_privs where grantee = 'PUBLIC';").column('owner').uniq
-  
+  users_with_public_access = sql.query("select DISTINCT owner from dba_tab_privs where grantee = 'PUBLIC';").column('owner').uniq
+
   if users_with_public_access.empty?
     impact 0.0
     describe 'There are no oracle users with access to PUBLIC, control N/A' do
@@ -101,6 +100,5 @@ control "V-61439" do
         it { should be_in USERS_ALLOWED_ACCEESS_TO_PUBLIC }
       end
     end
-  end 
+  end
 end
-

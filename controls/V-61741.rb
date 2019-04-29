@@ -1,8 +1,8 @@
-control "V-61741" do
+control 'V-61741' do
   title "The DBMS, when utilizing PKI-based authentication, must validate
   certificates by constructing a certification path with status information to an
   accepted trust anchor."
-  desc  "A trust anchor is an authoritative entity represented via a public key
+  desc "A trust anchor is an authoritative entity represented via a public key
   and associated data. It is used in the context of public key infrastructures,
   X.509 digital certificates, and DNSSEC.
 
@@ -27,12 +27,12 @@ control "V-61741" do
   'SSL', such as SSL_VERSION and SSL_CIPHER_SUITES, they refer to TLS.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000175-DB-000067"
-  tag "gid": "V-61741"
-  tag "rid": "SV-76231r3_rule"
-  tag "stig_id": "O121-C2-015300"
-  tag "fix_id": "F-67657r1_fix"
-  tag "cci": ["CCI-000185"]
+  tag "gtitle": 'SRG-APP-000175-DB-000067'
+  tag "gid": 'V-61741'
+  tag "rid": 'SV-76231r3_rule'
+  tag "stig_id": 'O121-C2-015300'
+  tag "fix_id": 'F-67657r1_fix'
+  tag "cci": ['CCI-000185']
   tag "nist": ['IA-5 (2) (a)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -95,25 +95,24 @@ control "V-61741" do
 
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'WALLET_LOCATION = (SOURCE= (METHOD = FILE) (METHOD_DATA = DIRECTORY=/wallet)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should match /SSL_CIPHER_SUITES=\(\w*\)/ }
   end
 
-  describe.one do 
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe.one do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.2' }
     end
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.1' }
     end
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SSL_CLIENT_AUTHENTICATION=TRUE)' }
   end
 end
-

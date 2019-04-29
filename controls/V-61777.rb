@@ -1,7 +1,7 @@
-control "V-61777" do
+control 'V-61777' do
   title "The DBMS must automatically terminate emergency accounts after an
   organization-defined time period for each type of account."
-  desc  "Emergency application accounts are typically created due to an
+  desc "Emergency application accounts are typically created due to an
   unforeseen operational event or could ostensibly be used in the event of a
   vendor support visit where a support representative requires a temporary unique
   account in order to perform diagnostic testing or conduct some other
@@ -31,12 +31,12 @@ control "V-61777" do
   being misused.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000234-DB-000157"
-  tag "gid": "V-61777"
-  tag "rid": "SV-76267r1_rule"
-  tag "stig_id": "O121-C2-018600"
-  tag "fix_id": "F-67693r1_fix"
-  tag "cci": ["CCI-001682"]
+  tag "gtitle": 'SRG-APP-000234-DB-000157'
+  tag "gid": 'V-61777'
+  tag "rid": 'SV-76267r1_rule'
+  tag "stig_id": 'O121-C2-018600'
+  tag "fix_id": 'F-67693r1_fix'
+  tag "cci": ['CCI-001682']
   tag "nist": ['AC-2 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -71,4 +71,3 @@ control "V-61777" do
     organization-defined time period for each type of account'
   end
 end
-

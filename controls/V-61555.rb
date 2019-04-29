@@ -1,7 +1,7 @@
-control "V-61555" do
+control 'V-61555' do
   title "The DBMS must support the disabling of network protocols deemed by the
   organization to be nonsecure."
-  desc  "This requirement is related to remote access, but more specifically to
+  desc "This requirement is related to remote access, but more specifically to
   the networking protocols allowing systems to communicate. Remote access is any
   access to an organizational information system by a user (or an information
   system) communicating through an external, non-organization  controlled network
@@ -28,12 +28,12 @@ control "V-61555" do
   protocols deemed nonsecure.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000020-DB-000194"
-  tag "gid": "V-61555"
-  tag "rid": "SV-76045r1_rule"
-  tag "stig_id": "O121-C2-001700"
-  tag "fix_id": "F-67471r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000020-DB-000194'
+  tag "gid": 'V-61555'
+  tag "rid": 'SV-76045r1_rule'
+  tag "stig_id": 'O121-C2-001700'
+  tag "fix_id": 'F-67471r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -185,4 +185,3 @@ control "V-61555" do
     organization to be nonsecure'
   end
 end
-

@@ -1,8 +1,8 @@
-control "V-61561" do
+control 'V-61561' do
   title "The DBMS must provide a mechanism to automatically terminate accounts
   designated as temporary or emergency accounts after an organization-defined
   time period."
-  desc  "Temporary application accounts could ostensibly be used in the event
+  desc "Temporary application accounts could ostensibly be used in the event
   of a vendor support visit where a support representative requires a temporary
   unique account in order to perform diagnostic testing or conduct some other
   support related activity. When these types of accounts are created, there is a
@@ -26,12 +26,12 @@ control "V-61561" do
   being used beyond its original purpose or timeframe.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000024-DB-000003"
-  tag "gid": "V-61561"
-  tag "rid": "SV-76051r3_rule"
-  tag "stig_id": "O121-C2-002000"
-  tag "fix_id": "F-67477r1_fix"
-  tag "cci": ["CCI-000016"]
+  tag "gtitle": 'SRG-APP-000024-DB-000003'
+  tag "gid": 'V-61561'
+  tag "rid": 'SV-76051r3_rule'
+  tag "stig_id": 'O121-C2-002000'
+  tag "fix_id": 'F-67477r1_fix'
+  tag "cci": ['CCI-000016']
   tag "nist": ['AC-2 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -60,7 +60,7 @@ control "V-61561" do
   identified by the value PASSWORD_LIFE_TIME in the RESOURCE_NAME column.
 
   SQL>select
-  profile, 
+  profile,
   resource_name,
   resource_type,
   limit
@@ -79,12 +79,12 @@ control "V-61561" do
   where n is the organization-defined time period."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  query = %(
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_LIFE_TIME'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   if user_profiles.empty?
     describe 'There are no oracle user profiles, therefore this control is N/A' do
@@ -94,13 +94,12 @@ control "V-61561" do
 
   if !user_profiles.empty?
     user_profiles.each do |profile|
-      password_life_time = sql.query(format(query, profile: profile)).column('limit') 
+      password_life_time = sql.query(format(query, profile: profile)).column('limit')
 
-      describe 'The oracle database account password life time for profile: #{profile}' do
+      describe "The oracle database account password life time for profile: #{profile}" do
         subject { password_life_time }
-        it { should cmp <= 35}
+        it { should cmp <= 35 }
       end
     end
   end
 end
-

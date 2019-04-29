@@ -1,5 +1,5 @@
-control "V-61693" do
-  title "Oracle must back up user-level information per a defined frequency."
+control 'V-61693' do
+  title 'Oracle must back up user-level information per a defined frequency.'
   desc  "Information system backup is a critical step in maintaining data
   assurance and availability.
 
@@ -18,12 +18,12 @@ control "V-61693" do
   is enabled and configured correctly to prevent data loss.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000145-DB-000095"
-  tag "gid": "V-61693"
-  tag "rid": "SV-76183r2_rule"
-  tag "stig_id": "O121-C2-012200"
-  tag "fix_id": "F-67609r1_fix"
-  tag "cci": ["CCI-000535"]
+  tag "gtitle": 'SRG-APP-000145-DB-000095'
+  tag "gid": 'V-61693'
+  tag "rid": 'SV-76183r2_rule'
+  tag "stig_id": 'O121-C2-012200'
+  tag "fix_id": 'F-67609r1_fix'
+  tag "cci": ['CCI-000535']
   tag "nist": ['CP-9 (a)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -49,4 +49,3 @@ control "V-61693" do
     skip 'A manual review is required to ensure Oracle backs up user-level information per a defined frequency'
   end
 end
-

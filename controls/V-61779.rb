@@ -1,7 +1,7 @@
-control "V-61779" do
+control 'V-61779' do
   title "The DBMS must employ automated mechanisms to alert security personnel
   of inappropriate or unusual activities with security implications."
-  desc  "Applications will typically utilize logging mechanisms for maintaining
+  desc "Applications will typically utilize logging mechanisms for maintaining
   a historical log of activity that occurs within the application. This
   information can then be used for diagnostic purposes, forensics purposes, or
   other purposes relevant to ensuring the availability and integrity of the
@@ -25,12 +25,12 @@ control "V-61779" do
   ongoing and more serious.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000237-DB-000158"
-  tag "gid": "V-61779"
-  tag "rid": "SV-76269r1_rule"
-  tag "stig_id": "O121-C2-018800"
-  tag "fix_id": "F-67695r1_fix"
-  tag "cci": ["CCI-001274"]
+  tag "gtitle": 'SRG-APP-000237-DB-000158'
+  tag "gid": 'V-61779'
+  tag "rid": 'SV-76269r1_rule'
+  tag "stig_id": 'O121-C2-018800'
+  tag "fix_id": 'F-67695r1_fix'
+  tag "cci": ['CCI-001274']
   tag "nist": ['SI-4 (12)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -60,6 +60,5 @@ control "V-61779" do
     of inappropriate or unusual activities with security implications' do
     skip 'A manual review is required to ensure the DBMS employs automated mechanisms to alert security personnel
     of inappropriate or unusual activities with security implications'
- end
+  end
 end
-

@@ -1,7 +1,7 @@
-control "V-61601" do
+control 'V-61601' do
   title "OS accounts utilized to run external procedures called by the DBMS
   must have limited privileges."
-  desc  "This requirement is intended to limit exposure due to operating from
+  desc "This requirement is intended to limit exposure due to operating from
   within a privileged account or role. The inclusion of role is intended to
   address those situations where an access control policy, such as Role Based
   Access Control (RBAC) is being implemented and where a change of role provides
@@ -30,12 +30,12 @@ control "V-61601" do
   provided by the host platform.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000063-DB-000020"
-  tag "gid": "V-61601"
-  tag "rid": "SV-76091r2_rule"
-  tag "stig_id": "O121-C2-004400"
-  tag "fix_id": "F-67517r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000020'
+  tag "gid": 'V-61601'
+  tag "rid": 'SV-76091r2_rule'
+  tag "stig_id": 'O121-C2-004400'
+  tag "fix_id": 'F-67517r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -75,9 +75,8 @@ control "V-61601" do
   perform their DBMS specific functionality."
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/rdbms/admin/externaljob.ora") do
+  describe file "#{oracle_home}/rdbms/admin/externaljob.ora" do
     its('content') { should include 'run_user = nobody' }
     its('content') { should include 'run_group = nobody' }
   end
 end
-

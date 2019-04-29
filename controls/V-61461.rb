@@ -1,8 +1,8 @@
 ALLOWED_APPLICATION_OWNERS = attribute('allowed_application_owners')
-control "V-61461" do
+control 'V-61461' do
   title "Application owner accounts must have a dedicated application
   tablespace."
-  desc  "Separation of tablespaces by application helps to protect the
+  desc "Separation of tablespaces by application helps to protect the
   application from resource contention and unauthorized access that could result
   from storage space reuses or host system access controls. Application data must
   be stored separately from system and custom user-defined objects to facilitate
@@ -10,12 +10,12 @@ control "V-61461" do
   never be used for application data storage in order to prevent resource
   contention and performance degradation."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61461"
-  tag "rid": "SV-75951r3_rule"
-  tag "stig_id": "O121-BP-023700"
-  tag "fix_id": "F-67377r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61461'
+  tag "rid": 'SV-75951r3_rule'
+  tag "stig_id": 'O121-BP-023700'
+  tag "fix_id": 'F-67377r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -60,10 +60,9 @@ control "V-61461" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   
   application_owners = sql.query("select distinct owner
   from dba_SEGMENTS;").column('owner').uniq
-  if  application_owners.empty?
+  if application_owners.empty?
     impact 0.0
     describe 'There are no oracle db application owners, therefore control N/A' do
       skip 'There are no oracle db application owners, therefore control N/A'

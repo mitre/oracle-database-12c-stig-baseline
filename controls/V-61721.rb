@@ -1,4 +1,4 @@
-control "V-61721" do
+control 'V-61721' do
   title "The DBMS must support organizational requirements to prohibit password
   reuse for the organization-defined number of generations."
   desc  "Password complexity, or strength, is a measure of the effectiveness of
@@ -21,12 +21,12 @@ control "V-61721" do
   have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000165-DB-000081"
-  tag "gid": "V-61721"
-  tag "rid": "SV-76211r2_rule"
-  tag "stig_id": "O121-C2-014000"
-  tag "fix_id": "F-67637r2_fix"
-  tag "cci": ["CCI-000200"]
+  tag "gtitle": 'SRG-APP-000165-DB-000081'
+  tag "gid": 'V-61721'
+  tag "rid": 'SV-76211r2_rule'
+  tag "stig_id": 'O121-C2-014000'
+  tag "fix_id": 'F-67637r2_fix'
+  tag "cci": ['CCI-000200']
   tag "nist": ['IA-5 (1) (e)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -76,30 +76,30 @@ control "V-61721" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  query_password_max_reuse = %(
+  query_password_max_reuse = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_REUSE_MAX'
-  )
+  }
 
-  query_password_reuse_time = %(
+  query_password_reuse_time = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_REUSE_TIME'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    password_reuse_max = sql.query(format(query_password_max_reuse, profile: profile)).column('limit') 
-    password_reuse_time = sql.query(format(query_password_reuse_time, profile: profile)).column('limit') 
+    password_reuse_max = sql.query(format(query_password_max_reuse, profile: profile)).column('limit')
+    password_reuse_time = sql.query(format(query_password_reuse_time, profile: profile)).column('limit')
 
-    describe 'The oracle database account password reuse max for profile: #{profile}' do
+    describe "The oracle database account password reuse max for profile: #{profile}" do
       subject { password_reuse_max }
-      it { should_not cmp "UNLIMITED"}
+      it { should_not cmp 'UNLIMITED' }
     end
 
     describe "The oracle database account password reuse time for profile: #{profile}" do
       subject { password_reuse_time }
-      it { should_not cmp "UNLIMITED"}
+      it { should_not cmp 'UNLIMITED' }
     end
   end
   if user_profiles.empty?
@@ -108,4 +108,3 @@ control "V-61721" do
     end
   end
 end
-

@@ -1,8 +1,8 @@
 ALLOWED_ORACLEDB_COMPONENTS = attribute('allowed_oracledb_components')
-control "V-61679" do
+control 'V-61679' do
   title "Unused database components, DBMS software, and database objects must
   be removed."
-  desc  "Information systems are capable of providing a wide variety of
+  desc "Information systems are capable of providing a wide variety of
   functions and services. Some of the functions and services, provided by
   default, may not be necessary to support essential organizational operations
   (e.g., key missions, functions).
@@ -28,12 +28,12 @@ control "V-61679" do
   vulnerabilities is reduced.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000141-DB-000091"
-  tag "gid": "V-61679"
-  tag "rid": "SV-76169r2_rule"
-  tag "stig_id": "O121-C2-011600"
-  tag "fix_id": "F-67593r2_fix"
-  tag "cci": ["CCI-000381"]
+  tag "gtitle": 'SRG-APP-000141-DB-000091'
+  tag "gid": 'V-61679'
+  tag "rid": 'SV-76169r2_rule'
+  tag "stig_id": 'O121-C2-011600'
+  tag "fix_id": 'F-67593r2_fix'
+  tag "cci": ['CCI-000381']
   tag "nist": ['CM-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -102,9 +102,8 @@ control "V-61679" do
   2) Plug the non-CDB database into a CDB database, creating a new PDB.  If
   wanted, can then create additional clones from the new PDB."
 
-  
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   list_of_installed_components = sql.query("SELECT comp_id, comp_name, version, status from dba_registry where comp_id not in ('CATALOG','CATPROC','XDB');").column('comp_name').uniq
   if list_of_installed_components.empty?
     impact 0.0
@@ -118,6 +117,5 @@ control "V-61679" do
         it { should be_in ALLOWED_ORACLEDB_COMPONENTS }
       end
     end
-  end 
+  end
 end
-

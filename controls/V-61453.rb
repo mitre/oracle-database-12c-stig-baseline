@@ -1,18 +1,18 @@
-control "V-61453" do
+control 'V-61453' do
   title "Sensitive information from production database exports must be
   modified before import to a development database."
-  desc  "Data export from production databases may include sensitive data.
+  desc "Data export from production databases may include sensitive data.
   Application developers do not have a need to know to sensitive data. Any access
   they may have to production data would be considered unauthorized access and
   subject the sensitive data to unlawful or unauthorized disclosure. See DODD
   8500.1 for a definition of Sensitive Information."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61453"
-  tag "rid": "SV-75943r2_rule"
-  tag "stig_id": "O121-BP-023300"
-  tag "fix_id": "F-67369r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61453'
+  tag "rid": 'SV-75943r2_rule'
+  tag "stig_id": 'O121-BP-023300'
+  tag "fix_id": 'F-67369r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -52,9 +52,8 @@ control "V-61453" do
   Implement policy and procedures to modify or remove sensitive information in
   production exports prior to import into development databases."
   describe 'A manual review is required to ensure sensitive information from production database exports are
-  modified before import to a development database' do 
-  skip 'A manual review is required to ensure sensitive information from production database exports are
-  modified before import to a development database'
+  modified before import to a development database' do
+    skip 'A manual review is required to ensure sensitive information from production database exports are
+    modified before import to a development database'
   end
 end
-

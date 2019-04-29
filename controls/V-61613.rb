@@ -1,7 +1,7 @@
-control "V-61613" do
+control 'V-61613' do
   title "The DBMS must have its auditing configured to reduce the likelihood of
   storage capacity being exceeded."
-  desc  "Applications need to be cognizant of potential audit log storage
+  desc "Applications need to be cognizant of potential audit log storage
   capacity issues. During the installation and/or configuration process,
   applications should detect and determine if adequate storage capacity has been
   allocated for audit logs.
@@ -17,12 +17,12 @@ control "V-61613" do
   continuing unlogged.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000071-DB-000047"
-  tag "gid": "V-61613"
-  tag "rid": "SV-76103r1_rule"
-  tag "stig_id": "O121-C2-005600"
-  tag "fix_id": "F-67529r1_fix"
-  tag "cci": ["CCI-001849"]
+  tag "gtitle": 'SRG-APP-000071-DB-000047'
+  tag "gid": 'V-61613'
+  tag "rid": 'SV-76103r1_rule'
+  tag "stig_id": 'O121-C2-005600'
+  tag "fix_id": 'F-67529r1_fix'
+  tag "cci": ['CCI-001849']
   tag "nist": ['AU-4', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -76,4 +76,3 @@ control "V-61613" do
     storage capacity being exceeded'
   end
 end
-

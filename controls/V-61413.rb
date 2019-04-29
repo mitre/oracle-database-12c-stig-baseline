@@ -1,15 +1,15 @@
-control "V-61413" do
-  title "Oracle instance names must not contain Oracle version numbers."
+control 'V-61413' do
+  title 'Oracle instance names must not contain Oracle version numbers.'
   desc  "Service names may be discovered by unauthenticated users. If the
   service name includes version numbers or other database product information, a
   malicious user may use that information to develop a targeted attack."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61413"
-  tag "rid": "SV-75903r1_rule"
-  tag "stig_id": "O121-BP-021300"
-  tag "fix_id": "F-67329r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61413'
+  tag "rid": 'SV-75903r1_rule'
+  tag "stig_id": 'O121-BP-021300'
+  tag "fix_id": 'F-67329r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -39,14 +39,12 @@ control "V-61413" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
- version = sql.query("select version from v$instance;").column('version')
- db_instance_name =  sql.query("select instance_name from v$instance;").column('instance_name')
+  version = sql.query('select version from v$instance;').column('version')
+  db_instance_name = sql.query('select instance_name from v$instance;').column('instance_name')
 
- describe 'The oracle database instance name' do
-  subject { db_instance_name }
-  it { should_not include "#{version}" }
- end
+  describe 'The oracle database instance name' do
+    subject { db_instance_name }
+    it { should_not include version.to_s }
+  end
 
- 
 end
-

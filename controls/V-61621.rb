@@ -1,7 +1,7 @@
-control "V-61621" do
+control 'V-61621' do
   title "The DBMS must provide audit record generation capability for
   organization-defined auditable events within the database."
-  desc  "Audit records can be generated from various components within the
+  desc "Audit records can be generated from various components within the
   information system. (e.g., network interface, hard disk, modem, etc.). From an
   application perspective, certain specific application functionalities may be
   audited as well.
@@ -55,12 +55,12 @@ control "V-61621" do
       - *All kernel module loads, unloads, and restarts.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000089-DB-000064"
-  tag "gid": "V-61621"
-  tag "rid": "SV-76111r1_rule"
-  tag "stig_id": "O121-C2-006800"
-  tag "fix_id": "F-67537r1_fix"
-  tag "cci": ["CCI-000169"]
+  tag "gtitle": 'SRG-APP-000089-DB-000064'
+  tag "gid": 'V-61621'
+  tag "rid": 'SV-76111r1_rule'
+  tag "stig_id": 'O121-C2-006800'
+  tag "fix_id": 'F-67537r1_fix'
+  tag "cci": ['CCI-000169']
   tag "nist": ['AU-12 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -111,7 +111,7 @@ control "V-61621" do
 
   If using a third-party product, proceed in accordance with the product
   documentation. If using Oracle's capabilities, proceed as follows.
- 
+
   If Standard Auditing is used:
   Use this process to ensure auditable events are captured:
   ALTER SYSTEM SET AUDIT_TRAIL=<audit trail type> SCOPE=SPFILE;
@@ -145,10 +145,9 @@ control "V-61621" do
   Oracle documentation at the locations above."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-   standard_auditing_used = attribute('standard_auditing_used')
-  unified_auditing_used = attribute('unified_auditing_used')
 
+  standard_auditing_used = attribute('standard_auditing_used')
+  unified_auditing_used = attribute('unified_auditing_used')
 
   describe.one do
     describe 'Standard auditing is in use for audit purposes' do
@@ -163,7 +162,7 @@ control "V-61621" do
   end
 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
-  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
+  audit_info_captured = sql.query('SELECT * FROM UNIFIED_AUDIT_TRAIL;').column('EVENT_TIMESTAMP')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
@@ -182,7 +181,7 @@ control "V-61621" do
 
     describe 'The oracle database unified auditing events captured' do
       subject { audit_info_captured }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
   end

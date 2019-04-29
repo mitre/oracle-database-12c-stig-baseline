@@ -1,7 +1,7 @@
-control "V-61819" do
+control 'V-61819' do
   title "The DBMS must limit the use of resources by priority and not impede
   the host from servicing processes designated as a higher-priority."
-  desc  "Priority protection helps prevent a lower-priority process from
+  desc "Priority protection helps prevent a lower-priority process from
   delaying or interfering with the information system servicing any
   higher-priority process. This control does not apply to components in the
   information system for which there is only a single user/role. The application
@@ -12,12 +12,12 @@ control "V-61819" do
   this can severely impact higher-priority processes.
   "
   impact 0.3
-  tag "gtitle": "SRG-APP-000248-DB-000135"
-  tag "gid": "V-61819"
-  tag "rid": "SV-76309r2_rule"
-  tag "stig_id": "O121-C3-019400"
-  tag "fix_id": "F-67735r5_fix"
-  tag "cci": ["CCI-002394"]
+  tag "gtitle": 'SRG-APP-000248-DB-000135'
+  tag "gid": 'V-61819'
+  tag "rid": 'SV-76309r2_rule'
+  tag "stig_id": 'O121-C3-019400'
+  tag "fix_id": 'F-67735r5_fix'
+  tag "cci": ['CCI-002394']
   tag "nist": ['SC-6', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -111,8 +111,8 @@ control "V-61819" do
   CONNECT_TIME       600;"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  limit = sql.query("select 
+
+  limit = sql.query("select
     DISTINCT b.limit
   from dba_users a,
        dba_profiles b
@@ -124,4 +124,3 @@ control "V-61819" do
     it { should_not include 'UNLIMITED' }
   end
 end
-

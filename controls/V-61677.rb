@@ -1,7 +1,7 @@
-control "V-61677" do
+control 'V-61677' do
   title "Default demonstration and sample databases, database objects, and
   applications must be removed."
-  desc  "Information systems are capable of providing a wide variety of
+  desc "Information systems are capable of providing a wide variety of
   functions and services. Some of the functions and services, provided by
   default, may not be necessary to support essential organizational operations
   (e.g., key missions, functions).
@@ -22,12 +22,12 @@ control "V-61677" do
   system.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000141-DB-000090"
-  tag "gid": "V-61677"
-  tag "rid": "SV-76167r3_rule"
-  tag "stig_id": "O121-C2-011500"
-  tag "fix_id": "F-67591r1_fix"
-  tag "cci": ["CCI-000381"]
+  tag "gtitle": 'SRG-APP-000141-DB-000090'
+  tag "gid": 'V-61677'
+  tag "rid": 'SV-76167r3_rule'
+  tag "stig_id": 'O121-C2-011500'
+  tag "fix_id": 'F-67591r1_fix'
+  tag "cci": ['CCI-000381']
   tag "nist": ['CM-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -97,9 +97,9 @@ control "V-61677" do
 
   To remove objects without removing their owner, use the appropriate DROP
   statement (DROP TABLE, DROP VIEW, etc.)."
- 
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   sample_schema_user_accounts = sql.query("select distinct(username) from dba_users where username in
   ('BI','HR','OE','PM','IX','SH','SCOTT');").column('username')
 
@@ -108,4 +108,3 @@ control "V-61677" do
     it { should be_empty }
   end
 end
-

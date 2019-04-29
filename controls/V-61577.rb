@@ -1,9 +1,9 @@
-control "V-61577" do
+control 'V-61577' do
   title "The DBMS must enforce Discretionary Access Control (DAC) policy
   allowing users to specify and control sharing by named individuals, groups of
   individuals, or by both, limiting propagation of access rights and including or
   excluding access to the granularity of a single user."
-  desc  "Access control policies (e.g., identity-based policies, role-based
+  desc "Access control policies (e.g., identity-based policies, role-based
   policies, attribute-based policies) and access enforcement mechanisms (e.g.,
   access control lists, access control matrices, cryptography) are employed by
   organizations to control access between users (or processes acting on behalf of
@@ -34,12 +34,12 @@ control "V-61577" do
   access to objects and information they are not authorized to view/modify.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000036-DB-000174"
-  tag "gid": "V-61577"
-  tag "rid": "SV-76067r1_rule"
-  tag "stig_id": "O121-C2-003000"
-  tag "fix_id": "F-67493r1_fix"
-  tag "cci": ["CCI-002165"]
+  tag "gtitle": 'SRG-APP-000036-DB-000174'
+  tag "gid": 'V-61577'
+  tag "rid": 'SV-76067r1_rule'
+  tag "stig_id": 'O121-C2-003000'
+  tag "fix_id": 'F-67493r1_fix'
+  tag "cci": ['CCI-002165']
   tag "nist": ['AC-3 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -72,4 +72,3 @@ control "V-61577" do
     excluding access to the granularity of a single user.'
   end
 end
-

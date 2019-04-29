@@ -1,8 +1,8 @@
-control "V-61755" do
+control 'V-61755' do
   title "The DBMS must support organizational requirements to encrypt
   information stored in the database and information extracted or derived from
   the database and stored on digital media."
-  desc  "When data is written to digital media, such as hard drives, mobile
+  desc "When data is written to digital media, such as hard drives, mobile
   computers, external/removable hard drives, personal digital assistants,
   flash/thumb drives, etc., there is risk of data loss and/or compromise.
 
@@ -31,14 +31,14 @@ control "V-61755" do
 
       Information at rest, when not encrypted, is open to compromise from
   attackers who have gained unauthorized access to the data files.
-  " 
+  "
   impact 0.5
-  tag "gtitle": "SRG-APP-000188-DB-000121"
-  tag "gid": "V-61755"
-  tag "rid": "SV-76245r2_rule"
-  tag "stig_id": "O121-C2-016400"
-  tag "fix_id": "F-67671r1_fix"
-  tag "cci": ["CCI-002262"]
+  tag "gtitle": 'SRG-APP-000188-DB-000121'
+  tag "gid": 'V-61755'
+  tag "rid": 'SV-76245r2_rule'
+  tag "stig_id": 'O121-C2-016400'
+  tag "fix_id": 'F-67671r1_fix'
+  tag "cci": ['CCI-002262']
   tag "nist": ['AC-16 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -125,28 +125,25 @@ control "V-61755" do
   http://csrc.nist.gov/publications/PubsFIPS.html#140-2"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   parameter = sql.query("select * from v$parameter where name = 'DBFIPS_140c';").column('value')
 
   describe 'The oracle database DBFIPS_140c parameter' do
     subject { parameter }
-    it { should_not be_empty}
+    it { should_not be_empty }
   end
 
-
-  encrypted_tablespaces = sql.query("SELECT * FROM V$ENCRYPTED_TABLESPACES;").column('MASTERKEYID')
+  encrypted_tablespaces = sql.query('SELECT * FROM V$ENCRYPTED_TABLESPACES;').column('MASTERKEYID')
 
   describe 'The oracle tablespaces that are encrypted' do
     subject { encrypted_tablespaces }
-    it { should_not be_empty}
+    it { should_not be_empty }
   end
 
-  encrypted_colums = sql.query("SELECT * FROM DBA_ENCRYPTED_COLUMNS;").column('COLUMN_NAME')
+  encrypted_colums = sql.query('SELECT * FROM DBA_ENCRYPTED_COLUMNS;').column('COLUMN_NAME')
 
   describe 'The oracle table columns that are encrypted' do
     subject { encrypted_colums }
     it { should_not be_empty }
   end
 end
-
-

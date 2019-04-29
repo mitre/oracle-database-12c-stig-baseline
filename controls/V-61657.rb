@@ -1,6 +1,6 @@
 ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
-control "V-61657" do
-  title "The system must protect audit information from unauthorized deletion."
+control 'V-61657' do
+  title 'The system must protect audit information from unauthorized deletion.'
   desc  "If audit data were to become compromised, then competent forensic
   analysis and discovery of the true source of potentially malicious system
   activity is impossible to achieve.
@@ -27,12 +27,12 @@ control "V-61657" do
   unauthorized modification of, sensitive data stored in the database.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000120-DB-000061"
-  tag "gid": "V-61657"
-  tag "rid": "SV-76147r1_rule"
-  tag "stig_id": "O121-C2-009500"
-  tag "fix_id": "F-67571r2_fix"
-  tag "cci": ["CCI-000164"]
+  tag "gtitle": 'SRG-APP-000120-DB-000061'
+  tag "gid": 'V-61657'
+  tag "rid": 'SV-76147r1_rule'
+  tag "stig_id": 'O121-C2-009500'
+  tag "fix_id": 'F-67571r2_fix'
+  tag "cci": ['CCI-000164']
   tag "nist": ['AU-9', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -270,9 +270,9 @@ control "V-61657" do
 
   Apply the same process used in standard auditing to the tables with AUDSYS as
   the owner."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
   if users_allowed_access_to_audit_info.empty?
@@ -287,6 +287,5 @@ control "V-61657" do
         it { should be_in ALLOWED_AUDIT_USERS }
       end
     end
-  end 
+  end
 end
-

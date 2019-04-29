@@ -1,4 +1,4 @@
-control "V-61647" do
+control 'V-61647' do
   title "The system must alert designated organizational officials in the event
   of an audit processing failure."
   desc  "It is critical for the appropriate personnel to be aware if a system
@@ -16,12 +16,12 @@ control "V-61647" do
   designated administrator.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000108-DB-000048"
-  tag "gid": "V-61647"
-  tag "rid": "SV-76137r2_rule"
-  tag "stig_id": "O121-C2-008500"
-  tag "fix_id": "F-67561r3_fix"
-  tag "cci": ["CCI-000139"]
+  tag "gtitle": 'SRG-APP-000108-DB-000048'
+  tag "gid": 'V-61647'
+  tag "rid": 'SV-76137r2_rule'
+  tag "stig_id": 'O121-C2-008500'
+  tag "fix_id": 'F-67561r3_fix'
+  tag "cci": ['CCI-000139']
   tag "nist": ['AU-5 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -50,4 +50,3 @@ control "V-61647" do
     of an audit processing failure'
   end
 end
-

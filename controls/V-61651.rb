@@ -1,5 +1,5 @@
-control "V-61651" do
-  title "Attempts to bypass access controls must be audited."
+control 'V-61651' do
+  title 'Attempts to bypass access controls must be audited.'
   desc  "Information system auditing capability is critical for accurate
   forensic analysis. Audit record content that may be necessary to satisfy the
   requirement of this control includes:  timestamps, source and destination
@@ -13,12 +13,12 @@ control "V-61651" do
   Without detection, malicious activity may proceed without hindrance.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000115-DB-000056"
-  tag "gid": "V-61651"
-  tag "rid": "SV-76141r1_rule"
-  tag "stig_id": "O121-C2-009000"
-  tag "fix_id": "F-67565r1_fix"
-  tag "cci": ["CCI-000158"]
+  tag "gtitle": 'SRG-APP-000115-DB-000056'
+  tag "gid": 'V-61651'
+  tag "rid": 'SV-76141r1_rule'
+  tag "stig_id": 'O121-C2-009000'
+  tag "fix_id": 'F-67565r1_fix'
+  tag "cci": ['CCI-000158']
   tag "nist": ['AU-7 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -153,7 +153,7 @@ control "V-61651" do
   XS_USER_NAME              VARCHAR2(128)
   XS_SESSIONID              RAW(33 BYTE)
   ENTRY_ID                  NUMBER
-  STATEMENT_ID              NUMBER 
+  STATEMENT_ID              NUMBER
   EVENT_TIMESTAMP           TIMESTAMP(6) WITH LOCAL TIME ZONE
   ACTION_NAME               VARCHAR2(64)
   RETURN_CODE               NUMBER
@@ -238,10 +238,10 @@ control "V-61651" do
   exist
   - Other activities that may produce unexpected failures or trigger DBMS
   lockdown actions"
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
- standard_auditing_used = attribute('standard_auditing_used')
+
+  standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
 
   describe.one do
@@ -257,7 +257,7 @@ control "V-61651" do
   end
 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
-  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
+  audit_info_captured = sql.query('SELECT * FROM UNIFIED_AUDIT_TRAIL;').column('EVENT_TIMESTAMP')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
@@ -276,9 +276,8 @@ control "V-61651" do
 
     describe 'The oracle database unified auditing events captured' do
       subject { audit_info_captured }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
   end
 end
-

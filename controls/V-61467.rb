@@ -1,10 +1,10 @@
 ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
 ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS = attribute('allowed_unlocked_oracledb_accounts')
 
-control "V-61467" do
+control 'V-61467' do
   title "Application object owner accounts must be disabled when not performing
   installation or maintenance actions."
-  desc  "Object ownership provides all database object permissions to the owned
+  desc "Object ownership provides all database object permissions to the owned
   object. Access to the application object owner accounts requires special
   protection to prevent unauthorized access and use of the object ownership
   privileges. In addition to the high privileges to application objects assigned
@@ -14,12 +14,12 @@ control "V-61467" do
   undetected. To help protect the account, it must be enabled only when access is
   required."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61467"
-  tag "rid": "SV-75957r4_rule"
-  tag "stig_id": "O121-BP-024000"
-  tag "fix_id": "F-67383r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61467'
+  tag "rid": 'SV-75957r4_rule'
+  tag "stig_id": 'O121-BP-024000'
+  tag "fix_id": 'F-67383r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -84,7 +84,7 @@ control "V-61467" do
 
   dba_users = sql.query("select grantee from dba_sys_privs
   where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
-  if  dba_users.empty?
+  if dba_users.empty?
     impact 0.0
     describe 'There are no oracle DBA users, control N/A' do
       skip 'There are no oracle DBA users, control N/A'
@@ -96,14 +96,14 @@ control "V-61467" do
         it { should be_in ALLOWED_DBADMIN_USERS }
       end
     end
-  end 
+  end
 
   unlocked_accounts = sql.query("select distinct o.owner from dba_objects o, dba_users u
   where
    o.object_type <> 'SYNONYM'
    and o.owner = username
    and upper(account_status) not like '%LOCKED%';").column('owner').uniq
-  if  unlocked_accounts.empty?
+  if unlocked_accounts.empty?
     impact 0.0
     describe 'There are no unlocked oracle accounts, control N/A' do
       skip 'There are no unlocked oracle accounts, control N/A'
@@ -115,5 +115,5 @@ control "V-61467" do
         it { should be_in ALLOWED_UNCLOCKED_ORACLEDB_ACCOUNTS }
       end
     end
-  end 
+  end
 end

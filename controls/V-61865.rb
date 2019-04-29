@@ -1,5 +1,5 @@
-control "V-61865" do
-  title "Use of the DBMS software installation account must be restricted."
+control 'V-61865' do
+  title 'Use of the DBMS software installation account must be restricted.'
   desc  "This requirement is intended to limit exposure due to operating from
   within a privileged account or role. The inclusion of role is intended to
   address those situations where an access control policy, such as Role Based
@@ -37,12 +37,12 @@ control "V-61865" do
   individual.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000063-DB-000022"
-  tag "gid": "V-61865"
-  tag "rid": "SV-76355r2_rule"
-  tag "stig_id": "O121-OS-004600"
-  tag "fix_id": "F-67781r4_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000022'
+  tag "gid": 'V-61865'
+  tag "rid": 'SV-76355r2_rule'
+  tag "stig_id": 'O121-OS-004600'
+  tag "fix_id": 'F-67781r4_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -72,4 +72,3 @@ control "V-61865" do
     skip 'A manual review is required to ensure the use of the DBMS software installation account is restricted'
   end
 end
-

@@ -1,5 +1,5 @@
-control "V-61789" do
-  title "The DBMS must identify potentially security-relevant error conditions."
+control 'V-61789' do
+  title 'The DBMS must identify potentially security-relevant error conditions.'
   desc  "The structure and content of error messages need to be carefully
   considered by the organization and development team. The extent to which the
   application is able to identify and handle error conditions is guided by
@@ -12,12 +12,12 @@ control "V-61789" do
   personnel responsible for addressing them.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000265-DB-000161"
-  tag "gid": "V-61789"
-  tag "rid": "SV-76279r1_rule"
-  tag "stig_id": "O121-C2-019800"
-  tag "fix_id": "F-67705r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000265-DB-000161'
+  tag "gid": 'V-61789'
+  tag "rid": 'SV-76279r1_rule'
+  tag "stig_id": 'O121-C2-019800'
+  tag "fix_id": 'F-67705r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -64,4 +64,3 @@ control "V-61789" do
     skip 'A manual review is required to ensure the DBMS must identifies potentially security-relevant error conditions'
   end
 end
-

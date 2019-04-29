@@ -1,4 +1,4 @@
-control "V-61643" do
+control 'V-61643' do
   title "The DBMS itself, or the logging or alerting mechanism the application
   utilizes, must provide a warning when allocated audit record storage volume
   reaches an organization-defined percentage of maximum audit record storage
@@ -23,12 +23,12 @@ control "V-61643" do
   designated log directory is nearing capacity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000103-DB-000050"
-  tag "gid": "V-61643"
-  tag "rid": "SV-76133r2_rule"
-  tag "stig_id": "O121-C2-008200"
-  tag "fix_id": "F-67555r1_fix"
-  tag "cci": ["CCI-001855"]
+  tag "gtitle": 'SRG-APP-000103-DB-000050'
+  tag "gid": 'V-61643'
+  tag "rid": 'SV-76133r2_rule'
+  tag "stig_id": 'O121-C2-008200'
+  tag "fix_id": 'F-67555r1_fix'
+  tag "cci": ['CCI-001855']
   tag "nist": ['AU-5 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -118,11 +118,10 @@ control "V-61643" do
   describe 'A manual review is required to ensure the DBMS itself, or the logging or alerting mechanism the application
     utilizes, provides a warning when allocated audit record storage volume
     reaches an organization-defined percentage of maximum audit record storage
-    capacity.' do 
+    capacity.' do
     skip 'A manual review is required to ensure the DBMS itself, or the logging or alerting mechanism the application
     utilizes, provides a warning when allocated audit record storage volume
     reaches an organization-defined percentage of maximum audit record storage
     capacity.'
   end
 end
-

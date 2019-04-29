@@ -1,7 +1,7 @@
-control "V-61603" do
+control 'V-61603' do
   title "The DBMS must verify account lockouts persist until reset by an
   administrator."
-  desc  "Anytime an authentication method is exposed, to allow for the
+  desc "Anytime an authentication method is exposed, to allow for the
   utilization of an application, there is a risk that attempts will be made to
   obtain unauthorized access.
 
@@ -20,12 +20,12 @@ control "V-61603" do
   have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000065-DB-000024"
-  tag "gid": "V-61603"
-  tag "rid": "SV-76093r2_rule"
-  tag "stig_id": "O121-C2-004900"
-  tag "fix_id": "F-67519r1_fix"
-  tag "cci": ["CCI-002236"]
+  tag "gtitle": 'SRG-APP-000065-DB-000024'
+  tag "gid": 'V-61603'
+  tag "rid": 'SV-76093r2_rule'
+  tag "stig_id": 'O121-C2-004900'
+  tag "fix_id": 'F-67519r1_fix'
+  tag "cci": ['CCI-002236']
   tag "nist": ['AC-7 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -70,19 +70,19 @@ control "V-61603" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  query = %(
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_LOCK_TIME'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    password_lock_time = sql.query(format(query, profile: profile)).column('limit') 
+    password_lock_time = sql.query(format(query, profile: profile)).column('limit')
 
     describe 'The oracle database account password lock time' do
       subject { password_lock_time }
-      it { should cmp 'UNLIMITED'}
+      it { should cmp 'UNLIMITED' }
     end
   end
   if user_profiles.empty?

@@ -1,16 +1,16 @@
-control "V-61503" do
+control 'V-61503' do
   title "Sensitive data stored in the database must be identified in the System
   Security Plan and AIS Functional Architecture documentation."
-  desc  "A DBMS that does not have the correct confidentiality level identified
+  desc "A DBMS that does not have the correct confidentiality level identified
   or any confidentiality level assigned is not being secured at a level
   appropriate to the risk it poses."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61503"
-  tag "rid": "SV-75993r1_rule"
-  tag "stig_id": "O121-BP-024900"
-  tag "fix_id": "F-67419r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61503'
+  tag "rid": 'SV-75993r1_rule'
+  tag "stig_id": 'O121-BP-024900'
+  tag "fix_id": 'F-67419r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -54,4 +54,3 @@ control "V-61503" do
     Security Plan and AIS Functional Architecture documentation'
   end
 end
-

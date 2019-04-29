@@ -1,5 +1,5 @@
-control "V-61541" do
-  title "DBMS default accounts must be assigned custom passwords."
+control 'V-61541' do
+  title 'DBMS default accounts must be assigned custom passwords.'
   desc  "Password maximum lifetime is  the maximum period of time, (typically
 in days) a user's password may be in effect before the user is forced to change
 it.
@@ -16,12 +16,12 @@ system and/or application passwords could be compromised.
 unauthorized access to database installations.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000174-DB-000078"
-  tag "gid": "V-61541"
-  tag "rid": "SV-76031r1_rule"
-  tag "stig_id": "O121-C1-015000"
-  tag "fix_id": "F-67457r1_fix"
-  tag "cci": ["CCI-000199"]
+  tag "gtitle": 'SRG-APP-000174-DB-000078'
+  tag "gid": 'V-61541'
+  tag "rid": 'SV-76031r1_rule'
+  tag "stig_id": 'O121-C1-015000'
+  tag "fix_id": 'F-67457r1_fix'
+  tag "cci": ['CCI-000199']
   tag "nist": ['IA-5 (1) (d)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -49,8 +49,8 @@ unauthorized access to database installations.
   the account to disabled or locked status."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  sys_dba_users_with_defpwd = sql.query(" SELECT username FROM SYS.DBA_USERS_WITH_DEFPWD;").column('username').uniq
+
+  sys_dba_users_with_defpwd = sql.query(' SELECT username FROM SYS.DBA_USERS_WITH_DEFPWD;').column('username').uniq
 
   sys_dba_users_with_defpwd.each do |user|
     describe "The oracle system database user: #{user} with a default password" do
@@ -64,5 +64,3 @@ unauthorized access to database installations.
     end
   end
 end
-
-

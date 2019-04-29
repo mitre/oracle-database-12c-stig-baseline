@@ -1,9 +1,9 @@
 ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
 
-control "V-61437" do
+control 'V-61437' do
   title "Oracle roles granted using the WITH ADMIN OPTION must not be granted
   to unauthorized accounts."
-  desc  "The WITH ADMIN OPTION allows the grantee to grant a role to another
+  desc "The WITH ADMIN OPTION allows the grantee to grant a role to another
   database account. Best security practice restricts the privilege of assigning
   privileges to authorized personnel. Authorized personnel include DBAs, object
   owners, and, where designed and included in the application's functions,
@@ -11,12 +11,12 @@ control "V-61437" do
   authorized accounts can help decrease mismanagement of privileges and wrongful
   assignments to unauthorized accounts."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61437"
-  tag "rid": "SV-75927r3_rule"
-  tag "stig_id": "O121-BP-022500"
-  tag "fix_id": "F-67353r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61437'
+  tag "rid": 'SV-75927r3_rule'
+  tag "stig_id": 'O121-BP-022500'
+  tag "fix_id": 'F-67353r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -88,7 +88,7 @@ control "V-61437" do
   Security Plan."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   users_with_admin_option = sql.query("select grantee from dba_role_privs
     where admin_option = 'YES' and grantee not in
     (select distinct owner from dba_objects)
@@ -96,7 +96,7 @@ control "V-61437" do
     (select grantee from dba_role_privs
      where granted_role = 'DBA')
     order by grantee;").column('grantee').uniq
-  if  users_with_admin_option.empty?
+  if users_with_admin_option.empty?
     impact 0.0
     describe 'There are no oracle users with the admin option, therefore control N/A' do
       skip 'There are no oracle users with the admin option, therefore control N/A'
@@ -110,4 +110,3 @@ control "V-61437" do
     end
   end
 end
-

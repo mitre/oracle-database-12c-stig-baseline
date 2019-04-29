@@ -1,7 +1,7 @@
-control "V-61795" do
+control 'V-61795' do
   title "The DBMS must support taking organization-defined list of least
   disruptive actions to terminate suspicious events."
-  desc  "System availability is a key tenet of system security. Organizations
+  desc "System availability is a key tenet of system security. Organizations
   need to have the flexibility to be able to define the automated actions taken
   in response to an identified incident. This includes being able to define a
   least disruptive action the application takes to terminate suspicious events. A
@@ -15,12 +15,12 @@ control "V-61795" do
   overly disruptive action, a Denial of Service (DoS) may occur.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000287-DB-000126"
-  tag "gid": "V-61795"
-  tag "rid": "SV-76285r1_rule"
-  tag "stig_id": "O121-C2-020300"
-  tag "fix_id": "F-67711r1_fix"
-  tag "cci": ["CCI-001670"]
+  tag "gtitle": 'SRG-APP-000287-DB-000126'
+  tag "gid": 'V-61795'
+  tag "rid": 'SV-76285r1_rule'
+  tag "stig_id": 'O121-C2-020300'
+  tag "fix_id": 'F-67711r1_fix'
+  tag "cci": ['CCI-001670']
   tag "nist": ['SI-4 (7)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -79,4 +79,3 @@ control "V-61795" do
     disruptive actions to terminate suspicious events.'
   end
 end
-

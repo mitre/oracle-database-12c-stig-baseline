@@ -1,7 +1,7 @@
-control "V-61625" do
+control 'V-61625' do
   title "The DBMS must generate audit records for the DoD-selected list of
   auditable events, to the extent such information is available."
-  desc  "Audit records can be generated from various components within the
+  desc "Audit records can be generated from various components within the
   information system, such as network interfaces, hard disks, modems, etc. From
   an application perspective, certain specific application functionalities may be
   audited, as well.
@@ -38,12 +38,12 @@ control "V-61625" do
       - *All kernel module loads, unloads, and restarts.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000091-DB-000066"
-  tag "gid": "V-61625"
-  tag "rid": "SV-76115r3_rule"
-  tag "stig_id": "O121-C2-007000"
-  tag "fix_id": "F-67541r1_fix"
-  tag "cci": ["CCI-000172"]
+  tag "gtitle": 'SRG-APP-000091-DB-000066'
+  tag "gid": 'V-61625'
+  tag "rid": 'SV-76115r3_rule'
+  tag "stig_id": 'O121-C2-007000'
+  tag "fix_id": 'F-67541r1_fix'
+  tag "cci": ['CCI-000172']
   tag "nist": ['AU-12 c', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -190,7 +190,7 @@ control "V-61625" do
   specific user as follows:
   audit policy policy1 by <user>;
   audit policy policy1 by <user> whenever not successful;"
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   standard_auditing_used = attribute('standard_auditing_used')
@@ -208,12 +208,10 @@ control "V-61625" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
   audit_policies_auditing_grant_privileges = sql.query("select DISTINCT POLICY_NAME from AUDIT_UNIFIED_POLICIES
   where AUDIT_OPTION='GRANT' and AUDIT_OPTION_TYPE='OBJECT ACTION';").column('policy_name')
-  unified_audit_policies_enabled = sql.query("select POLICY_NAME from AUDIT_UNIFIED_ENABLED_POLICIES;").column('policy_name')
-
+  unified_audit_policies_enabled = sql.query('select POLICY_NAME from AUDIT_UNIFIED_ENABLED_POLICIES;').column('policy_name')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
@@ -232,12 +230,12 @@ control "V-61625" do
 
     describe 'The audit policies that audit privilege grants on specific objects' do
       subject { audit_policies_auditing_grant_privileges }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
     describe 'The list of unified audit policies enabled' do
       subject { unified_audit_policies_enabled }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
   end

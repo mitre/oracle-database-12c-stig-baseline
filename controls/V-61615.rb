@@ -1,5 +1,5 @@
-control "V-61615" do
-  title "The DBMS must have allocated audit record storage capacity."
+control 'V-61615' do
+  title 'The DBMS must have allocated audit record storage capacity.'
   desc  "Applications need to be cognizant of potential audit log storage
   capacity issues. During the installation and/or configuration process,
   applications should detect and determine if adequate storage capacity has been
@@ -16,12 +16,12 @@ control "V-61615" do
   could be lost.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000072-DB-000046"
-  tag "gid": "V-61615"
-  tag "rid": "SV-76105r1_rule"
-  tag "stig_id": "O121-C2-005700"
-  tag "fix_id": "F-67531r1_fix"
-  tag "cci": ["CCI-001849"]
+  tag "gtitle": 'SRG-APP-000072-DB-000046'
+  tag "gid": 'V-61615'
+  tag "rid": 'SV-76105r1_rule'
+  tag "stig_id": 'O121-C2-005700'
+  tag "fix_id": 'F-67531r1_fix'
+  tag "cci": ['CCI-001849']
   tag "nist": ['AU-4', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -73,4 +73,3 @@ control "V-61615" do
     skip 'A manual review is required to ensure the DBMS has allocated audit record storage capacity'
   end
 end
-

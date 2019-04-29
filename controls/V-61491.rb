@@ -1,16 +1,16 @@
-control "V-61491" do
+control 'V-61491' do
   title "The DBMS host platform and other dependent applications must be
   configured in compliance with applicable STIG requirements."
-  desc  "The security of the data stored in the DBMS is also vulnerable to
+  desc "The security of the data stored in the DBMS is also vulnerable to
   attacks against the host platform, calling applications, and other application
   or optional components."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61491"
-  tag "rid": "SV-75981r1_rule"
-  tag "stig_id": "O121-BP-024300"
-  tag "fix_id": "F-67407r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61491'
+  tag "rid": 'SV-75981r1_rule'
+  tag "stig_id": 'O121-BP-024300'
+  tag "fix_id": 'F-67407r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -54,4 +54,3 @@ control "V-61491" do
     configured in compliance with applicable STIG requirements'
   end
 end
-

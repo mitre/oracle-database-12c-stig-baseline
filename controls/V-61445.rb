@@ -1,20 +1,20 @@
 ALLOWED_USERS_DBA_ROLE = attribute('allowed_users_dba_role')
 
-control "V-61445" do
+control 'V-61445' do
   title "Oracle application administration roles must be disabled if not
   required and authorized."
-  desc  "Application administration roles, which are assigned system or
+  desc "Application administration roles, which are assigned system or
   elevated application object privileges, must be protected from default
   activation. Application administration roles are determined by system privilege
   assignment (create / alter / drop user) and application user role ADMIN OPTION
   privileges."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61445"
-  tag "rid": "SV-75935r2_rule"
-  tag "stig_id": "O121-BP-022900"
-  tag "fix_id": "F-67361r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61445'
+  tag "rid": 'SV-75935r2_rule'
+  tag "stig_id": 'O121-BP-022900'
+  tag "fix_id": 'F-67361r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -59,7 +59,7 @@ control "V-61445" do
   appropriate default roles."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-   
+
   users_with_dba_role = sql.query("select grantee from dba_role_privs
   where default_role='YES'
   and granted_role in
@@ -68,7 +68,7 @@ control "V-61445" do
   and grantee not in
   (select distinct username from dba_users where upper(account_status) like
    '%LOCKED%');").column('grantee').uniq
-  if  users_with_dba_role.empty?
+  if users_with_dba_role.empty?
     impact 0.0
     describe 'There are no oracle users with the dba role, therefore control N/A' do
       skip 'There are no oracle users with the dba role, therefore control N/A'
@@ -82,8 +82,3 @@ control "V-61445" do
     end
   end
 end
-
-
-
-  
-

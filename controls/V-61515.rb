@@ -1,14 +1,14 @@
-control "V-61515" do
-  title "Network access to the DBMS must be restricted to authorized personnel."
+control 'V-61515' do
+  title 'Network access to the DBMS must be restricted to authorized personnel.'
   desc  "Restricting remote access to specific, trusted systems helps prevent
   access by unauthorized and potentially malicious users."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61515"
-  tag "rid": "SV-76005r2_rule"
-  tag "stig_id": "O121-BP-025600"
-  tag "fix_id": "F-67431r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61515'
+  tag "rid": 'SV-76005r2_rule'
+  tag "stig_id": 'O121-BP-025600'
+  tag "fix_id": 'F-67431r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -71,12 +71,11 @@ control "V-61515" do
   the System Security Plan are allowed access to the DBMS."
   tag "fix": "Configure the database listener to restrict access by IP address
   or set up an external device to restrict network access to the DBMS."
-  
+
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'tcp.validnode_checking=YES' }
     its('content') { should match /tcp.invited_nodes=(\W*)/ }
   end
 end
- 

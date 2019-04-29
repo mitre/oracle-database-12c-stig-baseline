@@ -1,6 +1,6 @@
 ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
-control "V-61683" do
-  title "Use of external executables must be authorized."
+control 'V-61683' do
+  title 'Use of external executables must be authorized.'
   desc  "Information systems are capable of providing a wide variety of
   functions and services. Some of the functions and services, provided by
   default, may not be necessary to support essential organizational operations
@@ -22,12 +22,12 @@ control "V-61683" do
   unauthorized access to the host system.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000141-DB-000093"
-  tag "gid": "V-61683"
-  tag "rid": "SV-76173r1_rule"
-  tag "stig_id": "O121-C2-011800"
-  tag "fix_id": "F-67597r1_fix"
-  tag "cci": ["CCI-000381"]
+  tag "gtitle": 'SRG-APP-000141-DB-000093'
+  tag "gid": 'V-61683'
+  tag "rid": 'SV-76173r1_rule'
+  tag "stig_id": 'O121-C2-011800'
+  tag "fix_id": 'F-67597r1_fix'
+  tag "cci": ['CCI-000381']
   tag "nist": ['CM-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -145,7 +145,7 @@ control "V-61683" do
      and ge.user#=oa.grantee#
      and tpm.privilege=oa.privilege#
      and l.file_spec is not null;").column('owner').uniq
-  if  dba_users.empty?
+  if dba_users.empty?
     impact 0.0
     describe 'There are no oracle DBA users, control N/A' do
       skip 'There are no oracle DBA users, control N/A'
@@ -157,5 +157,5 @@ control "V-61683" do
         it { should be_in ALLOWED_DBADMIN_USERS }
       end
     end
-  end 
+  end
 end

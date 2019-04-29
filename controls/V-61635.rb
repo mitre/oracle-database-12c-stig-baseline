@@ -1,7 +1,7 @@
-control "V-61635" do
+control 'V-61635' do
   title "The DBMS must produce audit records containing sufficient information
   to establish the sources (origins) of the events."
-  desc  "Information system auditing capability is critical for accurate
+  desc "Information system auditing capability is critical for accurate
   forensic analysis. Audit record content that may be necessary to satisfy the
   requirement of this control, includes, but is not limited to:  timestamps,
   source and destination IP addresses, user/process identifiers, event
@@ -12,12 +12,12 @@ control "V-61635" do
   records from a forensics perspective is questionable.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000098-DB-000042"
-  tag "gid": "V-61635"
-  tag "rid": "SV-76125r1_rule"
-  tag "stig_id": "O121-C2-007700"
-  tag "fix_id": "F-67547r1_fix"
-  tag "cci": ["CCI-000133"]
+  tag "gtitle": 'SRG-APP-000098-DB-000042'
+  tag "gid": 'V-61635'
+  tag "rid": 'SV-76125r1_rule'
+  tag "stig_id": 'O121-C2-007700'
+  tag "fix_id": 'F-67547r1_fix'
+  tag "cci": ['CCI-000133']
   tag "nist": ['AU-3', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -113,7 +113,7 @@ control "V-61635" do
   http://docs.oracle.com/database/121/UPGRD/afterup.htm#UPGRD52810"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
 
@@ -130,7 +130,7 @@ control "V-61635" do
   end
 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
-  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
+  audit_info_captured = sql.query('SELECT * FROM UNIFIED_AUDIT_TRAIL;').column('EVENT_TIMESTAMP')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
@@ -149,9 +149,8 @@ control "V-61635" do
 
     describe 'The oracle database unified auditing events captured' do
       subject { audit_info_captured }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
   end
 end
-

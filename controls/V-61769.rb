@@ -1,7 +1,7 @@
-control "V-61769" do
+control 'V-61769' do
   title "The DBMS must preserve any organization-defined system state
   information in the event of a system failure."
-  desc  "Failure in a known state can address safety or security in accordance
+  desc "Failure in a known state can address safety or security in accordance
   with the mission/business needs of the organization. Failure in a known secure
   state helps prevent a loss of confidentiality, integrity, or availability in
   the event of a failure of the information system or a component of the system.
@@ -11,12 +11,12 @@ control "V-61769" do
   disruption of mission/business processes.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000226-DB-000147"
-  tag "gid": "V-61769"
-  tag "rid": "SV-76259r3_rule"
-  tag "stig_id": "O121-C2-018200"
-  tag "fix_id": "F-67685r5_fix"
-  tag "cci": ["CCI-001665"]
+  tag "gtitle": 'SRG-APP-000226-DB-000147'
+  tag "gid": 'V-61769'
+  tag "rid": 'SV-76259r3_rule'
+  tag "stig_id": 'O121-C2-018200'
+  tag "fix_id": 'F-67685r5_fix'
+  tag "cci": ['CCI-001665']
   tag "nist": ['SC-24', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -110,14 +110,13 @@ control "V-61769" do
   recorded to transport to another database or being re-applied if the database
   becomes corrupt and needs to be restored from the last backup. Use the redo
   logs to replay transactions not captured in the backup."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  log_mode = sql.query("select log_mode from v$database;").column('log_mode')
+
+  log_mode = sql.query('select log_mode from v$database;').column('log_mode')
 
   describe 'The list of oracle database log mode' do
     subject { log_mode }
     it { should cmp 'ARCHIVELOG' }
   end
 end
-

@@ -1,18 +1,18 @@
-control "V-61501" do
+control 'V-61501' do
   title "Procedures and restrictions for import of production data to
   development databases must be documented, implemented and followed."
-  desc  "Data export from production databases may include sensitive data.
+  desc "Data export from production databases may include sensitive data.
   Application developers may not be cleared for or have need-to-know to sensitive
   data. Any access they may have to production data would be considered
   unauthorized access and subject the sensitive data to unlawful or unauthorized
   disclosure."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61501"
-  tag "rid": "SV-75991r1_rule"
-  tag "stig_id": "O121-BP-024800"
-  tag "fix_id": "F-67417r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61501'
+  tag "rid": 'SV-75991r1_rule'
+  tag "stig_id": 'O121-BP-024800'
+  tag "fix_id": 'F-67417r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -62,4 +62,3 @@ control "V-61501" do
     development databases are documented, implemented and followed'
   end
 end
-

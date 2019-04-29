@@ -1,7 +1,7 @@
-control "V-61557" do
+control 'V-61557' do
   title "The system must employ automated mechanisms for supporting Oracle user
   account management."
-  desc  "A comprehensive application account management process that includes
+  desc "A comprehensive application account management process that includes
   automation helps to ensure accounts designated as requiring attention are
   consistently and promptly addressed. Examples include, but are not limited to,
   using automation to take action on multiple accounts designated as inactive,
@@ -25,14 +25,14 @@ control "V-61557" do
   authentication/access mechanisms include, but are not limited to, Active
   Directory and LDAP. This requirement applies to cases where it is necessary to
   have accounts directly managed by Oracle.
-  " 
+  "
   impact 0.5
-  tag "gtitle": "SRG-APP-000023-DB-000001"
-  tag "gid": "V-61557"
-  tag "rid": "SV-76047r2_rule"
-  tag "stig_id": "O121-C2-001800"
-  tag "fix_id": "F-67473r2_fix"
-  tag "cci": ["CCI-000015"]
+  tag "gtitle": 'SRG-APP-000023-DB-000001'
+  tag "gid": 'V-61557'
+  tag "rid": 'SV-76047r2_rule'
+  tag "stig_id": 'O121-C2-001800'
+  tag "fix_id": 'F-67473r2_fix'
+  tag "cci": ['CCI-000015']
   tag "nist": ['AC-2 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -86,9 +86,8 @@ control "V-61557" do
   While password parameters reside in profiles, they are unaffected by
   RESOURCE_LIMIT or ALTER SYSTEM and password management is always enabled."
   describe 'A manual review is required to ensure the system must employs automated mechanisms for supporting Oracle user
-    account management' do 
+    account management' do
     skip 'A manual review is required to ensure the system must employs automated mechanisms for supporting Oracle user
     account management'
   end
 end
-

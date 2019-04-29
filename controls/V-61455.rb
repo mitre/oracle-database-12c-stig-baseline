@@ -1,18 +1,18 @@
-control "V-61455" do
+control 'V-61455' do
   title "Application user privilege assignment must be reviewed monthly or more
   frequently to ensure compliance with least privilege and documented policy."
-  desc  "Users granted privileges not required to perform their assigned
+  desc "Users granted privileges not required to perform their assigned
   functions are able to make unauthorized modifications to the production data or
   database. Monthly or more frequent periodic review of privilege assignments
   assures that organizational and/or functional changes are reflected
   appropriately."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61455"
-  tag "rid": "SV-75945r1_rule"
-  tag "stig_id": "O121-BP-023400"
-  tag "fix_id": "F-67371r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61455'
+  tag "rid": 'SV-75945r1_rule'
+  tag "stig_id": 'O121-BP-023400'
+  tag "fix_id": 'F-67371r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -41,11 +41,10 @@ control "V-61455" do
   reviews occur in accordance with the procedures."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  database_roles = sql.query("select * from dba_roles;").column('role')
 
-  describe "A manual review is required to ensure application user privilege assignment are reviewed monthly or more frequently to ensure compliance with least privilege and documented policy. The database roles to review are: #{database_roles}" do 
+  database_roles = sql.query('select * from dba_roles;').column('role')
+
+  describe "A manual review is required to ensure application user privilege assignment are reviewed monthly or more frequently to ensure compliance with least privilege and documented policy. The database roles to review are: #{database_roles}" do
     skip "A manual review is required to ensure application user privilege assignment are reviewed monthly or more frequently to ensure compliance with least privilege and documented policy. The database roles to review are: #{database_roles}"
   end
 end
- 

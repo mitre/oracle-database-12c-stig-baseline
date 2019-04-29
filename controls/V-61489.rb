@@ -1,15 +1,15 @@
-control "V-61489" do
-  title "Use of the DBMS installation account must be logged."
+control 'V-61489' do
+  title 'Use of the DBMS installation account must be logged.'
   desc  "The DBMS installation account may be used by any authorized user to
   perform DBMS installation or maintenance. Without logging, accountability for
   actions attributed to the account is lost."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61489"
-  tag "rid": "SV-75979r1_rule"
-  tag "stig_id": "O121-BP-024200"
-  tag "fix_id": "F-67405r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61489'
+  tag "rid": 'SV-75979r1_rule'
+  tag "stig_id": 'O121-BP-024200'
+  tag "fix_id": 'F-67405r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -50,26 +50,25 @@ control "V-61489" do
     its('stdout') { should be_empty }
   end
 
-  describe file("/etc/audit/audit.rules") do
-    its("content") { should match(/^\-w\s+\/etc\/sudoers\s+\-p\s+wa\s+\-k\s+[-\w]+\s*$/) }
+  describe file('/etc/audit/audit.rules') do
+    its('content') { should match(/^\-w\s+\/etc\/sudoers\s+\-p\s+wa\s+\-k\s+[-\w]+\s*$/) }
   end
   describe sshd_config do
     its('PrintLastLog') { should be_nil.or eq 'yes' }
-  end 
-  describe file("/etc/audit/audit.rules") do
-    its("content") { should match(/^\-w\s+\/etc\/group\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
   end
-  describe file("/etc/audit/audit.rules") do
-    its("content") { should match(/^\-w\s+\/etc\/passwd\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  describe file('/etc/audit/audit.rules') do
+    its('content') { should match(/^\-w\s+\/etc\/group\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
   end
-  describe file("/etc/audit/audit.rules") do
-    its("content") { should match(/^\-w\s+\/etc\/gshadow\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  describe file('/etc/audit/audit.rules') do
+    its('content') { should match(/^\-w\s+\/etc\/passwd\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
   end
-  describe file("/etc/audit/audit.rules") do
-    its("content") { should match(/^\-w\s+\/etc\/shadow\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  describe file('/etc/audit/audit.rules') do
+    its('content') { should match(/^\-w\s+\/etc\/gshadow\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
   end
-  describe file("/etc/audit/audit.rules") do
-    its("content") { should match(/^\-w\s+\/etc\/security\/opasswd\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  describe file('/etc/audit/audit.rules') do
+    its('content') { should match(/^\-w\s+\/etc\/shadow\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
+  end
+  describe file('/etc/audit/audit.rules') do
+    its('content') { should match(/^\-w\s+\/etc\/security\/opasswd\s+\-p\s+wa\s+\-k\s+\w+\s*$/) }
   end
 end
-

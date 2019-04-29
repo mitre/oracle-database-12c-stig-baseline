@@ -1,6 +1,6 @@
 ALLOWED_DBAOBJECT_OWNERS = attribute('allowed_dbaobject_owners')
-control "V-61673" do
-  title "Database objects must be owned by accounts authorized for ownership."
+control 'V-61673' do
+  title 'Database objects must be owned by accounts authorized for ownership.'
   desc  "Within the database, object ownership implies full privileges to the
   owned object including the privilege to assign access to the owned objects to
   other subjects. Unmanaged or uncontrolled ownership of objects can lead to
@@ -14,12 +14,12 @@ control "V-61673" do
   synonyms, but no other objects. If this is so, it should be documented.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000133-DB-000200"
-  tag "gid": "V-61673"
-  tag "rid": "SV-76163r2_rule"
-  tag "stig_id": "O121-C2-011000"
-  tag "fix_id": "F-67587r1_fix"
-  tag "cci": ["CCI-001499"]
+  tag "gtitle": 'SRG-APP-000133-DB-000200'
+  tag "gid": 'V-61673'
+  tag "rid": 'SV-76163r2_rule'
+  tag "stig_id": 'O121-C2-011000'
+  tag "fix_id": 'F-67587r1_fix'
+  tag "cci": ['CCI-001499']
   tag "nist": ['CM-5 (6)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -57,11 +57,10 @@ control "V-61673" do
 
   Re-assign ownership of authorized objects to authorized object owner accounts."
 
-
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  dba_object_owners = sql.query("select DISTINCT owner from dba_objects;").column('owner').uniq
-  if  dba_object_owners .empty?
+
+  dba_object_owners = sql.query('select DISTINCT owner from dba_objects;').column('owner').uniq
+  if dba_object_owners .empty?
     impact 0.0
     describe 'There are no oracle dba object owners, control N/A' do
       skip 'There are no oracle dba object owners, control N/A'

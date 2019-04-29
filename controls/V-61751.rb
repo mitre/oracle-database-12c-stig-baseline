@@ -1,7 +1,7 @@
-control "V-61751" do
+control 'V-61751' do
   title "The DBMS must employ strong identification and authentication
   techniques when establishing nonlocal maintenance and diagnostic sessions."
-  desc  "Non-local maintenance and diagnostic activities are those activities
+  desc "Non-local maintenance and diagnostic activities are those activities
   conducted by individuals communicating through a network, either an external
   network (e.g., the Internet) or an internal network.
 
@@ -18,12 +18,12 @@ control "V-61751" do
   information could be compromised.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000185-DB-000116"
-  tag "gid": "V-61751"
-  tag "rid": "SV-76241r1_rule"
-  tag "stig_id": "O121-C2-016100"
-  tag "fix_id": "F-67667r1_fix"
-  tag "cci": ["CCI-000877"]
+  tag "gtitle": 'SRG-APP-000185-DB-000116'
+  tag "gid": 'V-61751'
+  tag "rid": 'SV-76241r1_rule'
+  tag "stig_id": 'O121-C2-016100'
+  tag "fix_id": 'F-67667r1_fix'
+  tag "cci": ['CCI-000877']
   tag "nist": ['MA-4 c)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -49,4 +49,3 @@ control "V-61751" do
     techniques when establishing nonlocal maintenance and diagnostic sessions'
   end
 end
-

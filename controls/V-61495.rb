@@ -1,18 +1,18 @@
-control "V-61495" do
+control 'V-61495' do
   title "The database must not be directly accessible from public or
   unauthorized networks."
-  desc  "Databases often store critical and/or sensitive information used by
+  desc "Databases often store critical and/or sensitive information used by
   the organization. For this reason, databases are targeted for attacks by
   malicious users. Additional protections provided by network defenses that limit
   accessibility help protect the database and its data from unnecessary exposure
   and risk."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61495"
-  tag "rid": "SV-75985r1_rule"
-  tag "stig_id": "O121-BP-024500"
-  tag "fix_id": "F-67411r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61495'
+  tag "rid": 'SV-75985r1_rule'
+  tag "stig_id": 'O121-BP-024500'
+  tag "fix_id": 'F-67411r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -56,4 +56,3 @@ control "V-61495" do
     unauthorized networks.'
   end
 end
-

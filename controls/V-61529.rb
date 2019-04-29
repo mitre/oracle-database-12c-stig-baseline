@@ -1,4 +1,4 @@
-control "V-61529" do
+control 'V-61529' do
   title "Remote database or other external access must use fully-qualified
   names."
   desc  "The Oracle GLOBAL_NAMES parameter is used to set the requirement for
@@ -6,12 +6,12 @@ control "V-61529" do
   they define. By using the same name for both, ambiguity is avoided and
   unauthorized or unintended connections to remote databases are less likely."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61529"
-  tag "rid": "SV-76019r1_rule"
-  tag "stig_id": "O121-BP-026300"
-  tag "fix_id": "F-67445r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61529'
+  tag "rid": 'SV-76019r1_rule'
+  tag "stig_id": 'O121-BP-026300'
+  tag "fix_id": 'F-67445r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -39,7 +39,7 @@ control "V-61529" do
   startup."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   parameter = sql.query("select value from v$parameter where name = 'global_names';").column('value')
 
   describe 'The oracle database GLOBAL_NAMES parameter' do
@@ -47,4 +47,3 @@ control "V-61529" do
     it { should_not cmp 'FALSE' }
   end
 end
-

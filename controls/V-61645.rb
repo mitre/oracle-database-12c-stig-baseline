@@ -1,4 +1,4 @@
-control "V-61645" do
+control 'V-61645' do
   title "The system must provide a real-time alert when organization-defined
   audit failure events occur."
   desc  "It is critical for the appropriate personnel to be aware if a system
@@ -25,12 +25,12 @@ control "V-61645" do
   designated administrator.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000104-DB-000051"
-  tag "gid": "V-61645"
-  tag "rid": "SV-76135r2_rule"
-  tag "stig_id": "O121-C2-008300"
-  tag "fix_id": "F-67559r3_fix"
-  tag "cci": ["CCI-001858"]
+  tag "gtitle": 'SRG-APP-000104-DB-000051'
+  tag "gid": 'V-61645'
+  tag "rid": 'SV-76135r2_rule'
+  tag "stig_id": 'O121-C2-008300'
+  tag "fix_id": 'F-67559r3_fix'
+  tag "cci": ['CCI-001858']
   tag "nist": ['AU-5 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -52,9 +52,8 @@ control "V-61645" do
 
   (Oracle recommends the use of Oracle Enterprise Manager.)"
   describe 'A manual review is required to ensure the system provides a real-time alert when organization-defined
-    audit failure events occur' do 
+    audit failure events occur' do
     skip 'A manual review is required to ensure the system provides a real-time alert when organization-defined
     audit failure events occur'
   end
 end
-

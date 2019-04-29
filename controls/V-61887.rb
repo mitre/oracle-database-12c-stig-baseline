@@ -1,7 +1,7 @@
-control "V-61887" do
+control 'V-61887' do
   title "The DBMS must protect against an individual who uses a shared account
   falsely denying having performed a particular action."
-  desc  "Non-repudiation of actions taken is required in order to maintain
+  desc "Non-repudiation of actions taken is required in order to maintain
   application integrity. Examples of particular actions taken by individuals
   include creating information, sending a message, approving information (e.g.,
   indicating concurrence or signing a contract), and receiving a message.
@@ -32,12 +32,12 @@ control "V-61887" do
   addressed and must document what has been discovered.
   "
   impact 0.3
-  tag "gtitle": "SRG-APP-000080-DB-000063"
-  tag "gid": "V-61887"
-  tag "rid": "SV-76377r2_rule"
-  tag "stig_id": "O121-P3-006200"
-  tag "fix_id": "F-67803r2_fix"
-  tag "cci": ["CCI-000166"]
+  tag "gtitle": 'SRG-APP-000080-DB-000063'
+  tag "gid": 'V-61887'
+  tag "rid": 'SV-76377r2_rule'
+  tag "stig_id": 'O121-P3-006200'
+  tag "fix_id": 'F-67803r2_fix'
+  tag "cci": ['CCI-000166']
   tag "nist": ['AU-10', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -69,7 +69,7 @@ control "V-61887" do
   If Standard Auditing is used:
   To ensure that user activities other than SELECT, INSERT, UPDATE, and DELETE
   are also monitored and attributed to individuals, verify that Oracle auditing
-  is enabled. To see if Oracle is configured to capture audit data, enter the 
+  is enabled. To see if Oracle is configured to capture audit data, enter the
   following SQL*Plus command:
   SHOW PARAMETER AUDIT_TRAIL
   or the following SQL query:
@@ -146,7 +146,6 @@ control "V-61887" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
 
   if standard_auditing_used
@@ -165,4 +164,3 @@ control "V-61887" do
     end
   end
 end
-

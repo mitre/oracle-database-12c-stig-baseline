@@ -1,7 +1,7 @@
-control "V-61803" do
+control 'V-61803' do
   title "The DBMS must notify appropriate individuals when accounts are
   terminated."
-  desc  "When application accounts are terminated, user accessibility is
+  desc "When application accounts are terminated, user accessibility is
   affected.  Accounts are utilized for identifying individual application users
   or for identifying the application processes themselves.
 
@@ -25,12 +25,12 @@ control "V-61803" do
   activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000294-DB-000129"
-  tag "gid": "V-61803"
-  tag "rid": "SV-76293r2_rule"
-  tag "stig_id": "O121-C2-020700"
-  tag "fix_id": "F-67719r1_fix"
-  tag "cci": ["CCI-001686"]
+  tag "gtitle": 'SRG-APP-000294-DB-000129'
+  tag "gid": 'V-61803'
+  tag "rid": 'SV-76293r2_rule'
+  tag "stig_id": 'O121-C2-020700'
+  tag "fix_id": 'F-67719r1_fix'
+  tag "cci": ['CCI-001686']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -70,4 +70,3 @@ control "V-61803" do
     terminated'
   end
 end
-

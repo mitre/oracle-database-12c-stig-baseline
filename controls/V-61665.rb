@@ -1,19 +1,19 @@
-control "V-61665" do
+control 'V-61665' do
   title "The DBMS must support the requirement to back up audit data and
   records onto a different system or media than the system being audited on an
   organization-defined frequency."
-  desc  "Protection of log data includes assuring log data is not accidentally
+  desc "Protection of log data includes assuring log data is not accidentally
   lost or deleted. Backing up audit records to a different system or onto media
   separate from the system being audited on an organizational-defined frequency
   helps to assure, in the event of a catastrophic system failure, the audit
   records will be retained."
   impact 0.5
-  tag "gtitle": "SRG-APP-000125-DB-000170"
-  tag "gid": "V-61665"
-  tag "rid": "SV-76155r1_rule"
-  tag "stig_id": "O121-C2-010000"
-  tag "fix_id": "F-67579r1_fix"
-  tag "cci": ["CCI-001348"]
+  tag "gtitle": 'SRG-APP-000125-DB-000170'
+  tag "gid": 'V-61665'
+  tag "rid": 'SV-76155r1_rule'
+  tag "stig_id": 'O121-C2-010000'
+  tag "fix_id": 'F-67579r1_fix'
+  tag "cci": ['CCI-001348']
   tag "nist": ['AU-9 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -50,4 +50,3 @@ control "V-61665" do
     organization-defined frequency'
   end
 end
- 

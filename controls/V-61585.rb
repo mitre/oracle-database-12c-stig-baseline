@@ -1,5 +1,5 @@
-control "V-61585" do
-  title "The DBMS must be protected from unauthorized access by developers."
+control 'V-61585' do
+  title 'The DBMS must be protected from unauthorized access by developers.'
   desc  "Applications employ the concept of least privilege for specific duties
   and information systems (including specific functions, ports, protocols, and
   services). The concept of least privilege is also applied to information system
@@ -16,12 +16,12 @@ control "V-61585" do
   production systems must not be allowed.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000062-DB-000014"
-  tag "gid": "V-61585"
-  tag "rid": "SV-76075r1_rule"
-  tag "stig_id": "O121-C2-003700"
-  tag "fix_id": "F-67501r1_fix" 
-  tag "cci": ["CCI-000366", "CCI-002220"]
+  tag "gtitle": 'SRG-APP-000062-DB-000014'
+  tag "gid": 'V-61585'
+  tag "rid": 'SV-76075r1_rule'
+  tag "stig_id": 'O121-C2-003700'
+  tag "fix_id": 'F-67501r1_fix'
+  tag "cci": ['CCI-000366', 'CCI-002220']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
@@ -60,4 +60,3 @@ control "V-61585" do
     skip 'A manual review is required to ensure the DBMS is protected from unauthorized access by developers'
   end
 end
-

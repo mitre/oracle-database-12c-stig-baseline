@@ -1,6 +1,6 @@
 ALLOWED_DB_LINKS = attribute('allowed_db_links')
-control "V-61451" do
-  title "Unauthorized database links must not be defined and active."
+control 'V-61451' do
+  title 'Unauthorized database links must not be defined and active.'
   desc  "DBMS links provide a communication and data transfer path definition
   between two databases that may be used by malicious users to discover and
   obtain unauthorized access to remote systems. Database links between production
@@ -12,12 +12,12 @@ control "V-61451" do
   process may be introduced by the application object owner account to the
   production system."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61451"
-  tag "rid": "SV-75941r1_rule"
-  tag "stig_id": "O121-BP-023200"
-  tag "fix_id": "F-67367r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61451'
+  tag "rid": 'SV-75941r1_rule'
+  tag "stig_id": 'O121-BP-023200'
+  tag "fix_id": 'F-67367r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -72,9 +72,9 @@ control "V-61451" do
   materialized views, and deployment templates."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  db_links = sql.query("SELECT DB_LINK FROM DBA_DB_LINKS;").column('db_link').uniq
-  if  db_links.empty?
+
+  db_links = sql.query('SELECT DB_LINK FROM DBA_DB_LINKS;').column('db_link').uniq
+  if db_links.empty?
     impact 0.0
     describe 'There are no oracle database links defined, control N/A' do
       skip 'There are no oracle database links defined, control N/A'
@@ -86,6 +86,5 @@ control "V-61451" do
         it { should be_in ALLOWED_DB_LINKS }
       end
     end
-  end 
+  end
 end
- 

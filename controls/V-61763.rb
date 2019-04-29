@@ -1,7 +1,7 @@
-control "V-61763" do
+control 'V-61763' do
   title "The DBMS must protect the integrity of publicly available information
   and applications."
-  desc  "The purpose of this control is to ensure organizations explicitly
+  desc "The purpose of this control is to ensure organizations explicitly
   address the protection needs for public information and applications with such
   protection likely being implemented as part of other security controls.
 
@@ -11,12 +11,12 @@ control "V-61763" do
   modification, then it cannot be trusted by those accessing it.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000201-DB-000145"
-  tag "gid": "V-61763"
-  tag "rid": "SV-76253r1_rule"
-  tag "stig_id": "O121-C2-017100"
-  tag "fix_id": "F-67679r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000201-DB-000145'
+  tag "gid": 'V-61763'
+  tag "rid": 'SV-76253r1_rule'
+  tag "stig_id": 'O121-C2-017100'
+  tag "fix_id": 'F-67679r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -118,4 +118,3 @@ control "V-61763" do
     and applications.'
   end
 end
-

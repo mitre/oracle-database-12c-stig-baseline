@@ -1,16 +1,16 @@
-control "V-61427" do
-  title "The Oracle REMOTE_OS_ROLES parameter must be set to FALSE."
+control 'V-61427' do
+  title 'The Oracle REMOTE_OS_ROLES parameter must be set to FALSE.'
   desc  "Setting REMOTE_OS_ROLES to TRUE allows operating system groups to
   control Oracle roles. The default value of FALSE causes roles to be identified
   and managed by the database. If REMOTE_OS_ROLES is set to TRUE, a remote user
   could impersonate another operating system user over a network connection."
   impact 0.7
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61427"
-  tag "rid": "SV-75917r1_rule"
-  tag "stig_id": "O121-BP-022000"
-  tag "fix_id": "F-67343r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61427'
+  tag "rid": 'SV-75917r1_rule'
+  tag "stig_id": 'O121-BP-022000'
+  tag "fix_id": 'F-67343r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -38,10 +38,9 @@ control "V-61427" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
- 
   parameter = sql.query("select value from v$parameter where name = 'remote_os_roles';").column('value')
 
   describe 'The oracle database REMOTE_OS_ROLES parameter' do
@@ -49,4 +48,3 @@ control "V-61427" do
     it { should cmp 'FALSE' }
   end
 end
-

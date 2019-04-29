@@ -1,6 +1,6 @@
 ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
-control "V-61659" do
-  title "The system must protect audit tools from unauthorized access."
+control 'V-61659' do
+  title 'The system must protect audit tools from unauthorized access.'
   desc  "Protecting audit data also includes identifying and protecting the
   tools used to view and manipulate log data.
 
@@ -23,15 +23,15 @@ control "V-61659" do
   could also manipulate logs to hide evidence of malicious activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000121-DB-000202"
-  tag "gid": "V-61659"
-  tag "rid": "SV-76149r1_rule"
-  tag "stig_id": "O121-C2-009600"
-  tag "fix_id": "F-67573r1_fix"
-  tag "cci": ["CCI-001493"]
+  tag "gtitle": 'SRG-APP-000121-DB-000202'
+  tag "gid": 'V-61659'
+  tag "rid": 'SV-76149r1_rule'
+  tag "stig_id": 'O121-C2-009600'
+  tag "fix_id": 'F-67573r1_fix'
+  tag "cci": ['CCI-001493']
   tag "nist": ['AU-9', 'Rev_4']
   tag "false_negatives": nil
-  tag "false_positives": nil 
+  tag "false_positives": nil
   tag "documentable": false
   tag "mitigations": nil
   tag "severity_override_guidance": false
@@ -49,7 +49,7 @@ control "V-61659" do
   tag "fix": "Add or modify access controls and permissions to tools used to
   view or modify audit log data. Tools must be accessible by authorized personnel
   only."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
@@ -66,6 +66,5 @@ control "V-61659" do
         it { should be_in ALLOWED_AUDIT_USERS }
       end
     end
-  end 
+  end
 end
-

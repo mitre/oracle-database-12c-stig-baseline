@@ -1,8 +1,8 @@
 ALLOWED_USERS_WITH_ADMIN_PRIVS = attribute('allowed_users_with_admin_privs')
-control "V-61599" do
+control 'V-61599' do
   title "The DBA role must not be assigned excessive or unauthorized
   privileges."
-  desc  "This requirement is intended to limit exposure due to operating from
+  desc "This requirement is intended to limit exposure due to operating from
   within a privileged account or role. The inclusion of role is intended to
   address those situations where an access control policy, such as Role Based
   Access Control (RBAC), is being implemented and where a change of role provides
@@ -28,12 +28,12 @@ control "V-61599" do
   the information system or hide evidence of malicious activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000063-DB-000019"
-  tag "gid": "V-61599"
-  tag "rid": "SV-76089r2_rule"
-  tag "stig_id": "O121-C2-004300"
-  tag "fix_id": "F-67515r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000019'
+  tag "gid": 'V-61599'
+  tag "rid": 'SV-76089r2_rule'
+  tag "stig_id": 'O121-C2-004300'
+  tag "fix_id": 'F-67515r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -83,7 +83,7 @@ control "V-61599" do
   SELECT grantee, granted_role
   FROM dba_role_privs
   UNION
-  SELECT grantee, privilege 
+  SELECT grantee, privilege
   FROM dba_sys_privs
   )
   START WITH grantee IS NULL
@@ -144,7 +144,7 @@ control "V-61599" do
   beyond those required for administrative functions."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   users_with_admin_privs = sql.query("SELECT
   username,
   rp.granted_role,
@@ -195,4 +195,3 @@ control "V-61599" do
     end
   end
 end
-

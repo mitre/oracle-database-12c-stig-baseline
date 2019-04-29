@@ -1,5 +1,5 @@
-control "V-61849" do
-  title "DBMS default accounts must be protected from misuse."
+control 'V-61849' do
+  title 'DBMS default accounts must be protected from misuse.'
   desc  "The Security Requirements Guide says, Default accounts are usually
   accounts that have special privileges required to administer the database.
   Well-known DBMS account names are targeted most frequently by attackers and are
@@ -21,12 +21,12 @@ control "V-61849" do
   essential system accounts from misuse.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000063-DB-000023"
-  tag "gid": "V-61849"
-  tag "rid": "SV-76339r1_rule"
-  tag "stig_id": "O121-N2-004701"
-  tag "fix_id": "F-67765r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000023'
+  tag "gid": 'V-61849'
+  tag "rid": 'SV-76339r1_rule'
+  tag "stig_id": 'O121-N2-004701'
+  tag "fix_id": 'F-67765r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -59,4 +59,3 @@ control "V-61849" do
     skip 'A manual review is required to ensure the DBMS default accounts are protected from misuse'
   end
 end
-

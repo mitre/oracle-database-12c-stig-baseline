@@ -1,7 +1,7 @@
-control "V-61867" do
+control 'V-61867' do
   title "Database software, applications, and configuration files must be
   monitored to discover unauthorized changes."
-  desc  "Any changes to the hardware, software, and/or firmware components of
+  desc "Any changes to the hardware, software, and/or firmware components of
   the information system and/or application can potentially have significant
   effects on the overall security of the system.
 
@@ -17,12 +17,12 @@ control "V-61867" do
   configuration can lead to unauthorized or compromised installations.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000133-DB-000179"
-  tag "gid": "V-61867"
-  tag "rid": "SV-76357r2_rule"
-  tag "stig_id": "O121-OS-010700"
-  tag "fix_id": "F-67783r2_fix"
-  tag "cci": ["CCI-001499"]
+  tag "gtitle": 'SRG-APP-000133-DB-000179'
+  tag "gid": 'V-61867'
+  tag "rid": 'SV-76357r2_rule'
+  tag "stig_id": 'O121-OS-010700'
+  tag "fix_id": 'F-67783r2_fix'
+  tag "cci": ['CCI-001499']
   tag "nist": ['CM-5 (6)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -52,4 +52,3 @@ control "V-61867" do
     its('stdout.strip') { should_not be_empty }
   end
 end
-

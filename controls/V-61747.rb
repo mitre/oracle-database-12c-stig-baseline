@@ -1,7 +1,7 @@
-control "V-61747" do
+control 'V-61747' do
   title "The DBMS must use  NIST-validated FIPS 140-2-compliant cryptography
   for authentication mechanisms."
-  desc  "Encryption is only as good as the encryption modules utilized.
+  desc "Encryption is only as good as the encryption modules utilized.
   Unapproved cryptographic module algorithms cannot be verified and cannot be
   relied upon to provide confidentiality or integrity, and DoD data may be
   compromised due to weak algorithms.
@@ -19,12 +19,12 @@ control "V-61747" do
   DBMS.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000179-DB-000114"
-  tag "gid": "V-61747"
-  tag "rid": "SV-76237r2_rule"
-  tag "stig_id": "O121-C2-015700"
-  tag "fix_id": "F-67663r2_fix"
-  tag "cci": ["CCI-000803"]
+  tag "gtitle": 'SRG-APP-000179-DB-000114'
+  tag "gid": 'V-61747'
+  tag "rid": 'SV-76237r2_rule'
+  tag "stig_id": 'O121-C2-015700'
+  tag "fix_id": 'F-67663r2_fix'
+  tag "cci": ['CCI-000803']
   tag "nist": ['IA-7', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -44,7 +44,7 @@ control "V-61747" do
   To see if Oracle is configured for FIPS 140-2 SSL/TLS authentication and/or
   Encryption:
 
-  Verify the DBMS version: 
+  Verify the DBMS version:
   select * from V_$VERSION;
   If the version displayed for Oracle Database is lower than 12.1.0.2, this is a
   finding.
@@ -111,8 +111,7 @@ control "V-61747" do
   http://csrc.nist.gov/publications/PubsFIPS.html#140-2  "
   sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
 
- 
-  version = sql.query("select version from v$instance;").column('version')
+  version = sql.query('select version from v$instance;').column('version')
 
   describe 'The oracle database version' do
     subject { version }
@@ -121,9 +120,8 @@ control "V-61747" do
 
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/ldap/admin/fips.ora") do
+  describe file "#{oracle_home}/ldap/admin/fips.ora" do
     its('content') { should include 'SSLFIPS_140=TRUE' }
     it { should exist }
   end
 end
-

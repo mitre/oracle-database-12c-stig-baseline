@@ -1,16 +1,16 @@
-control "V-61595" do
-  title "All use of privileged accounts must be audited."
+control 'V-61595' do
+  title 'All use of privileged accounts must be audited.'
   desc  "This is intended to limit exposure, by making it possible to trace any
   unauthorized access, by a privileged user account or role that has permissions
   on security functions or security-relevant information, to other data or
   functionality."
   impact 0.5
-  tag "gtitle": "SRG-APP-000063-DB-000018"
-  tag "gid": "V-61595"
-  tag "rid": "SV-76085r2_rule"
-  tag "stig_id": "O121-C2-004200"
-  tag "fix_id": "F-67511r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000018'
+  tag "gid": 'V-61595'
+  tag "rid": 'SV-76085r2_rule'
+  tag "stig_id": 'O121-C2-004200'
+  tag "fix_id": 'F-67511r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -42,15 +42,15 @@ control "V-61595" do
   recorded in the audit log."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  unified_auditing_policies_defined = sql.query("SELECT unique policy_name from AUDIT_UNIFIED_POLICIES;").column('policy_name')
+
+  unified_auditing_policies_defined = sql.query('SELECT unique policy_name from AUDIT_UNIFIED_POLICIES;').column('policy_name')
 
   describe 'The list of unified auditing policies defined' do
     subject { unified_auditing_policies_defined }
     it { should_not be_empty }
   end
 
-  users_being_audited = sql.query("SELECT unique user_name from AUDIT_UNIFIED_ENABLED_POLICIES;").column('user_name')
+  users_being_audited = sql.query('SELECT unique user_name from AUDIT_UNIFIED_ENABLED_POLICIES;').column('user_name')
 
   describe 'The list of users being audited' do
     subject { users_being_audited }

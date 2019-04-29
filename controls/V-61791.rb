@@ -1,9 +1,9 @@
-control "V-61791" do
+control 'V-61791' do
   title "The DBMS must only generate error messages that provide information
   necessary for corrective actions without revealing organization-defined
   sensitive or potentially harmful information in error logs and administrative
   messages that could be exploited."
-  desc  "Any application providing too much information in error logs and in
+  desc "Any application providing too much information in error logs and in
   administrative messages to the screen risks compromising the data and security
   of the application and system. The structure and content of error messages
   needs to be carefully considered by the organization and development team.
@@ -29,12 +29,12 @@ control "V-61791" do
   addressed and must document what has been discovered.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000266-DB-000162"
-  tag "gid": "V-61791"
-  tag "rid": "SV-76281r2_rule"
-  tag "stig_id": "O121-C2-019900"
-  tag "fix_id": "F-67707r1_fix"
-  tag "cci": ["CCI-001312"]
+  tag "gtitle": 'SRG-APP-000266-DB-000162'
+  tag "gid": 'V-61791'
+  tag "rid": 'SV-76281r2_rule'
+  tag "stig_id": 'O121-C2-019900'
+  tag "fix_id": 'F-67707r1_fix'
+  tag "cci": ['CCI-001312']
   tag "nist": ['SI-11 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -74,4 +74,3 @@ control "V-61791" do
     messages that could be exploited.'
   end
 end
-

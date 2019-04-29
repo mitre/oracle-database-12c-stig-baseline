@@ -1,7 +1,7 @@
-control "V-61441" do
+control 'V-61441' do
   title "The Oracle Listener must be configured to require administration
   authentication."
-  desc  "Oracle listener authentication helps prevent unauthorized
+  desc "Oracle listener authentication helps prevent unauthorized
   administration of the Oracle listener. Unauthorized administration of the
   listener could lead to DoS exploits; loss of connection audit data,
   unauthorized reconfiguration or other unauthorized access. This is a Category I
@@ -9,12 +9,12 @@ control "V-61441" do
   authorized users. Unauthorized access can result in stopping of the listener
   (DoS) and overwriting of listener audit logs."
   impact 0.7
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61441"
-  tag "rid": "SV-75931r2_rule"
-  tag "stig_id": "O121-BP-022700"
-  tag "fix_id": "F-67357r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61441'
+  tag "rid": 'SV-75931r2_rule'
+  tag "stig_id": 'O121-BP-022700'
+  tag "fix_id": 'F-67357r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -95,11 +95,11 @@ control "V-61441" do
   listener_status = command("lsnrctl status #{listener_name}").stdout.strip
 
   describe 'The Oracle Listener status' do
-    subject {listener_status}
-    it {should_not include 'Security                  OFF'}
-    it {should_not include 'Security                  ON: Password or Local OS Authentication'}
+    subject { listener_status }
+    it { should_not include 'Security                  OFF' }
+    it { should_not include 'Security                  ON: Password or Local OS Authentication' }
   end
   describe listener_status do
-    it {should_not be_empty}
+    it { should_not be_empty }
   end
 end

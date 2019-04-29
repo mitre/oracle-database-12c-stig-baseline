@@ -1,7 +1,7 @@
-control "V-61793" do
+control 'V-61793' do
   title "The DBMS must restrict error messages so only authorized personnel may
   view them."
-  desc  "If the application provides too much information in error logs and
+  desc "If the application provides too much information in error logs and
   administrative messages to the screen, this could lead to compromise. The
   structure and content of error messages need to be carefully considered by the
   organization and development team. The extent to which the information system
@@ -24,12 +24,12 @@ control "V-61793" do
   addressed and must document what has been discovered.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000267-DB-000163"
-  tag "gid": "V-61793"
-  tag "rid": "SV-76283r2_rule"
-  tag "stig_id": "O121-C2-020000"
-  tag "fix_id": "F-67709r2_fix"
-  tag "cci": ["CCI-001314"]
+  tag "gtitle": 'SRG-APP-000267-DB-000163'
+  tag "gid": 'V-61793'
+  tag "rid": 'SV-76283r2_rule'
+  tag "stig_id": 'O121-C2-020000'
+  tag "fix_id": 'F-67709r2_fix'
+  tag "cci": ['CCI-001314']
   tag "nist": ['SI-11 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -94,4 +94,3 @@ control "V-61793" do
     view them'
   end
 end
-

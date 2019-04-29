@@ -1,4 +1,4 @@
-control "V-61765" do
+control 'V-61765' do
   title "The DBMS must terminate user sessions upon user logoff or any other
   organization or policy-defined session termination events, such as idle time
   limit exceeded."
@@ -23,12 +23,12 @@ control "V-61765" do
   prevent session hijacking.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000220-DB-000149"
-  tag "gid": "V-61765"
-  tag "rid": "SV-76255r2_rule"
-  tag "stig_id": "O121-C2-017600"
-  tag "fix_id": "F-67681r4_fix"
-  tag "cci": ["CCI-001185"]
+  tag "gtitle": 'SRG-APP-000220-DB-000149'
+  tag "gid": 'V-61765'
+  tag "rid": 'SV-76255r2_rule'
+  tag "stig_id": 'O121-C2-017600'
+  tag "fix_id": 'F-67681r4_fix'
+  tag "cci": ['CCI-001185']
   tag "nist": ['SC-23 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -174,41 +174,41 @@ control "V-61765" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  query_idle_time = %(
+  query_idle_time = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'IDLE_TIME'
-  )
+  }
 
-  query_sessions_per_user = %(
+  query_sessions_per_user = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'SESSIONS_PER_USER'
-  )
+  }
 
-  query_connect_time = %(
+  query_connect_time = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'CONNECT_TIME'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
     idle_time = sql.query(format(query_idle_time, profile: profile)).column('limit')
-    sessions_per_user = sql.query(format(query_sessions_per_user, profile: profile)).column('limit') 
-    connect_time = sql.query(format(query_connect_time, profile: profile)).column('limit') 
+    sessions_per_user = sql.query(format(query_sessions_per_user, profile: profile)).column('limit')
+    connect_time = sql.query(format(query_connect_time, profile: profile)).column('limit')
 
-    describe 'The oracle database idle time for profile: #{profile}' do
+    describe "The oracle database idle time for profile: #{profile}" do
       subject { idle_time }
-      it { should cmp <= 15}
+      it { should cmp <= 15 }
     end
 
-    describe 'The oracle database number of sessions per user for profile: #{profile}' do
+    describe "The oracle database number of sessions per user for profile: #{profile}" do
       subject { sessions_per_user }
-      it { should cmp <= 3}
+      it { should cmp <= 3 }
     end
 
-    describe 'The oracle database connect time for profile: #{profile}' do
+    describe "The oracle database connect time for profile: #{profile}" do
       subject { connect_time }
-      it { should cmp <= 15}
+      it { should cmp <= 15 }
     end
   end
   if user_profiles.empty?
@@ -217,4 +217,3 @@ control "V-61765" do
     end
   end
 end
-

@@ -1,5 +1,5 @@
-control "V-61877" do
-  title "The DBMS software libraries must be periodically backed up."
+control 'V-61877' do
+  title 'The DBMS software libraries must be periodically backed up.'
   desc  "Information system backup is a critical step in maintaining data
   assurance and availability.
 
@@ -14,12 +14,12 @@ control "V-61877" do
   libraries can prevent a successful recovery of DBMS operations.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000146-DB-000100"
-  tag "gid": "V-61877"
-  tag "rid": "SV-76367r1_rule"
-  tag "stig_id": "O121-P2-012700"
-  tag "fix_id": "F-67793r1_fix"
-  tag "cci": ["CCI-000537"]
+  tag "gtitle": 'SRG-APP-000146-DB-000100'
+  tag "gid": 'V-61877'
+  tag "rid": 'SV-76367r1_rule'
+  tag "stig_id": 'O121-P2-012700'
+  tag "fix_id": 'F-67793r1_fix'
+  tag "cci": ['CCI-000537']
   tag "nist": ['CP-9 (b)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -42,4 +42,3 @@ control "V-61877" do
     skip 'A manual review is required to ensure the DBMS software libraries are periodically backed up'
   end
 end
-

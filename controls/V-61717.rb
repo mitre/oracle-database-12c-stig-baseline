@@ -1,5 +1,5 @@
-control "V-61717" do
-  title "The DBMS must disable user accounts after 35 days of inactivity."
+control 'V-61717' do
+  title 'The DBMS must disable user accounts after 35 days of inactivity.'
   desc  "Password complexity, or strength, is a measure of the effectiveness of
   a password in resisting attempts at guessing and brute-force attacks.
 
@@ -20,12 +20,12 @@ control "V-61717" do
   have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000163-DB-000113"
-  tag "gid": "V-61717"
-  tag "rid": "SV-76207r2_rule"
-  tag "stig_id": "O121-C2-013800"
-  tag "fix_id": "F-67633r3_fix"
-  tag "cci": ["CCI-000795"]
+  tag "gtitle": 'SRG-APP-000163-DB-000113'
+  tag "gid": 'V-61717'
+  tag "rid": 'SV-76207r2_rule'
+  tag "stig_id": 'O121-C2-013800'
+  tag "fix_id": 'F-67633r3_fix'
+  tag "cci": ['CCI-000795']
   tag "nist": ['IA-4 e)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -35,7 +35,7 @@ control "V-61717" do
   tag "potential_impacts": nil
   tag "third_party_tools": nil
   tag "mitigation_controls": nil
-  tag "responsibility": nil 
+  tag "responsibility": nil
   tag "ia_controls": nil
   tag "check": "If all user accounts are managed and authenticated by the OS or
   an enterprise-level authentication/access mechanism, and not by Oracle, this is
@@ -78,19 +78,19 @@ control "V-61717" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  query = %(
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_LIFE_TIME'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    password_life_time = sql.query(format(query, profile: profile)).column('limit') 
+    password_life_time = sql.query(format(query, profile: profile)).column('limit')
 
-    describe 'The oracle database account password life time for profile: #{profile}' do
+    describe "The oracle database account password life time for profile: #{profile}" do
       subject { password_life_time }
-      it { should cmp <= 35}
+      it { should cmp <= 35 }
     end
   end
   if user_profiles.empty?
@@ -99,4 +99,3 @@ control "V-61717" do
     end
   end
 end
- 

@@ -1,8 +1,8 @@
-control "V-61593" do
+control 'V-61593' do
   title "Administrators must utilize a separate, distinct administrative
   account when performing administrative activities, accessing database security
   functions, or accessing security-relevant information."
-  desc  "This requirement is intended to limit exposure due to operating from
+  desc "This requirement is intended to limit exposure due to operating from
   within a privileged account or role. The inclusion of role is intended to
   address those situations where an access control policy, such as Role Based
   Access Control (RBAC), is being implemented and where a change of role provides
@@ -23,12 +23,12 @@ control "V-61593" do
   authorized maintenance session.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000063-DB-000017"
-  tag "gid": "V-61593"
-  tag "rid": "SV-76083r2_rule"
-  tag "stig_id": "O121-C2-004100"
-  tag "fix_id": "F-67509r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000017'
+  tag "gid": 'V-61593'
+  tag "rid": 'SV-76083r2_rule'
+  tag "stig_id": 'O121-C2-004100'
+  tag "fix_id": 'F-67509r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -70,4 +70,3 @@ control "V-61593" do
     functions, or accessing security-relevant information'
   end
 end
-

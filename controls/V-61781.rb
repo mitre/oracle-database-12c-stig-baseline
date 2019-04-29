@@ -1,7 +1,7 @@
-control "V-61781" do
+control 'V-61781' do
   title "The DBMS must prevent unauthorized and unintended information transfer
   via shared system resources."
-  desc  "The purpose of this control is to prevent information, including
+  desc "The purpose of this control is to prevent information, including
   encrypted representations of information, produced by the actions of a prior
   user/role (or the actions of a process acting on behalf of a prior user/role)
   from being available to any current user/role (or current process) that obtains
@@ -15,12 +15,12 @@ control "V-61781" do
   temporary location without the proper controls.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000243-DB-000128"
-  tag "gid": "V-61781"
-  tag "rid": "SV-76271r1_rule"
-  tag "stig_id": "O121-C2-018900"
-  tag "fix_id": "F-67697r1_fix"
-  tag "cci": ["CCI-001090"]
+  tag "gtitle": 'SRG-APP-000243-DB-000128'
+  tag "gid": 'V-61781'
+  tag "rid": 'SV-76271r1_rule'
+  tag "stig_id": 'O121-C2-018900'
+  tag "fix_id": 'F-67697r1_fix'
+  tag "cci": ['CCI-001090']
   tag "nist": ['SC-4', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -71,4 +71,3 @@ control "V-61781" do
     via shared system resources'
   end
 end
-

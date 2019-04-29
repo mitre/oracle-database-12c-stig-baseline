@@ -1,7 +1,7 @@
-control "V-61713" do
+control 'V-61713' do
   title "The DBMS must use organization-defined replay-resistant authentication
   mechanisms for network access to privileged accounts."
-  desc  "An authentication process resists replay attacks if it is impractical
+  desc "An authentication process resists replay attacks if it is impractical
   to achieve a successful authentication by recording and replaying a previous
   authentication message.
 
@@ -44,12 +44,12 @@ control "V-61713" do
   is the path forward for DoD.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000156-DB-000111"
-  tag "gid": "V-61713"
-  tag "rid": "SV-76203r4_rule"
-  tag "stig_id": "O121-C2-013600"
-  tag "fix_id": "F-67629r1_fix"
-  tag "cci": ["CCI-001941"]
+  tag "gtitle": 'SRG-APP-000156-DB-000111'
+  tag "gid": 'V-61713'
+  tag "rid": 'SV-76203r4_rule'
+  tag "stig_id": 'O121-C2-013600'
+  tag "fix_id": 'F-67629r1_fix'
+  tag "cci": ['CCI-001941']
   tag "nist": ['IA-2 (8)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -97,28 +97,27 @@ control "V-61713" do
   mechanisms."
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.ENCRYPTION_TYPES_SERVER=(AES256)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_SERVER = required' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_CLIENT = requested' }
   end
 end
-

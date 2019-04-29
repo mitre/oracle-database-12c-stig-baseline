@@ -1,17 +1,17 @@
-control "V-61419" do
+control 'V-61419' do
   title "A minimum of two Oracle redo log groups/files must be defined and
   configured to be stored on separate, archived physical disks or archived
   directories on a RAID device."
-  desc  "The Oracle redo log files store the detailed information on changes
+  desc "The Oracle redo log files store the detailed information on changes
   made to the database. This information is critical to database recovery in case
   of a database failure."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61419"
-  tag "rid": "SV-75909r1_rule"
-  tag "stig_id": "O121-BP-021600"
-  tag "fix_id": "F-67335r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61419'
+  tag "rid": 'SV-75909r1_rule'
+  tag "stig_id": 'O121-BP-021600'
+  tag "fix_id": 'F-67335r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -53,11 +53,10 @@ control "V-61419" do
   Replace diska, diskb, diskc with valid, different disk drive specifications.
 
   Replace log#.log file with valid or custom names for the log files."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  describe sql.query("select count(*) from V$LOG;").column('count(*)') do
+  describe sql.query('select count(*) from V$LOG;').column('count(*)') do
     it { should cmp >= 2 }
   end
 end
-

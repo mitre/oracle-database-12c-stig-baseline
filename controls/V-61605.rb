@@ -1,7 +1,7 @@
-control "V-61605" do
+control 'V-61605' do
   title "The DBMS must limit the number of consecutive failed logon attempts to
   3."
-  desc  "Anytime an authentication method is exposed,  to allow for the
+  desc "Anytime an authentication method is exposed,  to allow for the
   utilization of an application, there is a risk that attempts will be made to
   obtain unauthorized access.
 
@@ -28,13 +28,13 @@ control "V-61605" do
   (for counting consecutive invalid attempts) does satisfy this requirement.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000065-DB-000025"
-  tag "gid": "V-61605"
-  tag "rid": "SV-76095r2_rule"
-  tag "stig_id": "O121-C2-005000"
-  tag "fix_id": "F-67521r3_fix"
-  tag "cci": ["CCI-000044"]
- tag "nist": ['AC-7 a', 'Rev_4']
+  tag "gtitle": 'SRG-APP-000065-DB-000025'
+  tag "gid": 'V-61605'
+  tag "rid": 'SV-76095r2_rule'
+  tag "stig_id": 'O121-C2-005000'
+  tag "fix_id": 'F-67521r3_fix'
+  tag "cci": ['CCI-000044']
+  tag "nist": ['AC-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -73,20 +73,20 @@ control "V-61605" do
   technique to verify password complexity.)"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  query = %(
+
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'FAILED_LOGIN_ATTEMPTS'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    password_lock_time = sql.query(format(query, profile: profile)).column('limit') 
+    password_lock_time = sql.query(format(query, profile: profile)).column('limit')
 
     describe 'The oracle database limit for failed login attempts' do
       subject { password_lock_time }
-      it { should cmp <= 3}
+      it { should cmp <= 3 }
     end
   end
   if user_profiles.empty?
@@ -95,4 +95,3 @@ control "V-61605" do
     end
   end
 end
-

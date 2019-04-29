@@ -1,7 +1,7 @@
-control "V-61723" do
+control 'V-61723' do
   title "The DBMS must support organizational requirements to enforce password
   complexity by the number of upper-case characters used."
-  desc  "Password complexity or strength is a measure of the effectiveness of a
+  desc "Password complexity or strength is a measure of the effectiveness of a
   password in resisting attempts at guessing and brute-force attacks.
 
       Password complexity is one factor of several that determine how long it
@@ -19,12 +19,12 @@ control "V-61723" do
   have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000166-DB-000070"
-  tag "gid": "V-61723"
-  tag "rid": "SV-76213r1_rule"
-  tag "stig_id": "O121-C2-014100"
-  tag "fix_id": "F-67639r1_fix"
-  tag "cci": ["CCI-000192"]
+  tag "gtitle": 'SRG-APP-000166-DB-000070'
+  tag "gid": 'V-61723'
+  tag "rid": 'SV-76213r1_rule'
+  tag "stig_id": 'O121-C2-014100'
+  tag "fix_id": 'F-67639r1_fix'
+  tag "cci": ['CCI-000192']
   tag "nist": ['IA-5 (1) (a)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -68,22 +68,22 @@ control "V-61723" do
   script file
   <oracle_home>/RDBMS/ADMIN/utlpwdmg.sql.  This can be used as the starting point
   for a customized function.)"
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  query = %(
+
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    password_verify_function = sql.query(format(query, profile: profile)).column('limit') 
+    password_verify_function = sql.query(format(query, profile: profile)).column('limit')
 
-    describe 'The oracle database account password verify function for profile: #{profile}' do
+    describe "The oracle database account password verify function for profile: #{profile}" do
       subject { password_verify_function }
-      it { should_not eq ["NULL"]}
+      it { should_not eq ['NULL'] }
     end
   end
   if user_profiles.empty?
@@ -92,4 +92,3 @@ control "V-61723" do
     end
   end
 end
-

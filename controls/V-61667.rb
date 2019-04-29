@@ -1,7 +1,7 @@
-control "V-61667" do
+control 'V-61667' do
   title "The DBMS must protect audit data records and integrity by using
   cryptographic mechanisms."
-  desc  "Protection of audit records and audit data is of critical importance.
+  desc "Protection of audit records and audit data is of critical importance.
   Cryptographic mechanisms are the industry-established standard used to protect
   the integrity of audit data. An example of a cryptographic mechanism is the
   computation and application of a cryptographic-signed hash using asymmetric
@@ -13,12 +13,12 @@ control "V-61667" do
   having signed a document.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000126-DB-000171"
-  tag "gid": "V-61667"
-  tag "rid": "SV-76157r2_rule"
-  tag "stig_id": "O121-C2-010100"
-  tag "fix_id": "F-67581r5_fix"
-  tag "cci": ["CCI-001350"]
+  tag "gtitle": 'SRG-APP-000126-DB-000171'
+  tag "gid": 'V-61667'
+  tag "rid": 'SV-76157r2_rule'
+  tag "stig_id": 'O121-C2-010100'
+  tag "fix_id": 'F-67581r5_fix'
+  tag "cci": ['CCI-001350']
   tag "nist": ['AU-9 (3)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -242,4 +242,3 @@ control "V-61667" do
     cryptographic mechanisms'
   end
 end
-

@@ -1,8 +1,8 @@
 ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS = attribute('allowed_oracledb_components_integrated_into_dbms')
-control "V-61681" do
+control 'V-61681' do
   title "Unused database components that are integrated in the DBMS and cannot
   be uninstalled must be disabled."
-  desc  "Information systems are capable of providing a wide variety of
+  desc "Information systems are capable of providing a wide variety of
   functions and services. Some of the functions and services, provided by
   default, may not be necessary to support essential organizational operations
   (e.g., key missions, functions).
@@ -23,12 +23,12 @@ control "V-61681" do
   must be disabled.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000141-DB-000092"
-  tag "gid": "V-61681"
-  tag "rid": "SV-76171r2_rule"
-  tag "stig_id": "O121-C2-011700"
-  tag "fix_id": "F-67595r3_fix"
-  tag "cci": ["CCI-000381"]
+  tag "gtitle": 'SRG-APP-000141-DB-000092'
+  tag "gid": 'V-61681'
+  tag "rid": 'SV-76171r2_rule'
+  tag "stig_id": 'O121-C2-011700'
+  tag "fix_id": 'F-67595r3_fix'
+  tag "cci": ['CCI-000381']
   tag "nist": ['CM-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -89,9 +89,8 @@ control "V-61681" do
 
   (See My Oracle Support Document 948061.1 for more on the chopt command.)"
 
-  
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   list_of_installed_components_integrated_into_dbms = sql.query("SELECT parameter, value
   from v$option
   where parameter in
@@ -114,6 +113,5 @@ control "V-61681" do
         it { should be_in ALLOWED_ORACLEDB_COMPONENTS_INTEGRATED_INTO_DBMS }
       end
     end
-  end 
+  end
 end
-

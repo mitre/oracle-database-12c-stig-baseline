@@ -1,8 +1,8 @@
-control "V-61545" do
+control 'V-61545' do
   title "The DBMS must employ cryptographic mechanisms preventing the
   unauthorized disclosure of information during transmission unless the
   transmitted data is otherwise protected by alternative physical measures."
-  desc  "Preventing the disclosure of transmitted information requires that
+  desc "Preventing the disclosure of transmitted information requires that
   applications take measures to employ some form of cryptographic mechanism in
   order to protect the information during transmission. This is usually achieved
   through the use of Transport Layer Security (TLS), SSL VPN, or IPSEC tunnel.
@@ -27,12 +27,12 @@ control "V-61545" do
   is the path forward for DoD.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000264-DB-000136"
-  tag "gid": "V-61545"
-  tag "rid": "SV-76035r5_rule"
-  tag "stig_id": "O121-C1-019700"
-  tag "fix_id": "F-67461r1_fix"
-  tag "cci": ["CCI-002421"]
+  tag "gtitle": 'SRG-APP-000264-DB-000136'
+  tag "gid": 'V-61545'
+  tag "rid": 'SV-76035r5_rule'
+  tag "stig_id": 'O121-C1-019700'
+  tag "fix_id": 'F-67461r1_fix'
+  tag "cci": ['CCI-002421']
   tag "nist": ['SC-8 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -74,7 +74,7 @@ control "V-61545" do
   transmission where physical measures are not being utilized."
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
     its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }
@@ -83,6 +83,4 @@ control "V-61545" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_SERVER = required' }
   end
 
-    
 end
-

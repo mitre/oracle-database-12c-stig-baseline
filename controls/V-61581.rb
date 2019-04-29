@@ -1,7 +1,7 @@
-control "V-61581" do
+control 'V-61581' do
   title "The DBMS must restrict grants to sensitive information to authorized
   user roles."
-  desc  "Applications employ the concept of least privilege for specific duties
+  desc "Applications employ the concept of least privilege for specific duties
   and information systems (including specific functions, ports, protocols, and
   services). The concept of least privilege is also applied to information system
   processes, ensuring that the processes operate at privilege levels no higher
@@ -18,12 +18,12 @@ control "V-61581" do
   assigned to the individual user.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000062-DB-000011"
-  tag "gid": "V-61581"
-  tag "rid": "SV-76071r1_rule"
-  tag "stig_id": "O121-C2-003500"
-  tag "fix_id": "F-67497r1_fix"
-  tag "cci": ["CCI-000366", "CCI-002220"]
+  tag "gtitle": 'SRG-APP-000062-DB-000011'
+  tag "gid": 'V-61581'
+  tag "rid": 'SV-76071r1_rule'
+  tag "stig_id": 'O121-C2-003500'
+  tag "fix_id": 'F-67497r1_fix'
+  tag "cci": ['CCI-000366', 'CCI-002220']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
@@ -50,13 +50,12 @@ control "V-61581" do
 
   Revoke any privileges to sensitive information directly assigned to application
   user accounts."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  database_roles = sql.query("select * from dba_roles;").column('role')
+
+  database_roles = sql.query('select * from dba_roles;').column('role')
 
   describe "A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized user roles. The database roles to review are: #{database_roles}" do
-    skip  "A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized user roles. The database roles to review are: #{database_roles}"
+    skip "A manual review is required to ensure the DBMS estricts grants to sensitive information to authorized user roles. The database roles to review are: #{database_roles}"
   end
 end
-

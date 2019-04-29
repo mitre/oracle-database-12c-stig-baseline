@@ -1,19 +1,19 @@
-control "V-61417" do
+control 'V-61417' do
   title "A minimum of two Oracle control files must be defined and configured
   to be stored on separate, archived disks (physical or virtual) or archived
   partitions on a RAID device."
-    desc  "Oracle control files are used to store information critical to Oracle
-  database integrity. Oracle uses these files to maintain time synchronization of
-  database files as well as at system startup to verify the validity of system
-  data and log files. Loss of access to the control files can affect database
-  availability, integrity and recovery."
+  desc "Oracle control files are used to store information critical to Oracle
+database integrity. Oracle uses these files to maintain time synchronization of
+database files as well as at system startup to verify the validity of system
+data and log files. Loss of access to the control files can affect database
+availability, integrity and recovery."
   impact 0.3
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61417"
-  tag "rid": "SV-75907r3_rule"
-  tag "stig_id": "O121-BP-021500"
-  tag "fix_id": "F-67333r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61417'
+  tag "rid": 'SV-75907r3_rule'
+  tag "stig_id": 'O121-BP-021500'
+  tag "fix_id": 'F-67333r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -67,12 +67,12 @@ control "V-61417" do
 
   Consult and follow the instructions for creating control files in the Oracle
   Database Administrator's Guide, under Steps for Creating New Control Files."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  controlfiles = sql.query("select name from v$controlfile;").column("name")
+  controlfiles = sql.query('select name from v$controlfile;').column('name')
   partitions = []
-  
+
   controlfiles.each do |files|
     file = files[1..-1]
     get_pos_slash = file.index('/')
@@ -84,7 +84,7 @@ control "V-61417" do
   control_file2_partition = partitions[1]
 
   describe "The oracable control file permission: #{control_file1_partition}" do
-    subject {control_file1_partition}
-    it { should_not cmp control_file2_partition}
+    subject { control_file1_partition }
+    it { should_not cmp control_file2_partition }
   end
 end

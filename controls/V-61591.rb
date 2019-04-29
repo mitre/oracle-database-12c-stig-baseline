@@ -1,7 +1,7 @@
-control "V-61591" do
+control 'V-61591' do
   title "Administrative privileges must be assigned to database accounts via
   database roles."
-  desc  "Applications employ the concept of least privilege for specific duties
+  desc "Applications employ the concept of least privilege for specific duties
   and information systems (including specific functions, ports, protocols, and
   services). The concept of least privilege is also applied to information system
   processes, ensuring that the processes operate at privilege levels no higher
@@ -18,12 +18,12 @@ control "V-61591" do
   protect against unauthorized privilege assignment.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000062-DB-000034"
-  tag "gid": "V-61591"
-  tag "rid": "SV-76081r3_rule"
-  tag "stig_id": "O121-C2-004000"
-  tag "fix_id": "F-67507r1_fix"
-  tag "cci": ["CCI-000366", "CCI-002220"]
+  tag "gtitle": 'SRG-APP-000062-DB-000034'
+  tag "gid": 'V-61591'
+  tag "rid": 'SV-76081r3_rule'
+  tag "stig_id": 'O121-C2-004000'
+  tag "fix_id": 'F-67507r1_fix'
+  tag "cci": ['CCI-000366', 'CCI-002220']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
@@ -84,8 +84,8 @@ control "V-61591" do
   not permit to be assigned via roles."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  database_accounts_with_administrative_privs =  unified_auditing_events = sql.query("SELECT grantee
+
+  database_accounts_with_administrative_privs = sql.query("SELECT grantee
   FROM   dba_sys_privs
   WHERE  grantee IN
   (
@@ -116,12 +116,7 @@ control "V-61591" do
   );").column('grantee').uniq
 
   describe 'Database accounts with administrative privileges' do
-    subject {database_accounts_with_administrative_privs}
-    it {should be_empty}
+    subject { database_accounts_with_administrative_privs }
+    it { should be_empty }
   end
 end
-
-
-
-
-

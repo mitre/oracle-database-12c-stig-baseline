@@ -1,8 +1,8 @@
-control "V-61853" do
+control 'V-61853' do
   title "Disk space used by audit trail(s) must be monitored; audit records
   must be regularly or continuously off-loaded to a centralized log management
   system."
-  desc  "It is critical when a system is at risk of failing to process audit
+  desc "It is critical when a system is at risk of failing to process audit
   logs as required; it detects and takes action to mitigate the failure. Audit
   processing failures include:  software/hardware errors, failures in the audit
   capturing mechanisms, and audit storage capacity being reached or exceeded.
@@ -21,12 +21,12 @@ control "V-61853" do
   first-out basis.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000109-DB-000049"
-  tag "gid": "V-61853"
-  tag "rid": "SV-76343r1_rule"
-  tag "stig_id": "O121-N2-008601"
-  tag "fix_id": "F-67769r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000109-DB-000049'
+  tag "gid": 'V-61853'
+  tag "rid": 'SV-76343r1_rule'
+  tag "stig_id": 'O121-N2-008601'
+  tag "fix_id": 'F-67769r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -126,4 +126,3 @@ control "V-61853" do
     are regularly or continuously off-loaded to a centralized log management system'
   end
 end
-

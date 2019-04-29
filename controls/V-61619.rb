@@ -1,7 +1,7 @@
-control "V-61619" do
+control 'V-61619' do
   title "A DBMS utilizing Discretionary Access Control (DAC) must enforce a
   policy that includes or excludes access to the granularity of a single user."
-  desc  "DAC is based on the notion that individual users are \"owners\" of
+  desc "DAC is based on the notion that individual users are \"owners\" of
   objects and therefore have discretion over who should be authorized to access
   the object and in which mode (e.g., read or write). Ownership is usually
   acquired as a consequence of creating the object or via specified ownership
@@ -21,12 +21,12 @@ control "V-61619" do
   access to objects and information they are not authorized to view/modify.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000087-DB-000013"
-  tag "gid": "V-61619"
-  tag "rid": "SV-76109r1_rule"
-  tag "stig_id": "O121-C2-006700"
-  tag "fix_id": "F-67535r1_fix"
-  tag "cci": ["CCI-002165"]
+  tag "gtitle": 'SRG-APP-000087-DB-000013'
+  tag "gid": 'V-61619'
+  tag "rid": 'SV-76109r1_rule'
+  tag "stig_id": 'O121-C2-006700'
+  tag "fix_id": 'F-67535r1_fix'
+  tag "cci": ['CCI-002165']
   tag "nist": ['AC-3 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -56,4 +56,3 @@ control "V-61619" do
     policy that includes or excludes access to the granularity of a single user'
   end
 end
-

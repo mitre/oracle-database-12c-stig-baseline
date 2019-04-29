@@ -1,4 +1,4 @@
-control "V-61775" do
+control 'V-61775' do
   title "The DBMS must isolate security functions from nonsecurity functions by
   means of separate security domains."
   desc  "Security functions are defined as \"the hardware, software, and/or
@@ -19,12 +19,12 @@ control "V-61775" do
   functionality may be able to access security functionality.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000233-DB-000124"
-  tag "gid": "V-61775"
-  tag "rid": "SV-76265r1_rule"
-  tag "stig_id": "O121-C2-018500"
-  tag "fix_id": "F-67691r1_fix"
-  tag "cci": ["CCI-001084"]
+  tag "gtitle": 'SRG-APP-000233-DB-000124'
+  tag "gid": 'V-61775'
+  tag "rid": 'SV-76265r1_rule'
+  tag "stig_id": 'O121-C2-018500'
+  tag "fix_id": 'F-67691r1_fix'
+  tag "cci": ['CCI-001084']
   tag "nist": ['SC-3', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -62,4 +62,3 @@ control "V-61775" do
     means of separate security domains'
   end
 end
-

@@ -1,7 +1,7 @@
-control "V-61801" do
+control 'V-61801' do
   title "The DBMS must notify appropriate individuals when account disabling
   actions are taken."
-  desc  "When application accounts are disabled, user accessibility is
+  desc "When application accounts are disabled, user accessibility is
   affected. Accounts are utilized for identifying individual application users or
   for identifying the application processes themselves.
 
@@ -25,12 +25,12 @@ control "V-61801" do
   activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000293-DB-000130"
-  tag "gid": "V-61801"
-  tag "rid": "SV-76291r2_rule"
-  tag "stig_id": "O121-C2-020600"
-  tag "fix_id": "F-67717r1_fix"
-  tag "cci": ["CCI-001685"]
+  tag "gtitle": 'SRG-APP-000293-DB-000130'
+  tag "gid": 'V-61801'
+  tag "rid": 'SV-76291r2_rule'
+  tag "stig_id": 'O121-C2-020600'
+  tag "fix_id": 'F-67717r1_fix'
+  tag "cci": ['CCI-001685']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -70,4 +70,3 @@ control "V-61801" do
     actions are taken'
   end
 end
-

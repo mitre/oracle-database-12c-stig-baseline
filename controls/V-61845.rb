@@ -1,8 +1,8 @@
-control "V-61845" do
+control 'V-61845' do
   title "When using command-line tools such as Oracle SQL*Plus, which can
   accept a plain-text password, users must use an alternative logon method that
   does not expose the password."
-  desc  "The SRG states:  To prevent the compromise of authentication
+  desc "The SRG states:  To prevent the compromise of authentication
   information, such as passwords, during the authentication process, the feedback
   from the information system shall not provide any information that would allow
   an unauthorized user to compromise the authentication mechanism.
@@ -28,12 +28,12 @@ control "V-61845" do
   SSL, such as SSL_VERSION and SSL_CIPHER_SUITES, they refer to TLS.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000178-DB-000083"
-  tag "gid": "V-61845"
-  tag "rid": "SV-76335r2_rule"
-  tag "stig_id": "O121-N1-015602"
-  tag "fix_id": "F-67761r4_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000178-DB-000083'
+  tag "gid": 'V-61845'
+  tag "rid": 'SV-76335r2_rule'
+  tag "stig_id": 'O121-N1-015602'
+  tag "fix_id": 'F-67761r4_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -151,7 +151,7 @@ control "V-61845" do
   to /private/ora12, then need to enter the following into the client sqlnet.ora
   file:
 
-      WALLET_LOCATION = 
+      WALLET_LOCATION =
              (SOURCE =
                (METHOD = FILE)
                (METHOD_DATA =

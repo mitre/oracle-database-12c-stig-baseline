@@ -1,7 +1,7 @@
-control "V-61771" do
+control 'V-61771' do
   title "The DBMS must take needed steps to protect data at rest and ensure
   confidentiality and integrity of application data."
-  desc  "This control is intended to address the confidentiality and integrity
+  desc "This control is intended to address the confidentiality and integrity
   of information at rest in non-mobile devices and covers user information and
   system information. Information at rest refers to the state of information when
   it is located on a secondary storage device (e.g., disk drive, tape drive)
@@ -19,12 +19,12 @@ control "V-61771" do
   the data will be open to compromise and unauthorized modification.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000231-DB-000154"
-  tag "gid": "V-61771"
-  tag "rid": "SV-76261r2_rule"
-  tag "stig_id": "O121-C2-018300"
-  tag "fix_id": "F-67687r1_fix"
-  tag "cci": ["CCI-001199"]
+  tag "gtitle": 'SRG-APP-000231-DB-000154'
+  tag "gid": 'V-61771'
+  tag "rid": 'SV-76261r2_rule'
+  tag "stig_id": 'O121-C2-018300'
+  tag "fix_id": 'F-67687r1_fix'
+  tag "cci": ['CCI-001199']
   tag "nist": ['SC-28', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -90,18 +90,11 @@ control "V-61771" do
   If ASO is not an option, use site-specific procedures to secure data at rest."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   parameter = sql.query("select * from v$parameter where name = 'DBFIPS_140c';").column('value')
 
   describe 'The oracle database DBFIPS_140c parameter' do
     subject { parameter }
-    it { should_not be_empty}
+    it { should_not be_empty }
   end
 end
-
-
-
-
-
-  
-

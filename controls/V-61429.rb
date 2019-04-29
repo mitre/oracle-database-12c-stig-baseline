@@ -1,5 +1,5 @@
-control "V-61429" do
-  title "The Oracle SQL92_SECURITY parameter must be set to TRUE."
+control 'V-61429' do
+  title 'The Oracle SQL92_SECURITY parameter must be set to TRUE.'
   desc  "The configuration option SQL92_SECURITY specifies whether table-level
   SELECT privileges are required to execute an update or delete that references
   table column values. If this option is disabled (set to FALSE), the UPDATE
@@ -28,12 +28,12 @@ control "V-61429" do
       ORA-01031: insufficient privileges
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61429"
-  tag "rid": "SV-75919r1_rule"
-  tag "stig_id": "O121-BP-022100"
-  tag "fix_id": "F-67345r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61429'
+  tag "rid": 'SV-75919r1_rule'
+  tag "stig_id": 'O121-BP-022100'
+  tag "fix_id": 'F-67345r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -60,7 +60,7 @@ control "V-61429" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
   parameter = sql.query("select value from v$parameter where name = 'sql92_security';").column('value')
@@ -70,4 +70,3 @@ control "V-61429" do
     it { should cmp 'TRUE' }
   end
 end
-

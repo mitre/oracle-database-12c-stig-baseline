@@ -1,4 +1,4 @@
-control "V-61969" do
+control 'V-61969' do
   title "The system must provide a report generation capability for audit
   reduction data."
   desc  "In support of Audit Review, Analysis, and Reporting requirements,
@@ -31,12 +31,12 @@ control "V-61969" do
   to be missed.
   "
   impact 0.3
-  tag "gtitle": "SRG-APP-000114-DB-000054"
-  tag "gid": "V-61969"
-  tag "rid": "SV-76459r1_rule"
-  tag "stig_id": "O121-C3-008800"
-  tag "fix_id": "F-67889r1_fix"
-  tag "cci": ["CCI-001878"]
+  tag "gtitle": 'SRG-APP-000114-DB-000054'
+  tag "gid": 'V-61969'
+  tag "rid": 'SV-76459r1_rule'
+  tag "stig_id": 'O121-C3-008800'
+  tag "fix_id": 'F-67889r1_fix'
+  tag "cci": ['CCI-001878']
   tag "nist": ['AU-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -63,4 +63,3 @@ control "V-61969" do
     reduction data'
   end
 end
-

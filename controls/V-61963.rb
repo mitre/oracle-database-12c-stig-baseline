@@ -1,20 +1,20 @@
-control "V-61963" do
+control 'V-61963' do
   title "The DBMS data files, transaction logs and audit files must be stored
   in dedicated directories or disk partitions separate from software or other
   application files."
-  desc  "Protection of DBMS data, transaction and audit data files stored by
+  desc "Protection of DBMS data, transaction and audit data files stored by
   the host operating system is dependent on OS controls. When different
   applications share the same database process, resource contention and differing
   security controls may be required to isolate and protect one application's data
   and audit logs from another. DBMS software libraries and configuration files
   also require differing access control lists."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61963"
-  tag "rid": "SV-76453r1_rule"
-  tag "stig_id": "O121-BP-025100"
-  tag "fix_id": "F-67883r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61963'
+  tag "rid": 'SV-76453r1_rule'
+  tag "stig_id": 'O121-BP-025100'
+  tag "fix_id": 'F-67883r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -53,4 +53,3 @@ control "V-61963" do
     application files'
   end
 end
-

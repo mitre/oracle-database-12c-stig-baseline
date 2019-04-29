@@ -1,7 +1,7 @@
-control "V-61783" do
+control 'V-61783' do
   title "The DBMS must protect against or limit the effects of
   organization-defined types of Denial of Service (DoS) attacks."
-  desc  "A variety of technologies exist to limit, or in some cases, eliminate
+  desc "A variety of technologies exist to limit, or in some cases, eliminate
   the effects of DoS attacks. For example, boundary protection devices can filter
   certain types of packets to protect devices on an organization's internal
   network from being directly affected by DoS attacks.
@@ -14,12 +14,12 @@ control "V-61783" do
   and database clustering.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000245-DB-000132"
-  tag "gid": "V-61783"
-  tag "rid": "SV-76273r1_rule"
-  tag "stig_id": "O121-C2-019100"
-  tag "fix_id": "F-67699r1_fix"
-  tag "cci": ["CCI-002385"]
+  tag "gtitle": 'SRG-APP-000245-DB-000132'
+  tag "gid": 'V-61783'
+  tag "rid": 'SV-76273r1_rule'
+  tag "stig_id": 'O121-C2-019100'
+  tag "fix_id": 'F-67699r1_fix'
+  tag "cci": ['CCI-002385']
   tag "nist": ['SC-5', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -66,9 +66,8 @@ control "V-61783" do
 
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/listener.ora") do
+  describe file "#{oracle_home}/network/admin/listener.ora" do
     its('content') { should include 'RATE_LIMIT=' }
     its('content') { should match /CONNECTION_RATE_LISTENER=\d*/ }
   end
 end
-

@@ -1,7 +1,7 @@
-control "V-61689" do
+control 'V-61689' do
   title "Recovery procedures and technical system features must exist to ensure
   recovery is done in a secure and verifiable manner."
-  desc  "Application recovery and reconstitution constitutes executing an
+  desc "Application recovery and reconstitution constitutes executing an
 information system contingency plan comprised of activities that restore
 essential missions and business functions.
 
@@ -17,12 +17,12 @@ available, DBMS mechanisms to ensure use of only trusted files can help protect
 the database from this type of compromise during DBMS recovery.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000144-DB-000101"
-  tag "gid": "V-61689"
-  tag "rid": "SV-76179r1_rule"
-  tag "stig_id": "O121-C2-012000"
-  tag "fix_id": "F-67603r1_fix"
-  tag "cci": ["CCI-000553"]
+  tag "gtitle": 'SRG-APP-000144-DB-000101'
+  tag "gid": 'V-61689'
+  tag "rid": 'SV-76179r1_rule'
+  tag "stig_id": 'O121-C2-012000'
+  tag "fix_id": 'F-67603r1_fix'
+  tag "cci": ['CCI-000553']
   tag "nist": ['CP-10 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -133,4 +133,3 @@ the database from this type of compromise during DBMS recovery.
     recovery is done in a secure and verifiable manner'
   end
 end
-

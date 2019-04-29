@@ -1,8 +1,8 @@
-control "V-61885" do
+control 'V-61885' do
   title "The DBMS must prevent the presentation of information system
   management-related functionality at an interface utilized by general (i.e.,
   non-privileged) users."
-  desc  "Information system management functionality includes functions
+  desc "Information system management functionality includes functions
   necessary to administer databases, network components, workstations, or
   servers, and typically requires privileged user access.
 
@@ -22,12 +22,12 @@ control "V-61885" do
   be inadvertently made available to the user.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000212-DB-000123"
-  tag "gid": "V-61885"
-  tag "rid": "SV-76375r1_rule"
-  tag "stig_id": "O121-P2-017400"
-  tag "fix_id": "F-67801r1_fix"
-  tag "cci": ["CCI-001083"]
+  tag "gtitle": 'SRG-APP-000212-DB-000123'
+  tag "gid": 'V-61885'
+  tag "rid": 'SV-76375r1_rule'
+  tag "stig_id": 'O121-P2-017400'
+  tag "fix_id": 'F-67801r1_fix'
+  tag "cci": ['CCI-001083']
   tag "nist": ['SC-2 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -56,4 +56,3 @@ control "V-61885" do
     non-privileged) users.'
   end
 end
-

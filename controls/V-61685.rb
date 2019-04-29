@@ -1,5 +1,5 @@
-control "V-61685" do
-  title "Access to external executables must be disabled or restricted."
+control 'V-61685' do
+  title 'Access to external executables must be disabled or restricted.'
   desc  "The Oracle external procedure capability provides use of the Oracle
   process account outside the operation of the DBMS process. You can use it to
   submit and execute applications stored externally from the database under
@@ -10,12 +10,12 @@ control "V-61685" do
   use of the Oracle listener. This reduces the risk of unauthorized access to the
   procedure from outside of the database process."
   impact 0.5
-  tag "gtitle": "SRG-APP-000141-DB-000093"
-  tag "gid": "V-61685"
-  tag "rid": "SV-76175r2_rule"
-  tag "stig_id": "O121-C2-011810"
-  tag "fix_id": "F-67599r1_fix"
-  tag "cci": ["CCI-000381"]
+  tag "gtitle": 'SRG-APP-000141-DB-000093'
+  tag "gid": 'V-61685'
+  tag "rid": 'SV-76175r2_rule'
+  tag "stig_id": 'O121-C2-011810'
+  tag "fix_id": 'F-67599r1_fix'
+  tag "cci": ['CCI-000381']
   tag "nist": ['CM-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -210,12 +210,12 @@ control "V-61685" do
   for detailed configuration information."
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/rdbms/admin/externaljob.ora") do
+  describe file "#{oracle_home}/rdbms/admin/externaljob.ora" do
     its('content') { should_not include 'run_user = nobody' }
     its('content') { should_not include 'run_group = nobody' }
   end
 
-  describe file ("#{oracle_home}/hs/admin/extproc.ora") do
+  describe file "#{oracle_home}/hs/admin/extproc.ora" do
     it { should exist }
     its('content') { should match /^EXTPROC_DLLS=ONLY:\s*\w*/ }
   end

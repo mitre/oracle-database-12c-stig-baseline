@@ -1,5 +1,5 @@
-control "V-61785" do
-  title "The DBMS must check the validity of data inputs."
+control 'V-61785' do
+  title 'The DBMS must check the validity of data inputs.'
   desc  "Invalid user input occurs when a user inserts data or characters into
   an application's data entry fields and the application is unprepared to process
   that data. This results in unanticipated application behavior, potentially
@@ -25,12 +25,12 @@ control "V-61785" do
   addressed and must document what has been discovered.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000251-DB-000160"
-  tag "gid": "V-61785"
-  tag "rid": "SV-76275r2_rule"
-  tag "stig_id": "O121-C2-019500"
-  tag "fix_id": "F-67701r1_fix"
-  tag "cci": ["CCI-001310"]
+  tag "gtitle": 'SRG-APP-000251-DB-000160'
+  tag "gid": 'V-61785'
+  tag "rid": 'SV-76275r2_rule'
+  tag "stig_id": 'O121-C2-019500'
+  tag "fix_id": 'F-67701r1_fix'
+  tag "cci": ['CCI-001310']
   tag "nist": ['SI-10', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -213,4 +213,3 @@ control "V-61785" do
     skip 'A manual review is required to ensure the DBMS checks the validity of data inputs'
   end
 end
-

@@ -1,7 +1,7 @@
-control "V-61797" do
+control 'V-61797' do
   title "The DBMS must notify appropriate individuals when accounts are
   created."
-  desc  "Once an attacker establishes initial access to a system, they often
+  desc "Once an attacker establishes initial access to a system, they often
   attempt to create a persistent method of re-establishing access. One way to
   accomplish this is for the attacker to simply create a new account.
 
@@ -24,12 +24,12 @@ control "V-61797" do
   creation of an account within Oracle may indicate hostile activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000291-DB-000139"
-  tag "gid": "V-61797"
-  tag "rid": "SV-76287r2_rule"
-  tag "stig_id": "O121-C2-020400"
-  tag "fix_id": "F-67713r1_fix"
-  tag "cci": ["CCI-001683"]
+  tag "gtitle": 'SRG-APP-000291-DB-000139'
+  tag "gid": 'V-61797'
+  tag "rid": 'SV-76287r2_rule'
+  tag "stig_id": 'O121-C2-020400'
+  tag "fix_id": 'F-67713r1_fix'
+  tag "cci": ['CCI-001683']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -69,4 +69,3 @@ control "V-61797" do
     created'
   end
 end
-

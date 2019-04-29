@@ -1,5 +1,5 @@
-control "V-61425" do
-  title "The Oracle REMOTE_OS_AUTHENT parameter must be set to FALSE."
+control 'V-61425' do
+  title 'The Oracle REMOTE_OS_AUTHENT parameter must be set to FALSE.'
   desc  "Setting this value to TRUE allows operating system authentication over
   an unsecured connection. Trusting remote operating systems can allow a user to
   impersonate another operating system user and connect to the database without
@@ -7,12 +7,12 @@ control "V-61425" do
   information a remote user needs to connect to the database is the name of any
   user whose account is setup to be authenticated by the operating system."
   impact 0.7
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61425"
-  tag "rid": "SV-75915r1_rule"
-  tag "stig_id": "O121-BP-021900"
-  tag "fix_id": "F-67341r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61425'
+  tag "rid": 'SV-75915r1_rule'
+  tag "stig_id": 'O121-BP-021900'
+  tag "fix_id": 'F-67341r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -40,10 +40,9 @@ control "V-61425" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
- 
   parameter = sql.query("select value from v$parameter where name = 'remote_os_authent';").column('value')
 
   describe 'The oracle database REMOTE_OS_AUTHENT parameter' do
@@ -51,4 +50,3 @@ control "V-61425" do
     it { should cmp 'FALSE' }
   end
 end
-

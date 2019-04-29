@@ -1,7 +1,7 @@
-control "V-61879" do
+control 'V-61879' do
   title "The DBMS must uniquely identify and authenticate organizational users
   (or processes acting on behalf of organizational users)."
-  desc  "To assure accountability and prevent unauthorized access,
+  desc "To assure accountability and prevent unauthorized access,
   organizational users shall be identified and authenticated.
 
       Organizational users include organizational employees or individuals the
@@ -15,12 +15,12 @@ control "V-61879" do
   or authentication.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000148-DB-000103"
-  tag "gid": "V-61879"
-  tag "rid": "SV-76369r1_rule"
-  tag "stig_id": "O121-P2-012800"
-  tag "fix_id": "F-67795r1_fix"
-  tag "cci": ["CCI-000764"]
+  tag "gtitle": 'SRG-APP-000148-DB-000103'
+  tag "gid": 'V-61879'
+  tag "rid": 'SV-76369r1_rule'
+  tag "stig_id": 'O121-P2-012800'
+  tag "fix_id": 'F-67795r1_fix'
+  tag "cci": ['CCI-000764']
   tag "nist": ['IA-2', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -49,4 +49,3 @@ control "V-61879" do
     (or processes acting on behalf of organizational users).'
   end
 end
-

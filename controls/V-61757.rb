@@ -1,7 +1,7 @@
-control "V-61757" do
+control 'V-61757' do
   title "The DBMS must terminate the network connection associated with a
   communications session at the end of the session or 15 minutes of inactivity."
-  desc  "Non-local maintenance and diagnostic activities are those activities
+  desc "Non-local maintenance and diagnostic activities are those activities
   conducted by individuals communicating through a network, either an external
   network (e.g., the Internet) or an internal network.
 
@@ -23,12 +23,12 @@ control "V-61757" do
   aspect of the requirement, the timeout because of inactivity, is configurable.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000190-DB-000137"
-  tag "gid": "V-61757"
-  tag "rid": "SV-76247r2_rule"
-  tag "stig_id": "O121-C2-016500"
-  tag "fix_id": "F-67673r2_fix"
-  tag "cci": ["CCI-001133"]
+  tag "gtitle": 'SRG-APP-000190-DB-000137'
+  tag "gid": 'V-61757'
+  tag "rid": 'SV-76247r2_rule'
+  tag "stig_id": 'O121-C2-016500'
+  tag "fix_id": 'F-67673r2_fix'
+  tag "cci": ['CCI-001133']
   tag "nist": ['SC-10', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -58,20 +58,20 @@ control "V-61757" do
   ALTER PROFILE PPPPPP LIMIT IDLE_TIME 15;"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  query = %(
+
+  query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'IDLE_TIME'
-  )
+  }
 
-  user_profiles = sql.query("SELECT profile FROM dba_users;").column('profile').uniq
+  user_profiles = sql.query('SELECT profile FROM dba_users;').column('profile').uniq
 
   user_profiles.each do |profile|
-    idle_time = sql.query(format(query, profile: profile)).column('limit') 
+    idle_time = sql.query(format(query, profile: profile)).column('limit')
 
-    describe 'The oracle database idele time for profile: #{profile}' do
+    describe "The oracle database idele time for profile: #{profile}" do
       subject { idle_time }
-      it { should cmp <= 15}
+      it { should cmp <= 15 }
     end
   end
   if user_profiles.empty?
@@ -80,4 +80,3 @@ control "V-61757" do
     end
   end
 end
-

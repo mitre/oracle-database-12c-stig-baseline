@@ -1,9 +1,9 @@
 ALLOWED_DBADMIN_USERS = attribute('allowed_dbadmin_users')
 
-control "V-61433" do
+control 'V-61433' do
   title "System privileges granted using the WITH ADMIN OPTION must not be
   granted to unauthorized user accounts."
-  desc  "The WITH ADMIN OPTION allows the grantee to grant a privilege to
+  desc "The WITH ADMIN OPTION allows the grantee to grant a privilege to
   another database account. Best security practice restricts the privilege of
   assigning privileges to authorized personnel. Authorized personnel include
   DBAs, object owners, and, where designed and included in the application's
@@ -11,12 +11,12 @@ control "V-61433" do
   to authorized accounts can help decrease mismanagement of privileges and
   wrongful assignments to unauthorized accounts."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61433"
-  tag "rid": "SV-75923r3_rule"
-  tag "stig_id": "O121-BP-022300"
-  tag "fix_id": "F-67349r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61433'
+  tag "rid": 'SV-75923r3_rule'
+  tag "stig_id": 'O121-BP-022300'
+  tag "fix_id": 'F-67349r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -86,12 +86,12 @@ control "V-61433" do
 
   Document authorized privilege assignments with the WITH ADMIN OPTION in the
   System Security Plan."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   dba_users = sql.query("select grantee from dba_sys_privs
   where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
-  if  dba_users.empty?
+  if dba_users.empty?
     impact 0.0
     describe 'There are no oracle DBA users, control N/A' do
       skip 'There are no oracle DBA users, control N/A'
@@ -103,6 +103,5 @@ control "V-61433" do
         it { should be_in ALLOWED_DBADMIN_USERS }
       end
     end
-  end 
+  end
 end
-  

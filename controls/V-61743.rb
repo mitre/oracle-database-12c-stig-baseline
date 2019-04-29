@@ -1,7 +1,7 @@
-control "V-61743" do
+control 'V-61743' do
   title "The DBMS must map the authenticated identity to the user account using
   PKI-based authentication."
-  desc  "The cornerstone of the PKI is the private key used to encrypt or
+  desc "The cornerstone of the PKI is the private key used to encrypt or
   digitally sign information. The key by itself is a cryptographic value that
   does not contain specific user information.
 
@@ -15,12 +15,12 @@ control "V-61743" do
   'SSL', such as SSL_VERSION and SSL_CIPHER_SUITES, they refer to TLS.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000177-DB-000069"
-  tag "gid": "V-61743"
-  tag "rid": "SV-76233r2_rule"
-  tag "stig_id": "O121-C2-015500"
-  tag "fix_id": "F-67659r1_fix"
-  tag "cci": ["CCI-000187"]
+  tag "gtitle": 'SRG-APP-000177-DB-000069'
+  tag "gid": 'V-61743'
+  tag "rid": 'SV-76233r2_rule'
+  tag "stig_id": 'O121-C2-015500'
+  tag "fix_id": 'F-67659r1_fix'
+  tag "cci": ['CCI-000187']
   tag "nist": ['IA-5 (2) (c)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -76,30 +76,29 @@ control "V-61743" do
 
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'WALLET_LOCATION = (SOURCE= (METHOD = FILE) (METHOD_DATA = DIRECTORY=/wallet)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should match /SSL_CIPHER_SUITES=\(\w*\)/ }
   end
 
-  describe.one do 
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe.one do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.2' }
     end
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.1' }
     end
   end
 
   describe.one do
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_CLIENT_AUTHENTICATION=TRUE)' }
     end
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_CLIENT_AUTHENTICATION=FALSE)' }
     end
   end
 end
-

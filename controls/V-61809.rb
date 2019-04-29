@@ -1,4 +1,4 @@
-control "V-61809" do
+control 'V-61809' do
   title "The DBMS must implement separation of duties through assigned
     information access authorizations."
   desc  "Separation of duties is a prevalent Information Technology control
@@ -26,13 +26,13 @@ control "V-61809" do
     protect against unauthorized privilege assignment.
   "
   impact 0.3
-  tag "gtitle": "SRG-APP-000062-DB-000009"
-  tag "gid": "V-61809"
-  tag "rid": "SV-76299r3_rule"
-  tag "stig_id": "O121-C3-003300"
-  tag "fix_id": "F-67725r1_fix"
-  tag "cci": ["CCI-000366", "CCI-002220"]
-  tag "nist": ['CM-6 b', 'Rev_4'] 
+  tag "gtitle": 'SRG-APP-000062-DB-000009'
+  tag "gid": 'V-61809'
+  tag "rid": 'SV-76299r3_rule'
+  tag "stig_id": 'O121-C3-003300'
+  tag "fix_id": 'F-67725r1_fix'
+  tag "cci": ['CCI-000366', 'CCI-002220']
+  tag "nist": ['CM-6 b', 'Rev_4']
   tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -221,4 +221,3 @@ control "V-61809" do
     information access authorizations'
   end
 end
-

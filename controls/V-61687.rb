@@ -1,8 +1,8 @@
-control "V-61687" do
+control 'V-61687' do
   title "The DBMS must support the organizational requirements to specifically
   prohibit or restrict the use of unauthorized functions, ports, protocols,
   and/or services."
-  desc  "Information systems are capable of providing a wide variety of
+  desc "Information systems are capable of providing a wide variety of
   functions and services. Some of the functions and services, provided by
   default, may not be necessary to support essential organizational operations
   (e.g., key missions, functions).
@@ -24,12 +24,12 @@ control "V-61687" do
   components of the information system.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000142-DB-000094"
-  tag "gid": "V-61687"
-  tag "rid": "SV-76177r1_rule"
-  tag "stig_id": "O121-C2-011900"
-  tag "fix_id": "F-67601r1_fix"
-  tag "cci": ["CCI-000382"]
+  tag "gtitle": 'SRG-APP-000142-DB-000094'
+  tag "gid": 'V-61687'
+  tag "rid": 'SV-76177r1_rule'
+  tag "stig_id": 'O121-C2-011900'
+  tag "fix_id": 'F-67601r1_fix'
+  tag "cci": ['CCI-000382']
   tag "nist": ['CM-7 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil

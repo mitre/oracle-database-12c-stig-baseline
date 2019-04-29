@@ -1,5 +1,5 @@
-control "V-61573" do
-  title "The DBMS must automatically audit account termination."
+control 'V-61573' do
+  title 'The DBMS must automatically audit account termination.'
   desc  "When application accounts are terminated, user accessibility is
   affected.  Accounts are utilized for identifying individual application users
   or for identifying the application processes themselves.
@@ -20,12 +20,12 @@ control "V-61573" do
   always be configured to capture account termination.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000029-DB-000188"
-  tag "gid": "V-61573"
-  tag "rid": "SV-76063r2_rule"
-  tag "stig_id": "O121-C2-002500"
-  tag "fix_id": "F-67489r2_fix"
-  tag "cci": ["CCI-001405"]
+  tag "gtitle": 'SRG-APP-000029-DB-000188'
+  tag "gid": 'V-61573'
+  tag "rid": 'SV-76063r2_rule'
+  tag "stig_id": 'O121-C2-002500'
+  tag "fix_id": 'F-67489r2_fix'
+  tag "cci": ['CCI-001405']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -92,12 +92,11 @@ control "V-61573" do
   http://docs.oracle.com/database/121/ARPLS/d_audit_mgmt.htm#ARPLS241
   Oracle Database Upgrade Guide:
   http://docs.oracle.com/database/121/UPGRD/afterup.htm#UPGRD52810"
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   standard_auditing_used = attribute('standard_auditing_used')
+  standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
-
 
   describe.one do
     describe 'Standard auditing is in use for audit purposes' do
@@ -111,7 +110,6 @@ control "V-61573" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
 
   if standard_auditing_used
@@ -140,11 +138,9 @@ control "V-61573" do
               FROM   v$option
               WHERE  parameter = 'Unified Auditing') != 'TRUE';").column('Account termination is not being audited').uniq
 
-
     describe 'The unified auditing data capture for account termination' do
-      subject { "#{unified_auditing_events}" }
+      subject { unified_auditing_events.to_s }
       it { should_not cmp '[nil]' }
     end
   end
 end
-

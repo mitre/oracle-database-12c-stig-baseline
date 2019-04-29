@@ -1,7 +1,7 @@
-control "V-61671" do
+control 'V-61671' do
   title "The DBMS must support enforcement of logical access restrictions
   associated with changes to the DBMS configuration and to the database itself."
-  desc  "When dealing with access restrictions pertaining to change control, it
+  desc "When dealing with access restrictions pertaining to change control, it
   should be noted any changes to the hardware, software, and/or firmware
   components of the information system and/or application can have significant
   effects on the overall security of the system.
@@ -18,12 +18,12 @@ control "V-61671" do
   actions.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000128-DB-000086"
-  tag "gid": "V-61671"
-  tag "rid": "SV-76161r1_rule"
-  tag "stig_id": "O121-C2-010300"
-  tag "fix_id": "F-67585r1_fix"
-  tag "cci": ["CCI-000345"]
+  tag "gtitle": 'SRG-APP-000128-DB-000086'
+  tag "gid": 'V-61671'
+  tag "rid": 'SV-76161r1_rule'
+  tag "stig_id": 'O121-C2-010300'
+  tag "fix_id": 'F-67585r1_fix'
+  tag "cci": ['CCI-000345']
   tag "nist": ['CM-5', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -58,8 +58,7 @@ control "V-61671" do
   umask = command('umask').stdout.strip
 
   describe 'The system umask' do
-    subject {umask}
-    it {should be >= '0022'}
+    subject { umask }
+    it { should be >= '0022' }
   end
 end
-

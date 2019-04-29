@@ -1,7 +1,7 @@
-control "V-61579" do
+control 'V-61579' do
   title "DBMS processes or services must run under custom, dedicated OS
   accounts."
-  desc  "Separation of duties is a prevalent Information Technology control
+  desc "Separation of duties is a prevalent Information Technology control
   that is implemented at different layers of the information system, including
   the operating system and in applications. It serves to eliminate or reduce the
   possibility that a single user may carry out a prohibited action. Separation of
@@ -14,12 +14,12 @@ control "V-61579" do
   permissions.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000062-DB-000010"
-  tag "gid": "V-61579"
-  tag "rid": "SV-76069r1_rule"
-  tag "stig_id": "O121-C2-003400"
-  tag "fix_id": "F-67495r1_fix"
-  tag "cci": ["CCI-000366", "CCI-002220"]
+  tag "gtitle": 'SRG-APP-000062-DB-000010'
+  tag "gid": 'V-61579'
+  tag "rid": 'SV-76069r1_rule'
+  tag "stig_id": 'O121-C2-003400'
+  tag "fix_id": 'F-67495r1_fix'
+  tag "cci": ['CCI-000366', 'CCI-002220']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "nist": ['AC-5 c', 'Rev_4']
   tag "false_negatives": nil
@@ -94,8 +94,8 @@ control "V-61579" do
 
   oracle_file_owners.each do |owner|
     describe 'The file and directory inside the Oracle Home directory' do
-      subject {owner}
-      it { should cmp 'oracle'}
+      subject { owner }
+      it { should cmp 'oracle' }
     end
   end
   if oracle_file_owners.empty?

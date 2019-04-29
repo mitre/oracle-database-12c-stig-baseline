@@ -1,7 +1,7 @@
-control "V-68863" do
+control 'V-68863' do
   title "Logic modules within the database (to include packages, procedures,
   functions and triggers) must be monitored to discover unauthorized changes."
-  desc  "Any changes to the hardware, software, and/or firmware components of
+  desc "Any changes to the hardware, software, and/or firmware components of
   the information system and/or application can potentially have significant
   effects on the overall security of the system.  This includes the logic modules
   implemented within the database, such as packages, procedures, functions and
@@ -19,12 +19,12 @@ control "V-68863" do
   unauthorized or compromised installations.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000133-DB-000179"
-  tag "gid": "V-68863"
-  tag "rid": "SV-83467r1_rule"
-  tag "stig_id": "O121-OS-010710"
-  tag "fix_id": "F-75045r1_fix"
-  tag "cci": ["CCI-001499"]
+  tag "gtitle": 'SRG-APP-000133-DB-000179'
+  tag "gid": 'V-68863'
+  tag "rid": 'SV-83467r1_rule'
+  tag "stig_id": 'O121-OS-010710'
+  tag "fix_id": 'F-75045r1_fix'
+  tag "cci": ['CCI-001499']
   tag "nist": ['CM-5 (6)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -52,4 +52,3 @@ control "V-68863" do
     functions and triggers) are monitored to discover unauthorized changes'
   end
 end
-

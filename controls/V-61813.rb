@@ -1,5 +1,5 @@
-control "V-61813" do
-  title "The system must provide an audit log reduction capability."
+control 'V-61813' do
+  title 'The system must provide an audit log reduction capability.'
   desc  "Audit reduction is used to reduce the volume of audit records in order
   to facilitate manual review.  Before a security review, information systems
   and/or applications with an audit reduction capability may remove many audit
@@ -19,12 +19,12 @@ control "V-61813" do
   missed.
   "
   impact 0.3
-  tag "gtitle": "SRG-APP-000113-DB-000053"
-  tag "gid": "V-61813"
-  tag "rid": "SV-76303r1_rule"
-  tag "stig_id": "O121-C3-008700"
-  tag "fix_id": "F-67729r1_fix"
-  tag "cci": ["CCI-001875"]
+  tag "gtitle": 'SRG-APP-000113-DB-000053'
+  tag "gid": 'V-61813'
+  tag "rid": 'SV-76303r1_rule'
+  tag "stig_id": 'O121-C3-008700'
+  tag "fix_id": 'F-67729r1_fix'
+  tag "cci": ['CCI-001875']
   tag "nist": ['AU-7 a', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -42,9 +42,8 @@ control "V-61813" do
   this functionality.
 
   If this capability has not been implemented, this is a finding."
-  tag "fix": "Deploy software capable of performing audit data reduction."
+  tag "fix": 'Deploy software capable of performing audit data reduction.'
   describe 'A manual review is required to ensure the system provides an audit log reduction capability' do
     skip 'A manual review is required to ensure the system provides an audit log reduction capability'
   end
 end
-

@@ -1,8 +1,8 @@
 ORACLE_DBAS = attribute('oracle_dbas')
-control "V-61869" do
+control 'V-61869' do
   title "The OS must limit privileges to change the DBMS software resident
   within software libraries (including privileged programs)."
-  desc  "When dealing with change control issues, it should be noted, any
+  desc "When dealing with change control issues, it should be noted, any
   changes to the hardware, software, and/or firmware components of the
   information system and/or application can potentially have significant effects
   on the overall security of the system.
@@ -29,12 +29,12 @@ control "V-61869" do
   operation of the host system.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000133-DB-000207"
-  tag "gid": "V-61869"
-  tag "rid": "SV-76359r1_rule"
-  tag "stig_id": "O121-OS-011200"
-  tag "fix_id": "F-67785r1_fix"
-  tag "cci": ["CCI-001499"]
+  tag "gtitle": 'SRG-APP-000133-DB-000207'
+  tag "gid": 'V-61869'
+  tag "rid": 'SV-76359r1_rule'
+  tag "stig_id": 'O121-OS-011200'
+  tag "fix_id": 'F-67785r1_fix'
+  tag "cci": ['CCI-001499']
   tag "nist": ['CM-5 (6)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -68,12 +68,12 @@ control "V-61869" do
   require access based on job function."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   dba_users = sql.query("select * from dba_role_privs where granted_role = 'DBA';").column('grantee').uniq
-  if  dba_users.empty?
+  if dba_users.empty?
     impact 0.0
     describe "There are no oracle DBA's, control N/A" do
-      skip "There are no oracle DBA's, control N/A" 
+      skip "There are no oracle DBA's, control N/A"
     end
   else
     dba_users.each do |user|
@@ -82,6 +82,5 @@ control "V-61869" do
         it { should be_in ORACLE_DBAS }
       end
     end
-  end 
+  end
 end
-

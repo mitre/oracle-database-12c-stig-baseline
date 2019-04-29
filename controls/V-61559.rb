@@ -1,7 +1,7 @@
-control "V-61559" do
+control 'V-61559' do
   title "The DBMS must provide a mechanism to automatically identify accounts
   designated as temporary or emergency accounts."
-  desc  "Temporary application accounts could be used in the event of a vendor
+  desc "Temporary application accounts could be used in the event of a vendor
   support visit where a support representative requires a temporary unique
   account in order to perform diagnostic testing or conduct some other
   support-related activity. When these types of accounts are created, there is a
@@ -26,12 +26,12 @@ control "V-61559" do
   special handling.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000024-DB-000002"
-  tag "gid": "V-61559"
-  tag "rid": "SV-76049r2_rule"
-  tag "stig_id": "O121-C2-001900"
-  tag "fix_id": "F-67475r6_fix"
-  tag "cci": ["CCI-000016"]
+  tag "gtitle": 'SRG-APP-000024-DB-000002'
+  tag "gid": 'V-61559'
+  tag "rid": 'SV-76049r2_rule'
+  tag "stig_id": 'O121-C2-001900'
+  tag "fix_id": 'F-67475r6_fix'
+  tag "cci": ['CCI-000016']
   tag "nist": ['AC-2 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -187,4 +187,3 @@ control "V-61559" do
     designated as temporary or emergency accounts'
   end
 end
-

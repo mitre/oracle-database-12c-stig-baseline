@@ -1,7 +1,7 @@
-control "V-61735" do
+control 'V-61735' do
   title "Procedures for establishing temporary passwords that meet DoD password
   requirements for new accounts must be defined, documented, and implemented."
-  desc  "Password maximum lifetime is  the maximum period of time, (typically
+  desc "Password maximum lifetime is  the maximum period of time, (typically
   in days) a user's password may be in effect before the user is forced to change
   it.
 
@@ -25,12 +25,12 @@ control "V-61735" do
   where it is necessary to have accounts directly managed by Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000174-DB-000077"
-  tag "gid": "V-61735"
-  tag "rid": "SV-76225r1_rule"
-  tag "stig_id": "O121-C2-014900"
-  tag "fix_id": "F-67651r1_fix"
-  tag "cci": ["CCI-000199"]
+  tag "gtitle": 'SRG-APP-000174-DB-000077'
+  tag "gid": 'V-61735'
+  tag "rid": 'SV-76225r1_rule'
+  tag "stig_id": 'O121-C2-014900'
+  tag "fix_id": 'F-67651r1_fix'
+  tag "cci": ['CCI-000199']
   tag "nist": ['IA-5 (1) (d)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -63,4 +63,3 @@ control "V-61735" do
     requirements for new accounts are defined, documented, and implemented'
   end
 end
-

@@ -1,8 +1,8 @@
-control "V-61745" do
+control 'V-61745' do
   title "Processes (services, applications, etc.) that connect to the DBMS
   independently of individual users, must use valid, current DoD-issued PKI
   certificates for authentication to the  DBMS."
-  desc  "Just as individual users must be authenticated, and just as they must
+  desc "Just as individual users must be authenticated, and just as they must
   use PKI-based authentication, so must any processes that connect to the DBMS.
 
       The DoD standard for authentication of a process or device communicating
@@ -19,12 +19,12 @@ control "V-61745" do
   it is truly needed.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000177-DB-000069"
-  tag "gid": "V-61745"
-  tag "rid": "SV-76235r2_rule"
-  tag "stig_id": "O121-C2-015501"
-  tag "fix_id": "F-67661r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000177-DB-000069'
+  tag "gid": 'V-61745'
+  tag "rid": 'SV-76235r2_rule'
+  tag "stig_id": 'O121-C2-015501'
+  tag "fix_id": 'F-67661r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -42,7 +42,7 @@ control "V-61745" do
 
   If any such account (other than SYS, SYSBACKUP, SYSDG, and SYSKM) is not
   certificate-based, this is a finding."
-  tag "fix": "For each such account, use DoD certificate-based authentication."
+  tag "fix": 'For each such account, use DoD certificate-based authentication.'
   describe 'A manual review is required to ensure processes (services, applications, etc.) that connect to the DBMS
     independently of individual users, must use valid, current DoD-issued PKI
     certificates for authentication to the  DBMS' do
@@ -51,4 +51,3 @@ control "V-61745" do
     certificates for authentication to the  DBMS'
   end
 end
-

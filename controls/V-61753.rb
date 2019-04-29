@@ -1,8 +1,8 @@
-control "V-61753" do
+control 'V-61753' do
   title "Databases employed to write data to portable digital media must use
   cryptographic mechanisms to protect and restrict access to information on
   portable digital media."
-  desc  "When data is written to portable digital media, such as thumb drives,
+  desc "When data is written to portable digital media, such as thumb drives,
   floppy diskettes, compact disks, magnetic tape, etc., there is risk of data
   loss.
 
@@ -33,12 +33,12 @@ control "V-61753" do
   media is not encrypted, it can be compromised.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000187-DB-000120"
-  tag "gid": "V-61753"
-  tag "rid": "SV-76243r2_rule"
-  tag "stig_id": "O121-C2-016300"
-  tag "fix_id": "F-67669r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000187-DB-000120'
+  tag "gid": 'V-61753'
+  tag "rid": 'SV-76243r2_rule'
+  tag "stig_id": 'O121-C2-016300'
+  tag "fix_id": 'F-67669r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -75,4 +75,3 @@ control "V-61753" do
     portable digital media'
   end
 end
-

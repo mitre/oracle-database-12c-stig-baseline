@@ -1,7 +1,7 @@
-control "V-61509" do
+control 'V-61509' do
   title "The DBMS must not share a host supporting an independent security
   service."
-  desc  "The Security Support Structure is a security control function or
+  desc "The Security Support Structure is a security control function or
   service provided by an external system or application. An example of this would
   be a Windows domain controller that provides identification and authentication
   that can be used by other systems to control access. The associated risk of a
@@ -10,12 +10,12 @@ control "V-61509" do
   dedicated to local support of a security support function (e.g. a directory
   service), separation may not be possible."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61509"
-  tag "rid": "SV-75999r1_rule"
-  tag "stig_id": "O121-BP-025300"
-  tag "fix_id": "F-67425r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61509'
+  tag "rid": 'SV-75999r1_rule'
+  tag "stig_id": 'O121-BP-025300'
+  tag "fix_id": 'F-67425r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -47,8 +47,7 @@ control "V-61509" do
   the DBMS vendor."
   describe 'A manual review is required to ensure the DBMS does not share a host supporting an independent security
   service' do
-   skip 'A manual review is required to ensure the DBMS does not share a host supporting an independent security
-  service'
+    skip 'A manual review is required to ensure the DBMS does not share a host supporting an independent security
+   service'
   end
 end
-

@@ -1,7 +1,7 @@
-control "V-61649" do
+control 'V-61649' do
   title "The system must provide the capability to automatically process audit
   records for events of interest based upon selectable event criteria."
-  desc  "Before a security review, information systems and/or applications with
+  desc "Before a security review, information systems and/or applications with
   an audit reduction capability may remove many audit records known to have
   little security significance.
 
@@ -38,12 +38,12 @@ control "V-61649" do
   data once written.  Therefore, an external tool is needed.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000115-DB-000055"
-  tag "gid": "V-61649"
-  tag "rid": "SV-76139r2_rule"
-  tag "stig_id": "O121-C2-008900"
-  tag "fix_id": "F-67563r2_fix"
-  tag "cci": ["CCI-000158"]
+  tag "gtitle": 'SRG-APP-000115-DB-000055'
+  tag "gid": 'V-61649'
+  tag "rid": 'SV-76139r2_rule'
+  tag "stig_id": 'O121-C2-008900'
+  tag "fix_id": 'F-67563r2_fix'
+  tag "cci": ['CCI-000158']
   tag "nist": ['AU-7 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -66,9 +66,8 @@ control "V-61649" do
   tag "fix": "Utilize a tool, application or service that provides the ability
   to automatically process audit records for events based on selectable event
   criteria."
-   describe service('auditd') do
+  describe service('auditd') do
     it { should be_enabled }
     it { should be_running }
   end
 end
-

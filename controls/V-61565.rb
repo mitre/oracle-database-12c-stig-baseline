@@ -1,5 +1,5 @@
-control "V-61565" do 
-  title "The DBMS must automatically audit account creation."
+control 'V-61565' do
+  title 'The DBMS must automatically audit account creation.'
   desc  "Once an attacker establishes initial access to a system, they often
   attempt to create a persistent method of re-establishing access. One way to
   accomplish this is for the attacker to simply create a new account.
@@ -20,12 +20,12 @@ control "V-61565" do
   always be configured to capture account creation.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000026-DB-000005"
-  tag "gid": "V-61565"
-  tag "rid": "SV-76055r2_rule"
-  tag "stig_id": "O121-C2-002200"
-  tag "fix_id": "F-67481r2_fix"
-  tag "cci": ["CCI-000018"]
+  tag "gtitle": 'SRG-APP-000026-DB-000005'
+  tag "gid": 'V-61565'
+  tag "rid": 'SV-76055r2_rule'
+  tag "stig_id": 'O121-C2-002200'
+  tag "fix_id": 'F-67481r2_fix'
+  tag "cci": ['CCI-000018']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -94,9 +94,8 @@ control "V-61565" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   standard_auditing_used = attribute('standard_auditing_used')
+  standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
-
 
   describe.one do
     describe 'Standard auditing is in use for audit purposes' do
@@ -110,7 +109,6 @@ control "V-61565" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
 
   if standard_auditing_used
@@ -139,9 +137,8 @@ control "V-61565" do
               FROM   v$option
               WHERE  parameter = 'Unified Auditing') != 'TRUE';").column('Account creation is not being audited.').uniq
 
-
     describe 'The unified auditing data capture for account creation' do
-      subject { "#{unified_auditing_events}" }
+      subject { unified_auditing_events.to_s }
       it { should_not cmp '[nil]' }
     end
   end

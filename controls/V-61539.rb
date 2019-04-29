@@ -1,7 +1,7 @@
-control "V-61539" do
+control 'V-61539' do
   title "Oracle software must be evaluated and patched against newly found
   vulnerabilities."
-  desc  "Security faults with software applications and operating systems are
+  desc "Security faults with software applications and operating systems are
   discovered daily. Vendors are constantly updating and patching their products
   to address newly discovered security vulnerabilities. Organizations (including
   any contractor to the organization) are required to promptly install
@@ -21,12 +21,12 @@ control "V-61539" do
   discovered security versions. An unpatched version is vulnerable to attack.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000133-DB-000205"
-  tag "gid": "V-61539"
-  tag "rid": "SV-76029r2_rule"
-  tag "stig_id": "O121-C1-011100"
-  tag "fix_id": "F-67455r4_fix"
-  tag "cci": ["CCI-001499"]
+  tag "gtitle": 'SRG-APP-000133-DB-000205'
+  tag "gid": 'V-61539'
+  tag "rid": 'SV-76029r2_rule'
+  tag "stig_id": 'O121-C1-011100'
+  tag "fix_id": 'F-67455r4_fix'
+  tag "cci": ['CCI-001499']
   tag "nist": ['CM-5 (6)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -77,12 +77,11 @@ control "V-61539" do
   opatch lsinventory –detail"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
-  patches = sql.query("SELECT patch_id from dba_registry_sqlpatch;").column('patch_id')
 
- describe 'The oracle database installed patches' do
-  subject { patches }
-  it { should_not cmp nil }
- end
+  patches = sql.query('SELECT patch_id from dba_registry_sqlpatch;').column('patch_id')
+
+  describe 'The oracle database installed patches' do
+    subject { patches }
+    it { should_not cmp nil }
+  end
 end
- 

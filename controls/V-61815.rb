@@ -1,7 +1,7 @@
-control "V-61815" do
+control 'V-61815' do
   title "The DBMS must restrict the ability of users to launch Denial of
   Service (DoS) attacks against other information systems or networks."
-  desc  "When it comes to DoS attacks, most of the attention is paid to
+  desc "When it comes to DoS attacks, most of the attention is paid to
   ensuring that systems and applications are not victims of these attacks.
 
       While it is true that those accountable for systems want to ensure they are
@@ -34,12 +34,12 @@ control "V-61815" do
   addressed and must document what has been discovered.
     "
   impact 0.3
-  tag "gtitle": "SRG-APP-000246-DB-000133"
-  tag "gid": "V-61815"
-  tag "rid": "SV-76305r4_rule"
-  tag "stig_id": "O121-C3-019200"
-  tag "fix_id": "F-67731r10_fix"
-  tag "cci": ["CCI-001094"]
+  tag "gtitle": 'SRG-APP-000246-DB-000133'
+  tag "gid": 'V-61815'
+  tag "rid": 'SV-76305r4_rule'
+  tag "stig_id": 'O121-C3-019200'
+  tag "fix_id": 'F-67731r10_fix'
+  tag "cci": ['CCI-001094']
   tag "nist": ['SC-5 (1)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -281,13 +281,15 @@ control "V-61815" do
   generate an alert whenever these errors are encountered."
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/listener.ora") do
+  describe file "#{oracle_home}/network/admin/listener.ora" do
     its('content') { should include 'LISTENER=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST=)(PORT = 0)))' }
-    its('content') { should include 'LISTENER=
+    its('content') {
+      should include 'LISTENER=
     (ADDRESS_LIST=
       (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1521)(RATE_LIMIT=yes))
       (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1522)(RATE_LIMIT=yes))
-      (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1526))' }
+      (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1526))'
+    }
     its('content') { should include 'CONNECTION_RATE_LISTENER=10' }
     its('content') { should include 'SEC_MAX_FAILED_LOGIN_ATTEMPTS=3' }
     its('content') { should include 'ADMIN_RESTRICTIONS_LISTENER=ON' }
@@ -298,7 +300,7 @@ control "V-61815" do
 
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'TCP.VALIDNODE_CHECKING=yes' }
   end
 end

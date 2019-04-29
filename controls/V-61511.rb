@@ -1,17 +1,17 @@
-control "V-61511" do
+control 'V-61511' do
   title "Access to DBMS software files and directories must not be granted to
   unauthorized users."
-  desc  "The DBMS software libraries contain the executables used by the DBMS
+  desc "The DBMS software libraries contain the executables used by the DBMS
   to operate. Unauthorized access to the libraries can result in malicious
   alteration or planting of operational executables. This may in turn jeopardize
   data stored in the DBMS and/or operation of the host system."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61511"
-  tag "rid": "SV-76001r1_rule"
-  tag "stig_id": "O121-BP-025400"
-  tag "fix_id": "F-67427r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61511'
+  tag "rid": 'SV-76001r1_rule'
+  tag "stig_id": 'O121-BP-025400'
+  tag "fix_id": 'F-67427r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -98,8 +98,7 @@ control "V-61511" do
   umask = command('umask').stdout.strip
 
   describe 'The system umask' do
-    subject {umask}
-    it {should be >= '0022'}
+    subject { umask }
+    it { should be >= '0022' }
   end
-end 
-
+end

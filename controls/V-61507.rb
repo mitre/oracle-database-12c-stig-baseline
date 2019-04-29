@@ -1,17 +1,17 @@
 ALLOWED_DB_LINKS = attribute('allowed_db_links')
-control "V-61507" do
+control 'V-61507' do
   title "Credentials stored and used by the DBMS to access remote databases or
   applications must be authorized and restricted to authorized users."
-  desc  "Credentials defined for access to remote databases or applications may
+  desc "Credentials defined for access to remote databases or applications may
   provide unauthorized access to additional databases and applications to
   unauthorized or malicious users."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61507"
-  tag "rid": "SV-75997r1_rule"
-  tag "stig_id": "O121-BP-025200"
-  tag "fix_id": "F-67423r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61507'
+  tag "rid": 'SV-75997r1_rule'
+  tag "stig_id": 'O121-BP-025200'
+  tag "fix_id": 'F-67423r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -41,11 +41,10 @@ control "V-61507" do
 
   Document all database links access authorizations in the System Security Plan."
 
-  
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
-  db_links = sql.query("SELECT DB_LINK FROM DBA_DB_LINKS;").column('db_link').uniq
-  if  db_links.empty?
+
+  db_links = sql.query('SELECT DB_LINK FROM DBA_DB_LINKS;').column('db_link').uniq
+  if db_links.empty?
     impact 0.0
     describe 'There are no oracle database links defined, control N/A' do
       skip 'There are no oracle database links defined, control N/A'
@@ -57,5 +56,5 @@ control "V-61507" do
         it { should be_in ALLOWED_DB_LINKS }
       end
     end
-  end 
-end 
+  end
+end

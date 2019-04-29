@@ -1,5 +1,5 @@
-control "V-61435" do
-  title "System Privileges must not be granted to PUBLIC."
+control 'V-61435' do
+  title 'System Privileges must not be granted to PUBLIC.'
   desc  "System privileges can be granted to users and roles and to the user
   group PUBLIC. All privileges granted to PUBLIC are accessible to every user in
   the database. Many of these privileges convey considerable authority over the
@@ -9,12 +9,12 @@ control "V-61435" do
   privileges must never be granted to PUBLIC as this could allow users to
   compromise the database."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61435"
-  tag "rid": "SV-75925r1_rule"
-  tag "stig_id": "O121-BP-022400"
-  tag "fix_id": "F-67351r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61435'
+  tag "rid": 'SV-75925r1_rule'
+  tag "stig_id": 'O121-BP-022400'
+  tag "fix_id": 'F-67351r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -44,8 +44,7 @@ control "V-61435" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-  describe sql.query("select privilege from dba_sys_privs where grantee = 'PUBLIC';").row(0).column("privilege") do
+  describe sql.query("select privilege from dba_sys_privs where grantee = 'PUBLIC';").row(0).column('privilege') do
     its('value') { should be_empty }
   end
 end
-

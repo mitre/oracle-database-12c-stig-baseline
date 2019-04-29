@@ -1,4 +1,4 @@
-control "V-61967" do
+control 'V-61967' do
   title "The DBMS must limit the number of concurrent sessions for each system
   account to an organization-defined number of sessions."
   desc  "Application management includes the ability to control the number of
@@ -23,12 +23,12 @@ control "V-61967" do
   separate session.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000001-DB-000031"
-  tag "gid": "V-61967"
-  tag "rid": "SV-76457r2_rule"
-  tag "stig_id": "O121-C2-000100"
-  tag "fix_id": "F-67887r4_fix"
-  tag "cci": ["CCI-000054"]
+  tag "gtitle": 'SRG-APP-000001-DB-000031'
+  tag "gid": 'V-61967'
+  tag "rid": 'SV-76457r2_rule'
+  tag "stig_id": 'O121-C2-000100'
+  tag "fix_id": 'F-67887r4_fix'
+  tag "cci": ['CCI-000054']
   tag "nist": ['AC-10', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -88,7 +88,7 @@ control "V-61967" do
   ALTER USER <username> PROFILE ORA_STIG_PROFILE;"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   concurrent_sessions = sql.query("SELECT limit FROM SYS.DBA_PROFILES WHERE RESOURCE_NAME = 'SESSIONS_PER_USER';").column('limit')
 
   describe 'The oracle database number of concurrent sessions allowed' do
@@ -97,4 +97,3 @@ control "V-61967" do
     it { should_not include 'DEFAULT' }
   end
 end
-

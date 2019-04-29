@@ -1,7 +1,7 @@
-control "V-61787" do
+control 'V-61787' do
   title "The system must verify there have not been unauthorized changes to the
   DBMS software and information."
-  desc  "Organizations are required to employ integrity verification
+  desc "Organizations are required to employ integrity verification
   applications on information systems to look for evidence of information
   tampering, errors, and omissions. The organization is also required to employ
   good software engineering practices with regard to commercial off-the-shelf
@@ -15,12 +15,12 @@ control "V-61787" do
   of its configuration or unauthorized replacement of data.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000262-DB-000159"
-  tag "gid": "V-61787"
-  tag "rid": "SV-76277r1_rule"
-  tag "stig_id": "O121-C2-019600"
-  tag "fix_id": "F-67703r1_fix"
-  tag "cci": ["CCI-002716", "CCI-002718"]
+  tag "gtitle": 'SRG-APP-000262-DB-000159'
+  tag "gid": 'V-61787'
+  tag "rid": 'SV-76277r1_rule'
+  tag "stig_id": 'O121-C2-019600'
+  tag "fix_id": 'F-67703r1_fix'
+  tag "cci": ['CCI-002716', 'CCI-002718']
   tag "nist": ['SI-7 (6)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -47,4 +47,3 @@ control "V-61787" do
     its('stdout.strip') { should_not be_empty }
   end
 end
-

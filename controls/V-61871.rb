@@ -1,7 +1,7 @@
-control "V-61871" do
+control 'V-61871' do
   title "The DBMS must provide the ability to write specified audit record
   content to a centralized audit log repository."
-  desc  "Information system auditing capability is critical for accurate
+  desc "Information system auditing capability is critical for accurate
   forensic analysis. Audit record content that may be necessary to satisfy the
   requirement of this control includes but is not limited:  timestamps, source
   and destination IP addresses, user/process identifiers, event descriptions,
@@ -19,12 +19,12 @@ control "V-61871" do
   database.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000102-DB-000045"
-  tag "gid": "V-61871"
-  tag "rid": "SV-76361r1_rule"
-  tag "stig_id": "O121-P2-008100"
-  tag "fix_id": "F-67787r1_fix"
-  tag "cci": ["CCI-001844"]
+  tag "gtitle": 'SRG-APP-000102-DB-000045'
+  tag "gid": 'V-61871'
+  tag "rid": 'SV-76361r1_rule'
+  tag "stig_id": 'O121-P2-008100'
+  tag "fix_id": 'F-67787r1_fix'
+  tag "cci": ['CCI-001844']
   tag "nist": ['AU-3 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -76,4 +76,3 @@ control "V-61871" do
     content to a centralized audit log repository'
   end
 end
-

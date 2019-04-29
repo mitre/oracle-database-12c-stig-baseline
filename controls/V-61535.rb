@@ -1,16 +1,16 @@
-control "V-61535" do
-  title "Network client connections must be restricted to supported versions."
+control 'V-61535' do
+  title 'Network client connections must be restricted to supported versions.'
   desc  "Unsupported Oracle network client installations may introduce
   vulnerabilities to the database. Restriction to use of supported versions helps
   to protect the database and helps to enforce newer, more robust security
   controls."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61535"
-  tag "rid": "SV-76025r2_rule"
-  tag "stig_id": "O121-BP-026600"
-  tag "fix_id": "F-67451r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61535'
+  tag "rid": 'SV-76025r2_rule'
+  tag "stig_id": 'O121-BP-026600'
+  tag "fix_id": 'F-67451r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -62,20 +62,19 @@ control "V-61535" do
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
   describe.one do
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'sqlnet.allowed_logon_version_server=11' }
       its('content') { should include 'sqlnet.allowed_logon_version_client=11' }
     end
 
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'sqlnet.allowed_logon_version_server=12' }
       its('content') { should include 'sqlnet.allowed_logon_version_client=12' }
     end
 
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'sqlnet.allowed_logon_version_server=12a' }
       its('content') { should include 'sqlnet.allowed_logon_version_client=12a' }
     end
   end
 end
-

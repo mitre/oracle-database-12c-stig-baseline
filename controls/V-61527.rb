@@ -1,5 +1,5 @@
-control "V-61527" do
-  title "Changes to DBMS security labels must be audited."
+control 'V-61527' do
+  title 'Changes to DBMS security labels must be audited.'
   desc  "Some DBMS systems provide the feature to assign security labels to
   data elements. If labeling is required, implementation options include the
   Oracle Label Security package, or a third-party product, or custom-developed
@@ -7,16 +7,16 @@ control "V-61527" do
   security label assignment where this feature is in use. Changes to security
   label assignment may indicate suspicious activity."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61527"
-  tag "rid": "SV-76017r4_rule"
-  tag "stig_id": "O121-BP-026200"
-  tag "fix_id": "F-67443r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61527'
+  tag "rid": 'SV-76017r4_rule'
+  tag "stig_id": 'O121-BP-026200'
+  tag "fix_id": 'F-67443r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
-  tag "documentable": false 
+  tag "documentable": false
   tag "mitigations": nil
   tag "severity_override_guidance": false
   tag "potential_impacts": nil
@@ -30,7 +30,7 @@ control "V-61527" do
 
   If security labeling is not required, this is not a finding.
 
-  If Standard Auditing is used, run the SQL query: 
+  If Standard Auditing is used, run the SQL query:
 
   select * from dba_sa_audit_options;
 
@@ -110,7 +110,6 @@ control "V-61527" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
 
   if standard_auditing_used
@@ -140,12 +139,10 @@ control "V-61527" do
               FROM   v$option
               WHERE  parameter = 'Unified Auditing') != 'TRUE';").column('Changes to security label assignment is not being audited.').uniq
 
-
     describe 'The unified auditing data capture for account creation' do
-      subject { "#{unified_auditing_events}" }
+      subject { unified_auditing_events.to_s }
       it { should_not cmp '[nil]' }
     end
   end
-  
-end
 
+end

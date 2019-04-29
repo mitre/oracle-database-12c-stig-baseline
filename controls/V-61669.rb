@@ -1,9 +1,9 @@
 ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
-control "V-61669" do
+control 'V-61669' do
   title "The DBMS must protect the audit records generated, as a result of
   remote access to privileged accounts, and the execution of privileged
   functions."
-  desc  "Protection of audit records and audit data is of critical importance.
+  desc "Protection of audit records and audit data is of critical importance.
   Care must be taken to ensure privileged users cannot circumvent audit
   protections put in place.
 
@@ -25,12 +25,12 @@ control "V-61669" do
   could also manipulate logs to hide evidence of malicious activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000127-DB-000172"
-  tag "gid": "V-61669"
-  tag "rid": "SV-76159r1_rule"
-  tag "stig_id": "O121-C2-010200"
-  tag "fix_id": "F-67583r1_fix"
-  tag "cci": ["CCI-000366", "CCI-001351"]
+  tag "gtitle": 'SRG-APP-000127-DB-000172'
+  tag "gid": 'V-61669'
+  tag "rid": 'SV-76159r1_rule'
+  tag "stig_id": 'O121-C2-010200'
+  tag "fix_id": 'F-67583r1_fix'
+  tag "cci": ['CCI-000366', 'CCI-001351']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "nist": ['AU-9 (4)', 'Rev_4']
   tag "false_negatives": nil
@@ -84,7 +84,7 @@ control "V-61669" do
   Grant the correct Audit roles to authorized users."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
   if users_allowed_access_to_audit_info.empty?
@@ -99,6 +99,5 @@ control "V-61669" do
         it { should be_in ALLOWED_AUDIT_USERS }
       end
     end
-  end 
-end 
-
+  end
+end

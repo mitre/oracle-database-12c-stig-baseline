@@ -1,18 +1,18 @@
-control "V-61431" do
+control 'V-61431' do
   title "The Oracle REMOTE_LOGIN_PASSWORDFILE parameter must be set to
   EXCLUSIVE or NONE."
-  desc  "The REMOTE_LOGIN_PASSWORDFILE setting of \"NONE\" disallows remote
+  desc "The REMOTE_LOGIN_PASSWORDFILE setting of \"NONE\" disallows remote
   administration of the database. The REMOTE_LOGIN_PASSWORDFILE setting of
   \"EXCLUSIVE\" allows for auditing of individual DBA logons to the SYS account.
   If not set to \"EXCLUSIVE\", remote connections to the database as \"internal\"
   or \"as SYSDBA\" are not logged to an individual account."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61431"
-  tag "rid": "SV-75921r2_rule"
-  tag "stig_id": "O121-BP-022200"
-  tag "fix_id": "F-67347r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61431'
+  tag "rid": 'SV-75921r2_rule'
+  tag "stig_id": 'O121-BP-022200'
+  tag "fix_id": 'F-67347r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -45,9 +45,9 @@ control "V-61431" do
 
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
-  
+
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   parameter = sql.query("select value from v$parameter where upper(name) = 'REMOTE_LOGIN_PASSWORDFILE';").column('value')
 
   describe.one do
@@ -62,4 +62,3 @@ control "V-61431" do
     end
   end
 end
-

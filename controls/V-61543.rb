@@ -1,7 +1,7 @@
-control "V-61543" do
+control 'V-61543' do
   title "The DBMS, when using PKI-based authentication, must enforce authorized
   access to the corresponding private key."
-  desc  "The cornerstone of the PKI is the private key used to encrypt or
+  desc "The cornerstone of the PKI is the private key used to encrypt or
   digitally sign information.
 
       If the private key is stolen, this will lead to the compromise of the
@@ -23,12 +23,12 @@ control "V-61543" do
   'SSL', such as SSL_VERSION and SSL_CIPHER_SUITES, they refer to TLS.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000176-DB-000068"
-  tag "gid": "V-61543"
-  tag "rid": "SV-76033r3_rule"
-  tag "stig_id": "O121-C1-015400"
-  tag "fix_id": "F-67459r1_fix"
-  tag "cci": ["CCI-000186"]
+  tag "gtitle": 'SRG-APP-000176-DB-000068'
+  tag "gid": 'V-61543'
+  tag "rid": 'SV-76033r3_rule'
+  tag "stig_id": 'O121-C1-015400'
+  tag "fix_id": 'F-67459r1_fix'
+  tag "cci": ['CCI-000186']
   tag "nist": ['IA-5 (2) (b)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -83,35 +83,36 @@ control "V-61543" do
   private keys."
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.AUTHENTICATION_SERVICES= (BEQ, TCPS)' }
   end
 
-  describe.one do 
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe.one do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.2' }
     end
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.1' }
     end
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
-    its('content') { should include 'WALLET_LOCATION =
-  (SOURCE =
-  (METHOD = FILE)
-  (METHOD_DATA =
-  (DIRECTORY = /u01/app/oracle/product/12.1.0/dbhome_1/owm/wallets)
-  )
-  )' }
-  end 
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
+    its('content') {
+      should include 'WALLET_LOCATION =
+      (SOURCE =
+      (METHOD = FILE)
+      (METHOD_DATA =
+      (DIRECTORY = /u01/app/oracle/product/12.1.0/dbhome_1/owm/wallets)
+      )
+      )'
+    }
+  end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SSL_CIPHER_SUITES= (SSL_RSA_WITH_AES_256_CBC_SHA384)' }
   end
 end
- 

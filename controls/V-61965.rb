@@ -1,8 +1,8 @@
-control "V-61965" do
+control 'V-61965' do
   title "The directory assigned to the AUDIT_FILE_DEST parameter must be
   protected from unauthorized access and must be stored in a dedicated directory
   or disk partition separate from software or other application files."
-  desc  "The AUDIT_FILE_DEST parameter specifies the directory where the
+  desc "The AUDIT_FILE_DEST parameter specifies the directory where the
   database audit trail file is stored (when AUDIT_TRAIL parameter is set to ‘OS’,
   ‘xml’ or ‘xml, extended’ where supported by the DBMS). Unauthorized access or
   loss of integrity of the audit trail could result in loss of accountability or
@@ -12,12 +12,12 @@ control "V-61965" do
   not running (when AUDIT_SYS_OPERATIONS parameter is set to TRUE).
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61965"
-  tag "rid": "SV-76455r3_rule"
-  tag "stig_id": "O121-BP-025101"
-  tag "fix_id": "F-67885r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61965'
+  tag "rid": 'SV-76455r3_rule'
+  tag "stig_id": 'O121-BP-025101'
+  tag "fix_id": 'F-67885r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -31,7 +31,7 @@ control "V-61965" do
   tag "ia_controls": nil
   tag "check": "If Standard Auditing is used:
 
-  From SQL*Plus: 
+  From SQL*Plus:
 
   select value from v$parameter where name = 'audit_trail';
   select value from v$parameter where name = 'audit_file_dest';
@@ -97,10 +97,9 @@ control "V-61965" do
 
   get_audit_file_dest = sql.query("select value from v$parameter where name = 'audit_file_dest';").column('value')
 
-  audit_file_dest = "#{get_audit_file_dest}".delete('[""]')
+  audit_file_dest = get_audit_file_dest.to_s.delete('[""]')
 
   describe command("ls -ld #{audit_file_dest}/ |awk '{ print $1; }'") do
-    its('stdout') { should match /\w*---.$/}
+    its('stdout') { should match /\w*---.$/ }
   end
 end
-

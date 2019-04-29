@@ -1,7 +1,7 @@
-control "V-61761" do
+control 'V-61761' do
   title "Database data files containing sensitive information must be
   encrypted."
-  desc  "Cryptography is only as strong as the encryption modules/algorithms
+  desc "Cryptography is only as strong as the encryption modules/algorithms
   employed to encrypt the data.
 
       Use of weak or untested encryption algorithms undermines the purposes of
@@ -13,12 +13,12 @@ control "V-61761" do
   even taken place.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000196-DB-000141"
-  tag "gid": "V-61761"
-  tag "rid": "SV-76251r1_rule"
-  tag "stig_id": "O121-C2-016700"
-  tag "fix_id": "F-67677r1_fix"
-  tag "cci": ["CCI-002450"]
+  tag "gtitle": 'SRG-APP-000196-DB-000141'
+  tag "gid": 'V-61761'
+  tag "rid": 'SV-76251r1_rule'
+  tag "stig_id": 'O121-C2-016700'
+  tag "fix_id": 'F-67677r1_fix'
+  tag "cci": ['CCI-002450']
   tag "nist": ['SC-13', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -115,27 +115,25 @@ control "V-61761" do
   http://csrc.nist.gov/publications/PubsFIPS.html#140-2"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   parameter = sql.query("select * from v$parameter where name = 'DBFIPS_140c';").column('value')
 
   describe 'The oracle database DBFIPS_140c parameter' do
     subject { parameter }
-    it { should_not be_empty}
+    it { should_not be_empty }
   end
 
-
-  encrypted_tablespaces = sql.query("SELECT * FROM V$ENCRYPTED_TABLESPACES;").column('MASTERKEYID')
+  encrypted_tablespaces = sql.query('SELECT * FROM V$ENCRYPTED_TABLESPACES;').column('MASTERKEYID')
 
   describe 'The oracle tablespaces that are encrypted' do
     subject { encrypted_tablespaces }
-    it { should_not be_empty}
+    it { should_not be_empty }
   end
 
-  encrypted_colums = sql.query("SELECT * FROM DBA_ENCRYPTED_COLUMNS;").column('COLUMN_NAME')
+  encrypted_colums = sql.query('SELECT * FROM DBA_ENCRYPTED_COLUMNS;').column('COLUMN_NAME')
 
   describe 'The oracle table columns that are encrypted' do
     subject { encrypted_colums }
     it { should_not be_empty }
   end
 end
-

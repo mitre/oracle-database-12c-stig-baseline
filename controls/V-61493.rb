@@ -1,17 +1,17 @@
-control "V-61493" do
+control 'V-61493' do
   title "Remote administrative access to the database must be monitored by the
   ISSO or ISSM."
-  desc  "Remote administrative access to systems provides a path for access to
+  desc "Remote administrative access to systems provides a path for access to
   and exploit of DBA privileges. Where the risk has been accepted to allow remote
   administrative access, it is imperative to instate increased monitoring of this
   access to detect any abuse or compromise."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61493"
-  tag "rid": "SV-75983r1_rule"
-  tag "stig_id": "O121-BP-024400"
-  tag "fix_id": "F-67409r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61493'
+  tag "rid": 'SV-75983r1_rule'
+  tag "stig_id": 'O121-BP-024400'
+  tag "fix_id": 'F-67409r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -47,4 +47,3 @@ control "V-61493" do
     it { should be_running }
   end
 end
-

@@ -1,7 +1,7 @@
-control "V-61499" do
+control 'V-61499' do
   title "Plans and procedures for testing DBMS installations, upgrades and
   patches must be defined and followed prior to production implementation."
-  desc  "Updates and patches to existing software have the intention of
+  desc "Updates and patches to existing software have the intention of
   improving the security or enhancing or adding features to the product. However,
   it is unfortunately common that updates or patches can render production
   systems inoperable or even introduce serious vulnerabilities. Some updates also
@@ -9,12 +9,12 @@ control "V-61499" do
   security requirements. For these reasons, it is a good practice to test updates
   and patches offline before introducing them in a production environment."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61499"
-  tag "rid": "SV-75989r1_rule"
-  tag "stig_id": "O121-BP-024700"
-  tag "fix_id": "F-67415r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61499'
+  tag "rid": 'SV-75989r1_rule'
+  tag "stig_id": 'O121-BP-024700'
+  tag "fix_id": 'F-67415r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -40,5 +40,3 @@ control "V-61499" do
     patches are defined and followed prior to production implementation'
   end
 end
-
- 

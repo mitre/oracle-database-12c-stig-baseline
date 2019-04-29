@@ -1,4 +1,4 @@
-control "V-61639" do
+control 'V-61639' do
   title "The DBMS must produce audit records containing sufficient information
   to establish the identity of any user/subject or process associated with the
   event."
@@ -16,13 +16,13 @@ control "V-61639" do
   use.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000100-DB-000201"
-  tag "gid": "V-61639"
-  tag "rid": "SV-76129r1_rule"
-  tag "stig_id": "O121-C2-007900"
-  tag "fix_id": "F-67551r1_fix"
-  tag "cci": ["CCI-001487"]
-  tag "nist": ['AU-3', 'Rev_4'] 
+  tag "gtitle": 'SRG-APP-000100-DB-000201'
+  tag "gid": 'V-61639'
+  tag "rid": 'SV-76129r1_rule'
+  tag "stig_id": 'O121-C2-007900'
+  tag "fix_id": 'F-67551r1_fix'
+  tag "cci": ['CCI-001487']
+  tag "nist": ['AU-3', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -119,7 +119,7 @@ control "V-61639" do
   http://docs.oracle.com/database/121/UPGRD/afterup.htm#UPGRD52810"
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
 
@@ -136,7 +136,7 @@ control "V-61639" do
   end
 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
-  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
+  audit_info_captured = sql.query('SELECT * FROM UNIFIED_AUDIT_TRAIL;').column('EVENT_TIMESTAMP')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
@@ -155,9 +155,8 @@ control "V-61639" do
 
     describe 'The oracle database unified auditing events captured' do
       subject { audit_info_captured }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
   end
 end
-

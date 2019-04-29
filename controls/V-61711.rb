@@ -1,7 +1,7 @@
-control "V-61711" do
+control 'V-61711' do
   title "The DBMS must ensure users are authenticated with an individual
   authenticator prior to using a shared authenticator."
-  desc  "To assure individual accountability and prevent unauthorized access,
+  desc "To assure individual accountability and prevent unauthorized access,
   application users (and any processes acting on behalf of users) must be
   individually identified and authenticated.
 
@@ -30,12 +30,12 @@ control "V-61711" do
   individual users, users may deny having performed a particular action.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000153-DB-000108"
-  tag "gid": "V-61711"
-  tag "rid": "SV-76201r1_rule"
-  tag "stig_id": "O121-C2-013300"
-  tag "fix_id": "F-67627r1_fix"
-  tag "cci": ["CCI-000770"]
+  tag "gtitle": 'SRG-APP-000153-DB-000108'
+  tag "gid": 'V-61711'
+  tag "rid": 'SV-76201r1_rule'
+  tag "stig_id": 'O121-C2-013300'
+  tag "fix_id": 'F-67627r1_fix'
+  tag "cci": ['CCI-000770']
   tag "nist": ['IA-2 (5)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -97,4 +97,3 @@ control "V-61711" do
     authenticator prior to using a shared authenticator'
   end
 end
-

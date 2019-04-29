@@ -1,8 +1,8 @@
-control "V-61701" do
+control 'V-61701' do
   title "DBMS must conduct backups of system-level information per
   organization-defined frequency that is consistent with recovery time and
   recovery point objectives."
-  desc  "Information system backup is a critical step in maintaining data
+  desc "Information system backup is a critical step in maintaining data
   assurance and availability.
 
       System-level information includes:  system-state information, operating
@@ -17,12 +17,12 @@ control "V-61701" do
   is enabled and configured correctly to prevent data loss.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000146-DB-000099"
-  tag "gid": "V-61701"
-  tag "rid": "SV-76191r1_rule"
-  tag "stig_id": "O121-C2-012600"
-  tag "fix_id": "F-67617r1_fix"
-  tag "cci": ["CCI-000537"]
+  tag "gtitle": 'SRG-APP-000146-DB-000099'
+  tag "gid": 'V-61701'
+  tag "rid": 'SV-76191r1_rule'
+  tag "stig_id": 'O121-C2-012600'
+  tag "fix_id": 'F-67617r1_fix'
+  tag "cci": ['CCI-000537']
   tag "nist": ['CP-9 (b)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -50,4 +50,3 @@ control "V-61701" do
     recovery point objectives'
   end
 end
-

@@ -1,16 +1,16 @@
-control "V-61525" do
+control 'V-61525' do
   title "DBMS symmetric keys must be protected in accordance with NSA or
   NIST-approved key management technology or processes."
-  desc  "Symmetric keys used for encryption protect data from unauthorized
+  desc "Symmetric keys used for encryption protect data from unauthorized
   access. However, if not protected in accordance with acceptable standards, the
   keys themselves may be compromised and used for unauthorized data access."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61525"
-  tag "rid": "SV-76015r1_rule"
-  tag "stig_id": "O121-BP-026100"
-  tag "fix_id": "F-67441r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61525'
+  tag "rid": 'SV-76015r1_rule'
+  tag "stig_id": 'O121-BP-026100'
+  tag "fix_id": 'F-67441r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -48,4 +48,3 @@ control "V-61525" do
     NIST-approved key management technology or processes.'
   end
 end
-

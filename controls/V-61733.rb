@@ -1,7 +1,7 @@
-control "V-61733" do
+control 'V-61733' do
   title "The DBMS must support organizational requirements to enforce password
   encryption for storage."
-  desc  "Applications must enforce password encryption when storing passwords.
+  desc "Applications must enforce password encryption when storing passwords.
   Passwords need to be protected at all times, and encryption is the standard
   method for protecting passwords. If passwords are not encrypted, they can be
   plainly read and easily compromised.
@@ -15,12 +15,12 @@ control "V-61733" do
   'SSL', such as SSL_VERSION and SSL_CIPHER_SUITES, they refer to TLS.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000171-DB-000074"
-  tag "gid": "V-61733"
-  tag "rid": "SV-76223r2_rule"
-  tag "stig_id": "O121-C2-014600"
-  tag "fix_id": "F-67649r5_fix"
-  tag "cci": ["CCI-000196"]
+  tag "gtitle": 'SRG-APP-000171-DB-000074'
+  tag "gid": 'V-61733'
+  tag "rid": 'SV-76223r2_rule'
+  tag "stig_id": 'O121-C2-014600'
+  tag "fix_id": 'F-67649r5_fix'
+  tag "cci": ['CCI-000196']
   tag "nist": ['IA-5 (1) (c)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -265,27 +265,27 @@ control "V-61733" do
   sqlnet.ora files.)"
   oracle_home = command('echo $ORACLE_HOME').stdout.strip
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.AUTHENTICATION_SERVICES= (BEQ, TCPS)' }
   end
 
-  describe.one do 
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe.one do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.2' }
     end
-    describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+    describe file "#{oracle_home}/network/admin/sqlnet.ora" do
       its('content') { should include 'SSL_VERSION = 1.1' }
     end
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SSL_CLIENT_AUTHENTICATION = TRUE)' }
   end
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SSL_CIPHER_SUITES= (SSL_RSA_WITH_AES_256_CBC_SHA384)' }
   end
 
-  describe file ("#{oracle_home}/network/admin/sqlnet.ora") do
+  describe file "#{oracle_home}/network/admin/sqlnet.ora" do
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT= (SHA384)' }
     its('content') { should include 'SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER= (SHA384)' }
     its('content') { should include 'SQLNET.ENCRYPTION_TYPES_CLIENT= (AES256)' }

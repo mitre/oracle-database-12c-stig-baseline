@@ -1,6 +1,6 @@
 ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
-control "V-61663" do
-  title "The system must protect audit tools from unauthorized deletion."
+control 'V-61663' do
+  title 'The system must protect audit tools from unauthorized deletion.'
   desc  "Protecting audit data also includes identifying and protecting the
   tools used to view and manipulate log data.
 
@@ -25,12 +25,12 @@ control "V-61663" do
   could also manipulate logs to hide evidence of malicious activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000123-DB-000204"
-  tag "gid": "V-61663"
-  tag "rid": "SV-76153r1_rule"
-  tag "stig_id": "O121-C2-009800"
-  tag "fix_id": "F-67577r1_fix"
-  tag "cci": ["CCI-001495"]
+  tag "gtitle": 'SRG-APP-000123-DB-000204'
+  tag "gid": 'V-61663'
+  tag "rid": 'SV-76153r1_rule'
+  tag "stig_id": 'O121-C2-009800'
+  tag "fix_id": 'F-67577r1_fix'
+  tag "cci": ['CCI-001495']
   tag "nist": ['AU-9', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -53,7 +53,7 @@ control "V-61663" do
   these tools."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
-  
+
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
   if users_allowed_access_to_audit_info.empty?
@@ -68,6 +68,5 @@ control "V-61663" do
         it { should be_in ALLOWED_AUDIT_USERS }
       end
     end
-  end 
+  end
 end
-

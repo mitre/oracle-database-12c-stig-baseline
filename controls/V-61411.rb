@@ -1,7 +1,7 @@
-control "V-61411" do
+control 'V-61411' do
   title "Access to default accounts used to support replication must be
   restricted to authorized DBAs."
-  desc  "Replication database accounts are used for database connections
+  desc "Replication database accounts are used for database connections
   between databases. Replication requires the configuration of these accounts
   using the same username and password on all databases participating in the
   replication. Replication connections use fixed user database links. This means
@@ -10,12 +10,12 @@ control "V-61411" do
   the replication account provides unauthorized and privileged access to all
   databases participating in the replication group."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61411"
-  tag "rid": "SV-75901r1_rule"
-  tag "stig_id": "O121-BP-021200"
-  tag "fix_id": "F-67327r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61411'
+  tag "rid": 'SV-75901r1_rule'
+  tag "stig_id": 'O121-BP-021200'
+  tag "fix_id": 'F-67327r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -67,8 +67,7 @@ control "V-61411" do
   is_oracle_replication_used = sql.query("select count(*) from all_tables
   where table_name like 'REPCAT%';").column('count(*)')
 
-  oracle_replication_accounts = sql.query("select * from sys.dba_repcatlog;").column('gname')
-
+  oracle_replication_accounts = sql.query('select * from sys.dba_repcatlog;').column('gname')
 
   if !is_oracle_replication_used.include?('0')
     describe "The ISSO or DBA must manually ensure the following replication accounts are justified: #{oracle_replication_accounts}" do
@@ -76,12 +75,8 @@ control "V-61411" do
     end
   else
     describe 'The number of replication accounts defined' do
-      subject { (is_oracle_replication_used) }
-      it {should cmp 0}
+      subject { is_oracle_replication_used }
+      it { should cmp 0 }
     end
   end
-end 
-
-  
-
-
+end

@@ -1,7 +1,7 @@
-control "V-61571" do
+control 'V-61571' do
   title "The DBMS must automatically audit account disabling actions, to the
   extent such information is available."
-  desc  "When application accounts are disabled, user accessibility is
+  desc "When application accounts are disabled, user accessibility is
   affected. Accounts are utilized for identifying individual application users or
   for identifying the application processes themselves.
 
@@ -32,12 +32,12 @@ control "V-61571" do
   account, although initiated by user actions, is a function of the database.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000028-DB-000187"
-  tag "gid": "V-61571"
-  tag "rid": "SV-76061r4_rule"
-  tag "stig_id": "O121-C2-002400"
-  tag "fix_id": "F-67487r2_fix"
-  tag "cci": ["CCI-001404"]
+  tag "gtitle": 'SRG-APP-000028-DB-000187'
+  tag "gid": 'V-61571'
+  tag "rid": 'SV-76061r4_rule'
+  tag "stig_id": 'O121-C2-002400'
+  tag "fix_id": 'F-67487r2_fix'
+  tag "cci": ['CCI-001404']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -106,9 +106,8 @@ control "V-61571" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   standard_auditing_used = attribute('standard_auditing_used')
+  standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
-
 
   describe.one do
     describe 'Standard auditing is in use for audit purposes' do
@@ -122,7 +121,6 @@ control "V-61571" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
 
   if standard_auditing_used
@@ -151,11 +149,9 @@ control "V-61571" do
     FROM v$option
     WHERE parameter = 'Unified Auditing') != 'TRUE';").column('Account disabling is not being audited.').uniq
 
-
     describe 'The unified auditing data capture for account disabling actions' do
-      subject { "#{unified_auditing_events}" }
+      subject { unified_auditing_events.to_s }
       it { should_not cmp '[nil]' }
     end
   end
 end
-

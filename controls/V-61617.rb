@@ -1,7 +1,7 @@
-control "V-61617" do
+control 'V-61617' do
   title "Databases utilizing Discretionary Access Control (DAC) must enforce a
   policy that limits propagation of access rights."
-  desc  "Discretionary Access Control (DAC) is based on the premise that
+  desc "Discretionary Access Control (DAC) is based on the premise that
   individual users are owners of objects and therefore have discretion over
   who should be authorized to access the object and in which mode (e.g., read or
   write). Ownership is usually acquired as a consequence of creating the object
@@ -24,12 +24,12 @@ control "V-61617" do
       This is default behavior for Oracle.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000085-DB-000038"
-  tag "gid": "V-61617"
-  tag "rid": "SV-76107r1_rule"
-  tag "stig_id": "O121-C2-006600"
-  tag "fix_id": "F-67533r1_fix"
-  tag "cci": ["CCI-002165"]
+  tag "gtitle": 'SRG-APP-000085-DB-000038'
+  tag "gid": 'V-61617'
+  tag "rid": 'SV-76107r1_rule'
+  tag "stig_id": 'O121-C2-006600'
+  tag "fix_id": 'F-67533r1_fix'
+  tag "cci": ['CCI-002165']
   tag "nist": ['AC-3 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -66,4 +66,3 @@ control "V-61617" do
     policy that limits propagation of access rights'
   end
 end
-

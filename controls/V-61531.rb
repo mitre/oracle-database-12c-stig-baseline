@@ -1,14 +1,14 @@
-control "V-61531" do
+control 'V-61531' do
   title "The /diag subdirectory under the directory assigned to the
   DIAGNOSTIC_DEST parameter must be protected from unauthorized access."
-  desc "<DIAGNOSTIC_DEST>/diag indicates the directory where trace, alert, core and incident directories and files are located. The files may contain sensitive data or information that could prove useful to potential attackers."
+  desc '<DIAGNOSTIC_DEST>/diag indicates the directory where trace, alert, core and incident directories and files are located. The files may contain sensitive data or information that could prove useful to potential attackers.'
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61531"
-  tag "rid": "SV-76021r2_rule"
-  tag "stig_id": "O121-BP-026400"
-  tag "fix_id": "F-67447r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61531'
+  tag "rid": 'SV-76021r2_rule'
+  tag "stig_id": 'O121-BP-026400'
+  tag "fix_id": 'F-67447r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -61,10 +61,9 @@ control "V-61531" do
 
   get_diagnostic_dest = sql.query("select value from v$parameter where name = 'diagnostic_dest';").column('value')
 
-  diagnostic_dest = "#{get_diagnostic_dest}".delete('[""]')
+  diagnostic_dest = get_diagnostic_dest.to_s.delete('[""]')
 
   describe command("ls -ld #{diagnostic_dest}/diag |awk '{ print $1; }'") do
-    its('stdout') { should match /\w*---.$/}
+    its('stdout') { should match /\w*---.$/ }
   end
 end
- 

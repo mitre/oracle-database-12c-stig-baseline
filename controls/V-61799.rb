@@ -1,7 +1,7 @@
-control "V-61799" do
+control 'V-61799' do
   title "The DBMS must notify appropriate individuals when accounts are
   modified."
-  desc  "Once an attacker establishes initial access to a system, they often
+  desc "Once an attacker establishes initial access to a system, they often
   attempt to create a persistent method of re-establishing access. One way to
   accomplish this is for the attacker to modify an existing account for later use.
 
@@ -25,12 +25,12 @@ control "V-61799" do
   activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000292-DB-000138"
-  tag "gid": "V-61799"
-  tag "rid": "SV-76289r2_rule"
-  tag "stig_id": "O121-C2-020500"
-  tag "fix_id": "F-67715r1_fix"
-  tag "cci": ["CCI-001684"]
+  tag "gtitle": 'SRG-APP-000292-DB-000138'
+  tag "gid": 'V-61799'
+  tag "rid": 'SV-76289r2_rule'
+  tag "stig_id": 'O121-C2-020500'
+  tag "fix_id": 'F-67715r1_fix'
+  tag "cci": ['CCI-001684']
   tag "nist": ['AC-2 (4)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -70,4 +70,3 @@ control "V-61799" do
     modified'
   end
 end
-

@@ -1,8 +1,8 @@
-control "V-61553" do
+control 'V-61553' do
   title "The DBMS must ensure remote sessions that access an
   organization-defined list of security functions and security-relevant
   information are audited."
-  desc  "Remote access is any access to an organizational information system by
+  desc "Remote access is any access to an organizational information system by
   a user (or an information system) communicating through an external,
   non-organization-controlled network (e.g., the Internet). Examples of remote
   access methods include dial-up, broadband, and wireless.
@@ -36,12 +36,12 @@ control "V-61553" do
   to ensure the access is authorized and appropriate.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000019-DB-000197"
-  tag "gid": "V-61553"
-  tag "rid": "SV-76043r1_rule"
-  tag "stig_id": "O121-C2-001600"
-  tag "fix_id": "F-67469r1_fix"
-  tag "cci": ["CCI-002186"]
+  tag "gtitle": 'SRG-APP-000019-DB-000197'
+  tag "gid": 'V-61553'
+  tag "rid": 'SV-76043r1_rule'
+  tag "stig_id": 'O121-C2-001600'
+  tag "fix_id": 'F-67469r1_fix'
+  tag "cci": ['CCI-002186']
   tag "nist": ['AC-3 (10)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -73,7 +73,7 @@ control "V-61553" do
   SELECT * FROM SYS V$PARAMETER WHERE NAME = 'audit_trail';
   select value from v$parameter where name='audit_trail';
   If Oracle returns the value 'NONE', this is a finding.
- 
+
   To confirm that Oracle audit is capturing information on the required events,
   review the contents of the SYS.AUD$ table or the audit file, whichever is in
   use. If auditable events are not listed, this is a finding.
@@ -128,9 +128,8 @@ control "V-61553" do
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
 
-   standard_auditing_used = attribute('standard_auditing_used')
+  standard_auditing_used = attribute('standard_auditing_used')
   unified_auditing_used = attribute('unified_auditing_used')
-
 
   describe.one do
     describe 'Standard auditing is in use for audit purposes' do
@@ -144,11 +143,8 @@ control "V-61553" do
     end
   end
 
- 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
-  audit_info_captured = sql.query("SELECT * FROM UNIFIED_AUDIT_TRAIL;").column('EVENT_TIMESTAMP')
-
-
+  audit_info_captured = sql.query('SELECT * FROM UNIFIED_AUDIT_TRAIL;').column('EVENT_TIMESTAMP')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
@@ -167,9 +163,8 @@ control "V-61553" do
 
     describe 'The oracle database unified auditing events captured' do
       subject { audit_info_captured }
-      it { should_not be_empty}
+      it { should_not be_empty }
     end
 
   end
 end
-

@@ -1,17 +1,17 @@
-control "V-61487" do
+control 'V-61487' do
   title "DBMS production application and data directories must be protected
   from developers on shared production/development DBMS host systems."
-  desc  "Developer roles must not be assigned DBMS administrative privileges to
+  desc "Developer roles must not be assigned DBMS administrative privileges to
   production DBMS application and data directories. The separation of production
   DBA and developer roles helps protect the production system from unauthorized,
   malicious or unintentional interruption due to development activities."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61487"
-  tag "rid": "SV-75977r1_rule"
-  tag "stig_id": "O121-BP-024100"
-  tag "fix_id": "F-67403r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61487'
+  tag "rid": 'SV-75977r1_rule'
+  tag "stig_id": 'O121-BP-024100'
+  tag "fix_id": 'F-67403r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -54,4 +54,3 @@ control "V-61487" do
   from developers on shared production/development DBMS host systems.'
   end
 end
-

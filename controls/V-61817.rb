@@ -1,7 +1,7 @@
-control "V-61817" do
+control 'V-61817' do
   title "The DBMS must manage resources to limit the effects of information
   flooding types of Denial of Service (DoS) incidents."
-  desc  "In the case of application DoS incidents, care must be taken when
+  desc "In the case of application DoS incidents, care must be taken when
   designing the application to ensure the application makes the best use of
   system resources. SQL queries have the potential to consume large amounts of
   CPU cycles if they are not tuned for optimal performance. Web services
@@ -24,12 +24,12 @@ control "V-61817" do
   needs of the various classes of user.
   "
   impact 0.3
-  tag "gtitle": "SRG-APP-000247-DB-000134"
-  tag "gid": "V-61817"
-  tag "rid": "SV-76307r3_rule"
-  tag "stig_id": "O121-C3-019300"
-  tag "fix_id": "F-67733r8_fix"
-  tag "cci": ["CCI-001095"]
+  tag "gtitle": 'SRG-APP-000247-DB-000134'
+  tag "gid": 'V-61817'
+  tag "rid": 'SV-76307r3_rule'
+  tag "stig_id": 'O121-C3-019300'
+  tag "fix_id": 'F-67733r8_fix'
+  tag "cci": ['CCI-001095']
   tag "nist": ['SC-5 (2)', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -105,7 +105,7 @@ control "V-61817" do
   technique to verify password complexity."
 
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   limit = sql.query("select DISTINCT b.limit from dba_users a, dba_profiles b where a.profile = b.profile and resource_type='KERNEL';").column('limit')
 
   describe 'The oracle database user profile limit' do
@@ -113,4 +113,3 @@ control "V-61817" do
     it { should_not include 'UNLIMITED' }
   end
 end
-

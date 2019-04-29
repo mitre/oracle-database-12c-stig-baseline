@@ -1,5 +1,5 @@
 ALLOWED_USERS_SYSTEM_TABLESPACE = attribute('allowed_users_system_tablespace')
-control "V-61459" do
+control 'V-61459' do
   title "Only authorized system accounts must have the SYSTEM tablespace
  specified as the default tablespace."
   desc  "The Oracle SYSTEM tablespace is used by the database to store all DBMS
@@ -7,12 +7,12 @@ control "V-61459" do
   availability and the effectiveness of host system access controls to the
   tablespace files."
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61459"
-  tag "rid": "SV-75949r2_rule"
-  tag "stig_id": "O121-BP-023600"
-  tag "fix_id": "F-67375r2_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61459'
+  tag "rid": 'SV-75949r2_rule'
+  tag "stig_id": 'O121-BP-023600'
+  tag "fix_id": 'F-67375r2_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -62,9 +62,8 @@ control "V-61459" do
   name (typically TEMP).
   Repeat the \"alter user\" for each affected user account."
 
-  
   sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
- 
+
   property_name = sql.query("select property_name
   from database_properties
   where property_name in
@@ -74,23 +73,22 @@ control "V-61459" do
     subject { property_name }
     it { should_not include 'SYSTEM' }
   end
- 
+
   property_value = sql.query("select property_value
   from database_properties
   where property_name in
   ('DEFAULT_PERMANENT_TABLESPACE','DEFAULT_TEMP_TABLESPACE');").column('property_value')
 
   describe 'The oracle database property_value' do
-    subject { property_name }
+    subject { property_value }
     it { should_not include 'SYSTEM' }
   end
 
-   
   users_with_system_tablespace = sql.query("select username from dba_users
   where (default_tablespace = 'SYSTEM' or temporary_tablespace = 'SYSTEM')
   and username not in
   ('LBACSYS','OUTLN','SYS','SYSTEM');").column('username').uniq
-  if  users_with_system_tablespace.empty?
+  if users_with_system_tablespace.empty?
     impact 0.0
     describe 'There are no oracle users granted system tablespace, therefore control N/A' do
       skip 'There are no oracle users granted system tablespace, therefore control N/A'

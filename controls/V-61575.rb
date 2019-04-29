@@ -1,7 +1,7 @@
-control "V-61575" do
+control 'V-61575' do
   title "The DBMS must enforce approved authorizations for logical access to
   the system in accordance with applicable policy."
-  desc  "Strong access controls are critical to securing application data.
+  desc "Strong access controls are critical to securing application data.
   Access control policies (e.g., identity-based policies, role-based policies,
   attribute-based policies) and access enforcement mechanisms (e.g., access
   control lists, access control matrices, cryptography) must be employed by
@@ -19,12 +19,12 @@ control "V-61575" do
   and may be in conflict with applicable policy.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000033-DB-000084"
-  tag "gid": "V-61575"
-  tag "rid": "SV-76065r1_rule"
-  tag "stig_id": "O121-C2-002700"
-  tag "fix_id": "F-67491r1_fix"
-  tag "cci": ["CCI-000213"]
+  tag "gtitle": 'SRG-APP-000033-DB-000084'
+  tag "gid": 'V-61575'
+  tag "rid": 'SV-76065r1_rule'
+  tag "stig_id": 'O121-C2-002700'
+  tag "fix_id": 'F-67491r1_fix'
+  tag "cci": ['CCI-000213']
   tag "nist": ['AC-3', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -148,4 +148,3 @@ control "V-61575" do
     the system in accordance with applicable policy'
   end
 end
-

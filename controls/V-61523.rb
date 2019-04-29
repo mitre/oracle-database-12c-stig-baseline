@@ -1,7 +1,7 @@
-control "V-61523" do
+control 'V-61523' do
   title "Remote DBMS administration must be documented and authorized or
   disabled."
-  desc  "Remote administration may expose configuration and sensitive data to
+  desc "Remote administration may expose configuration and sensitive data to
   unauthorized viewing during transit across the network or allow unauthorized
   administrative access to the DBMS to remote users.
 
@@ -10,12 +10,12 @@ control "V-61523" do
   DoDIN.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000516-DB-999900"
-  tag "gid": "V-61523"
-  tag "rid": "SV-76013r3_rule"
-  tag "stig_id": "O121-BP-026000"
-  tag "fix_id": "F-67439r4_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000516-DB-999900'
+  tag "gid": 'V-61523'
+  tag "rid": 'SV-76013r3_rule'
+  tag "stig_id": 'O121-BP-026000'
+  tag "fix_id": 'F-67439r4_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -57,4 +57,3 @@ control "V-61523" do
     it { should be_running }
   end
 end
-

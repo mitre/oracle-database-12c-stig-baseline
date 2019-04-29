@@ -1,8 +1,8 @@
 ALLOWED_AUDIT_USERS = attribute('allowed_audit_users')
-control "V-61653" do
+control 'V-61653' do
   title "The system must protect audit information from any type of
   unauthorized access."
-  desc  "If audit data were to become compromised, then competent forensic
+  desc "If audit data were to become compromised, then competent forensic
   analysis and discovery of the true source of potentially malicious system
   activity is difficult, if not impossible, to achieve. In addition, access to
   audit records provides information an attacker could potentially use to his or
@@ -28,12 +28,12 @@ control "V-61653" do
   activity.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000118-DB-000059"
-  tag "gid": "V-61653"
-  tag "rid": "SV-76143r2_rule"
-  tag "stig_id": "O121-C2-009300"
-  tag "fix_id": "F-67567r3_fix"
-  tag "cci": ["CCI-000162"]
+  tag "gtitle": 'SRG-APP-000118-DB-000059'
+  tag "gid": 'V-61653'
+  tag "rid": 'SV-76143r2_rule'
+  tag "stig_id": 'O121-C2-009300'
+  tag "fix_id": 'F-67567r3_fix'
+  tag "cci": ['CCI-000162']
   tag "nist": ['AU-9', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -125,5 +125,5 @@ control "V-61653" do
         it { should be_in ALLOWED_AUDIT_USERS }
       end
     end
-  end 
+  end
 end

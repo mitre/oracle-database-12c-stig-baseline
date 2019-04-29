@@ -1,7 +1,7 @@
-control "V-61675" do
+control 'V-61675' do
   title "The DBMS must enforce requirements for remote connections to the
   information system."
-  desc  "Applications that provide remote access to information systems must be
+  desc "Applications that provide remote access to information systems must be
   able to enforce remote access policy requirements or work in conjunction with
   enterprise tools designed to enforce policy requirements. Examples of policy
   requirements include, but are not limited to, authorizing remote access to the
@@ -13,12 +13,12 @@ control "V-61675" do
   database, gain access to other components of the information system.
   "
   impact 0.5
-  tag "gtitle": "SRG-APP-000140-DB-000033"
-  tag "gid": "V-61675"
-  tag "rid": "SV-76165r1_rule"
-  tag "stig_id": "O121-C2-011400"
-  tag "fix_id": "F-67589r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000140-DB-000033'
+  tag "gid": 'V-61675'
+  tag "rid": 'SV-76165r1_rule'
+  tag "stig_id": 'O121-C2-011400'
+  tag "fix_id": 'F-67589r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -55,4 +55,3 @@ control "V-61675" do
     it { should be_running }
   end
 end
-

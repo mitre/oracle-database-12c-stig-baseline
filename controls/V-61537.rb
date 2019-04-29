@@ -1,7 +1,7 @@
-control "V-61537" do
+control 'V-61537' do
   title "DBA OS accounts must be granted only those host system privileges
   necessary for the administration of the DBMS."
-  desc  "This requirement is intended to limit exposure due to operating from
+  desc "This requirement is intended to limit exposure due to operating from
   within a privileged account or role. The inclusion of role is intended to
   address those situations where an access control policy, such as Role Based
   Access Control (RBAC), is being implemented and where a change of role provides
@@ -13,12 +13,12 @@ control "V-61537" do
   endanger the information system or hide evidence of malicious activity.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000063-DB-000021"
-  tag "gid": "V-61537"
-  tag "rid": "SV-76027r1_rule"
-  tag "stig_id": "O121-C1-004500"
-  tag "fix_id": "F-67453r1_fix"
-  tag "cci": ["CCI-000366"]
+  tag "gtitle": 'SRG-APP-000063-DB-000021'
+  tag "gid": 'V-61537'
+  tag "rid": 'SV-76027r1_rule'
+  tag "stig_id": 'O121-C1-004500'
+  tag "fix_id": 'F-67453r1_fix'
+  tag "cci": ['CCI-000366']
   tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
@@ -96,14 +96,14 @@ control "V-61537" do
 
   get_dba_users.each do |user|
     describe "The dba user: #{user} in /etc/group" do
-      subject {user}
-      it { should_not cmp 'root'}
+      subject { user }
+      it { should_not cmp 'root' }
     end
 
     get_members_root_group.each do |member|
       describe "The user: #{member} in the root group" do
-        subject {member}
-        it { should_not cmp "#{user}"}
+        subject { member }
+        it { should_not cmp user.to_s }
       end
     end
   end
@@ -113,4 +113,3 @@ control "V-61537" do
     end
   end
 end
-
