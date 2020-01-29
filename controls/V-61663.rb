@@ -51,7 +51,7 @@ control 'V-61663' do
   view or modify audit log data. Only authorized personnel must be able to delete
   these tools."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   users_allowed_access_to_audit_info = sql.query("SELECT GRANTEE, TABLE_NAME, PRIVILEGE
       FROM DBA_TAB_PRIVS where owner='AUDSYS';").column('grantee').uniq
@@ -64,7 +64,7 @@ control 'V-61663' do
     users_allowed_access_to_audit_info.each do |user|
       describe "oracle users: #{user} allowed access to audit information" do
         subject { user }
-        it { should be_in attribute('allowed_audit_users') }
+        it { should be_in input('allowed_audit_users') }
       end
     end
   end

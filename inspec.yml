@@ -6,105 +6,105 @@ copyright_email: you@example.com
 license: Apache-2.0
 summary: "This Security Technical Implementation Guide is published as a tool to improve the security of Department of Defense (DoD) information systems. The requirements are derived from the National Institute of Standards and Technology (NIST) 800-53 and related documents. Comments or proposed revisions to this document should be sent via e-mail to the following address: disa.stig_spt@mail.mil."
 version: 0.1.0
-attributes:
+inputs:
   - name: user
     description: 'username Oracle DB'
-    default: 'system'
+    value: 'system'
 
   - name: password
     description: 'password Oracle DB'
-    default: 'xvIA7zonxGM=1'
+    value: 'xvIA7zonxGM=1'
 
   - name: host
     description: 'hostname Oracle DB'
-    default: 'localhost'
+    value: 'localhost'
 
   - name: service
     description: 'service name Oracle DB'
-    default: 'ORCLCDB'
+    value: 'ORCLCDB'
 
   - name: sqlplus_bin
     description: 'Location of sqlplus tool'
-    default: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus'
+    value: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus'
 
   - name: standard_auditing_used
     description: 'Set to true if standard auditing is used'
     type: boolean
-    default: true 
+    value: true 
 
   - name: unified_auditing_used
     description: 'Set to true if unified auditing is used'
     type: boolean
-    default: false
+    value: false
 
   - name: allowed_db_links
     description: 'List of allowed database links'
     type: array
-    default: []
+    value: []
 
   - name: allowed_dbadmin_users
     description: 'List of allowed database admins'
-    default: []
+    value: []
 
   - name: users_allowed_access_to_public
     description: 'List of users allowed access to PUBLIC'
     type: array
-    default: []
+    value: []
 
   - name: allowed_users_dba_role
     description: 'List of users allowed the dba role'
     type: array
-    default: []
+    value: []
 
   - name: allowed_users_system_tablespace
     description: 'List of users allowed the system tablespace'
     type: array
-    default: []
+    value: []
 
   - name: allowed_application_owners
     description: 'List of application owners'
     type: array
-    default: []
+    value: []
 
   - name: allowed_unlocked_oracledb_accounts
     description: 'List of allowed unlocked oracle db accounts'
     type: array
-    default: []
+    value: []
 
   - name: users_allowed_access_to_dictionary_table
     description: 'List of users allowed access to the dictionary table'
     type: array
-    default: []
+    value: []
 
   - name: allowed_users_with_admin_privs
     description: 'List of users allowed admin privileges'
     type: array
-    default: []
+    value: []
 
   - name: allowed_audit_users
     description: 'List of users allowed audit access'
     type: array
-    default: []
+    value: []
 
   - name: allowed_dbaobject_owners
     description: 'List of allowed dba object owners'
     type: array
-    default: []
+    value: []
 
   - name: allowed_oracledb_components
     description: 'List of allowed oracle db components'
     type: array
-    default: []
+    value: []
 
   - name: allowed_oracledb_components_integrated_into_dbms
     description: 'List of oracle db components allowed to be intregrated into the dbms'
     type: array
-    default: []
+    value: []
 
   - name: oracle_dbas
     description: "List of allowed oracle dba's"
     type: array
-    default: []
+    value: []
 
 
 

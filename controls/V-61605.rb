@@ -72,7 +72,7 @@ control 'V-61605' do
   validation function, ORA12C_STRONG_VERIFY_FUNCTION, if relying on this
   technique to verify password complexity.)"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =

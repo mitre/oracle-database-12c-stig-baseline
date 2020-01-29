@@ -48,7 +48,7 @@ unauthorized access to database installations.
   necessary, unlock or enable accounts to change the password, and then return
   the account to disabled or locked status."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   sys_dba_users_with_defpwd = sql.query(' SELECT username FROM SYS.DBA_USERS_WITH_DEFPWD;').column('username').uniq
 

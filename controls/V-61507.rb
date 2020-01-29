@@ -40,7 +40,7 @@ control 'V-61507' do
 
   Document all database links access authorizations in the System Security Plan."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   db_links = sql.query('SELECT DB_LINK FROM DBA_DB_LINKS;').column('db_link').uniq
   if db_links.empty?
@@ -52,7 +52,7 @@ control 'V-61507' do
     db_links.each do |link|
       describe "The defined oracle database link: #{link}" do
         subject { link }
-        it { should be_in attribute('allowed_db_links') }
+        it { should be_in input('allowed_db_links') }
       end
     end
   end

@@ -37,7 +37,7 @@ control 'V-61413' do
   related documents) to change the SID for the database without re-creating the
   database to a value that does not identify the Oracle version."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   version = sql.query('select version from v$instance;').column('version')
   db_instance_name = sql.query('select instance_name from v$instance;').column('instance_name')

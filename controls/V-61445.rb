@@ -1,4 +1,4 @@
-ALLOWED_USERS_DBA_ROLE = attribute('allowed_users_dba_role')
+ALLOWED_USERS_DBA_ROLE = input('allowed_users_dba_role')
 
 control 'V-61445' do
   title "Oracle application administration roles must be disabled if not
@@ -58,7 +58,7 @@ control 'V-61445' do
   remove assigned roles from default assignment and assign individually the
   appropriate default roles."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   users_with_dba_role = sql.query("select grantee from dba_role_privs
   where default_role='YES'

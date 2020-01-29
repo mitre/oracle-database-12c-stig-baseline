@@ -61,7 +61,7 @@ control 'V-61459' do
   name (typically TEMP).
   Repeat the \"alter user\" for each affected user account."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   property_name = sql.query("select property_name
   from database_properties
@@ -96,7 +96,7 @@ control 'V-61459' do
     users_with_system_tablespace.each do |user|
       describe "oracle users with system tablespace: #{user}" do
         subject { user }
-        it { should be_in attribute('allowed_users_system_tablespace') }
+        it { should be_in input('allowed_users_system_tablespace') }
       end
     end
   end

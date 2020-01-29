@@ -68,7 +68,7 @@ control 'V-61731' do
   script file <oracle_home>/RDBMS/ADMIN/utlpwdmg.sql.  This can be used as the
   starting point for a customized function.)"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =

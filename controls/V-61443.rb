@@ -36,7 +36,7 @@ control 'V-61443' do
 
   revoke [role name] from PUBLIC;"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   describe sql.query("select granted_role from dba_role_privs where grantee = 'PUBLIC';").row(0).column('granted_role') do
     its('value') { should be_empty }

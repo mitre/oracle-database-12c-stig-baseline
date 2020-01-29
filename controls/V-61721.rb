@@ -74,7 +74,7 @@ control 'V-61721' do
   Using PPPPPP as an example, the statement to do this is:
   ALTER PROFILE PPPPPP LIMIT PASSWORD_REUSE_MAX 5 PASSWORD_REUSE_TIME 5;"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   query_password_max_reuse = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =

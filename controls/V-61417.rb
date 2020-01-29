@@ -68,7 +68,7 @@ availability, integrity and recovery."
   Consult and follow the instructions for creating control files in the Oracle
   Database Administrator's Guide, under Steps for Creating New Control Files."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   controlfiles = sql.query('select name from v$controlfile;').column('name')
   partitions = []

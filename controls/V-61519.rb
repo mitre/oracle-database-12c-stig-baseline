@@ -34,7 +34,7 @@ control 'V-61519' do
   The above SQL*Plus command will set the parameter to take effect at next system
   startup."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   parameter = sql.query("select value from v$parameter where name = 'audit_sys_operations';").column('value')
 

@@ -86,7 +86,7 @@ control 'V-61965' do
   Authorize and document user access requirements to the directory outside of the
   Oracle, DBA, and SA account list in the System Security Plan."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
 

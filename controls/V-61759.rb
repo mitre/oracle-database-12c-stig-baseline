@@ -127,7 +127,7 @@ control 'V-61759' do
   business applications (including payroll, finance, logistics, and personnel
   management applications)."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   version = sql.query('select version from v$instance;').column('version')
 
