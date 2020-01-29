@@ -3,13 +3,15 @@
 InSpec profile to validate the secure configuration of MongoDB Enterprised Advanced, against [DISA](https://iase.disa.mil/stigs/)'s **Oracle Database 12c Security Technical Implementation Guide (STIG) Version 1, Release 12**.
 
 ## Getting Started  
-It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__.
+It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__ or __SSH__.
 
 __For the best security of the runner, always install on the runner the _latest version_ of InSpec and supporting Ruby language components.__ 
 
 Latest versions and installation options are available at the [InSpec](http://inspec.io/) site.
 
 ## Running This Profile
+
+### Using winrm
 
     inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
 
@@ -18,6 +20,46 @@ Runs this profile over winrm to the host at IP address <hostip> as a privileged 
 The following is an example of using this command. 
 
     inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+
+### Using SSH
+
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
+
+Runs this profile over winrm to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
+    
+The following is an example of using this command. 
+
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+
+### Additional InSpec Exec commands depending on your target
+How to run on a remote target using ssh
+```bash
+# How to run 
+$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+```
+
+If you need to run your profile with escalated privileges
+```bash
+# How to run 
+$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input_files oracle-database-12c-stig-baseline/inputs.example.yml --sudo
+```
+
+How to run on a remote target using pem key
+```bash
+# How to run 
+$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME@TARGET_IP:TARGET_PORT -i PEM_KEY --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+```
+
+How to run on docker container
+```bash
+Inspec exec oracle-database-12c-stig-baseline -t docker://DOCKER_CONTAINER_ID --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+```
+
+To run it locally on the target with InSpec installed (JBOSS and InSpec installed on same box)
+```bash
+# How to run 
+$ inspec exec oracle-database-12c-stig-baseline --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+```
 
 ## Viewing the JSON Results
 
