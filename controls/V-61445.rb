@@ -77,7 +77,7 @@ control 'V-61445' do
     users_with_dba_role.each do |user|
       describe "oracle users with admin option: #{user}" do
         subject { user }
-        it { should be_in ALLOWED_USERS_DBA_ROLE }
+        it { should be_in input('allowed_users_dba_role') }
       end
     end
   end
