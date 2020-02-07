@@ -9,6 +9,74 @@ __For the best security of the runner, always install on the runner the _latest 
 
 Latest versions and installation options are available at the [InSpec](http://inspec.io/) site.
 
+The following inputs must be configured in an inputs file for the profile to run correctly. More information about InSpec inputs can be found in the [InSpec Profile Documentation](https://www.inspec.io/docs/reference/profiles/).
+
+### Configuring the inputs in your inputs.yml file
+```yaml
+# description: Username Oracle DB (e.g., 'system')
+user: ''
+
+# description: Password Oracle DB (e.g., 'xvIA7zonxGM=1')
+password: ''
+
+# description: Hostname Oracle DB (e.g., 'localhost')
+host: ''
+
+# description: Service name Oracle DB (e.g., 'ORCLCDB')
+service: ''
+
+# description: Location of sqlplus tool (e.g., '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+sqlplus_bin: ''
+
+# description: Set to true if standard auditing is used
+standard_auditing_used: false 
+
+# description: Set to true if unified auditing is used
+unified_auditing_used: false
+
+# description: List of allowed database links
+allowed_db_links: []
+
+# description: List of allowed database admins
+allowed_dbadmin_users: []
+
+# description: List of users allowed access to PUBLIC
+users_allowed_access_to_public: []
+
+# description: List of users allowed the dba role
+allowed_users_dba_role: []
+
+# description: List of users allowed the system tablespace
+allowed_users_system_tablespace: []
+
+# description: List of application owners
+allowed_application_owners: []
+
+# description: List of allowed unlocked Oracle db accounts
+allowed_unlocked_oracledb_accounts: []
+
+# description: List of users allowed access to the dictionary table
+users_allowed_access_to_dictionary_table: []
+
+# description: List of users allowed admin privileges
+allowed_users_with_admin_privs: []
+
+# description: List of users allowed audit access
+allowed_audit_users: []
+
+# description: List of allowed dba object owners
+allowed_dbaobject_owners: []
+
+# description: List of allowed Oracle db components
+allowed_oracledb_components: []
+
+# description: List of Oracle db components allowed to be intregrated into the dbms
+allowed_oracledb_components_integrated_into_dbms: []
+
+# description: List of allowed Oracle dba's
+oracle_dbas: []
+```
+
 ## Running This Profile
 
 ### Using winrm
