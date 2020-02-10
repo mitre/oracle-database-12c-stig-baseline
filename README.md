@@ -103,30 +103,30 @@ The following is an example of using this command.
 How to run on a remote target using ssh
 ```bash
 # How to run 
-$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input_file oracle-database-12c-stig-baseline/inputs.example.yml
 ```
 
 If you need to run your profile with escalated privileges
 ```bash
 # How to run 
-$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input_files oracle-database-12c-stig-baseline/inputs.example.yml --sudo
+$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input_file oracle-database-12c-stig-baseline/inputs.example.yml --sudo
 ```
 
 How to run on a remote target using pem key
 ```bash
 # How to run 
-$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME@TARGET_IP:TARGET_PORT -i PEM_KEY --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME@TARGET_IP:TARGET_PORT -i PEM_KEY --input_file oracle-database-12c-stig-baseline/inputs.example.yml
 ```
 
 How to run on docker container
 ```bash
-Inspec exec oracle-database-12c-stig-baseline -t docker://DOCKER_CONTAINER_ID --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+Inspec exec oracle-database-12c-stig-baseline -t docker://DOCKER_CONTAINER_ID --input_file oracle-database-12c-stig-baseline/inputs.example.yml
 ```
 
 To run it locally on the target with InSpec installed (JBOSS and InSpec installed on same box)
 ```bash
 # How to run 
-$ inspec exec oracle-database-12c-stig-baseline --input_files oracle-database-12c-stig-baseline/inputs.example.yml
+$ inspec exec oracle-database-12c-stig-baseline --input_file oracle-database-12c-stig-baseline/inputs.example.yml
 ```
 
 ## Viewing the JSON Results
