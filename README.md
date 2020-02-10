@@ -27,6 +27,7 @@ The JSON InSpec results file may also be loaded into a __full heimdall server__,
 
 ## Authors
 - Alicia Sturtevant
+- Krishna Kola, DIFZ
 
 ## Special Thanks
 
