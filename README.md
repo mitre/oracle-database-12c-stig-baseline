@@ -93,11 +93,11 @@ The following is an example of using this command.
 
     inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
 
-Runs this profile over winrm to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
+Runs this profile over ssh to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
     
 The following is an example of using this command. 
 
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://$hostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-database-12c-stig-baseliner-results.json
 
 ### Additional InSpec Exec commands depending on your target
 How to run on a remote target using ssh
