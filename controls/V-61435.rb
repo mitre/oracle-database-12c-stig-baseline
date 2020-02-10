@@ -42,7 +42,7 @@ control 'V-61435' do
   Note:  System privileges are not granted to PUBLIC by default and would
   indicate a custom action."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   describe sql.query("select privilege from dba_sys_privs where grantee = 'PUBLIC';").row(0).column('privilege') do
     its('value') { should be_empty }

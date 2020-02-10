@@ -78,7 +78,7 @@ control 'V-61561' do
   Create a job to lock accounts under this profile that are more than n days old,
   where n is the organization-defined time period."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
   query = %{
     SELECT PROFILE, RESOURCE_NAME, LIMIT FROM DBA_PROFILES WHERE PROFILE =
   '%<profile>s' AND RESOURCE_NAME = 'PASSWORD_LIFE_TIME'

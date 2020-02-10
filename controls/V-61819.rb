@@ -110,7 +110,7 @@ control 'V-61819' do
   CPU_PER_CALL       100
   CONNECT_TIME       600;"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   limit = sql.query("select
     DISTINCT b.limit

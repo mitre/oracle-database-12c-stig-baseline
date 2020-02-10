@@ -69,7 +69,7 @@ control 'V-61449' do
   Use auditing to capture use of the DBMS_JOB package in the audit trail. Review
   the audit trail for unauthorized use of the DBMS_JOB package."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   database_jobs = sql.query("select owner, job_name, state, job_class, job_type, job_action
   from dba_scheduler_jobs;").column('job_name')

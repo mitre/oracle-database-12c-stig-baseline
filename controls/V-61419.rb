@@ -54,7 +54,7 @@ control 'V-61419' do
 
   Replace log#.log file with valid or custom names for the log files."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   describe sql.query('select count(*) from V$LOG;').column('count(*)') do
     it { should cmp >= 2 }

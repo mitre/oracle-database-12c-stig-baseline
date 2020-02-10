@@ -83,7 +83,7 @@ control 'V-61591' do
   administrative privileges directly to users, except for those that Oracle does
   not permit to be assigned via roles."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   database_accounts_with_administrative_privs = sql.query("SELECT grantee
   FROM   dba_sys_privs

@@ -77,7 +77,7 @@ control 'V-61467' do
   index or enable the application owner account for the duration of the routine
   maintenance function only."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   dba_users = sql.query("select grantee from dba_sys_privs
   where admin_option = 'YES' and grantee not in (select grantee from dba_role_privs where granted_role = 'DBA');").column('grantee').uniq
@@ -90,7 +90,7 @@ control 'V-61467' do
     dba_users.each do |user|
       describe "oracle DBA users: #{user}" do
         subject { user }
-        it { should be_in attribute('allowed_dbadmin_users') }
+        it { should be_in input('allowed_dbadmin_users') }
       end
     end
   end
@@ -109,7 +109,7 @@ control 'V-61467' do
     unlocked_accounts.each do |user|
       describe "oracle user: #{user}" do
         subject { user }
-        it { should be_in attribute('allowed_unlocked_oracledb_accounts') }
+        it { should be_in input('allowed_unlocked_oracledb_accounts') }
       end
     end
   end

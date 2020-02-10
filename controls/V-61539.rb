@@ -76,7 +76,7 @@ control 'V-61539' do
   Windows:
   opatch lsinventory –detail"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   patches = sql.query('SELECT patch_id from dba_registry_sqlpatch;').column('patch_id')
 

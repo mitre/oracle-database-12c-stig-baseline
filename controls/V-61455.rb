@@ -40,7 +40,7 @@ control 'V-61455' do
   Include methods to provide evidence of review in the procedures to verify
   reviews occur in accordance with the procedures."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   database_roles = sql.query('select * from dba_roles;').column('role')
 

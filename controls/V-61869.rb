@@ -66,7 +66,7 @@ control 'V-61869' do
   tag "fix": "Restrict access to the DBMS software libraries to accounts that
   require access based on job function."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   dba_users = sql.query("select * from dba_role_privs where granted_role = 'DBA';").column('grantee').uniq
   if dba_users.empty?
@@ -78,7 +78,7 @@ control 'V-61869' do
     dba_users.each do |user|
       describe "oracle DBA's users: #{user}" do
         subject { user }
-        it { should be_in attribute('oracle_dbas') }
+        it { should be_in input('oracle_dbas') }
       end
     end
   end

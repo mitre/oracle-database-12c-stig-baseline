@@ -103,10 +103,10 @@ control 'V-61631' do
   Oracle Database Upgrade Guide:
   http://docs.oracle.com/database/121/UPGRD"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
-  standard_auditing_used = attribute('standard_auditing_used')
-  unified_auditing_used = attribute('unified_auditing_used')
+  standard_auditing_used = input('standard_auditing_used')
+  unified_auditing_used = input('unified_auditing_used')
 
   describe.one do
     describe 'Standard auditing is in use for audit purposes' do

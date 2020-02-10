@@ -108,7 +108,7 @@ control 'V-61683' do
   Revoke privileges granted to users that are not authorized access to external
   applications."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   dba_users = sql.query("select library_name,owner,  '' grantee, '' privilege
   from dba_libraries where file_spec is not null
@@ -153,7 +153,7 @@ control 'V-61683' do
     dba_users.each do |user|
       describe "oracle DBA users: #{user}" do
         subject { user }
-        it { should be_in attribute('allowed_dbadmin_users') }
+        it { should be_in input('allowed_dbadmin_users') }
       end
     end
   end

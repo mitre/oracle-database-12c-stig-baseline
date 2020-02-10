@@ -88,7 +88,7 @@ control 'V-61681' do
 
   (See My Oracle Support Document 948061.1 for more on the chopt command.)"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   list_of_installed_components_integrated_into_dbms = sql.query("SELECT parameter, value
   from v$option
@@ -109,7 +109,7 @@ control 'V-61681' do
     list_of_installed_components_integrated_into_dbms.each do |component|
       describe "The installed oracle database components integrated into the DBMS: #{component}" do
         subject { component }
-        it { should be_in attribute('allowed_oracledb_components_integrated_into_dbms') }
+        it { should be_in input('allowed_oracledb_components_integrated_into_dbms') }
       end
     end
   end

@@ -41,7 +41,7 @@ control 'V-61595' do
   tag "fix": "Configure DBMS auditing so that all use of privileged accounts is
   recorded in the audit log."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   unified_auditing_policies_defined = sql.query('SELECT unique policy_name from AUDIT_UNIFIED_POLICIES;').column('policy_name')
 

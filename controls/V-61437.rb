@@ -85,7 +85,7 @@ control 'V-61437' do
   Document authorized role assignments with the WITH ADMIN OPTION in the System
   Security Plan."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   users_with_admin_option = sql.query("select grantee from dba_role_privs
     where admin_option = 'YES' and grantee not in
@@ -103,7 +103,7 @@ control 'V-61437' do
     users_with_admin_option.each do |user|
       describe "oracle users with admin option: #{user}" do
         subject { user }
-        it { should be_in attribute('allowed_dbadmin_users') }
+        it { should be_in input('allowed_dbadmin_users') }
       end
     end
   end

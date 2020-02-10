@@ -69,7 +69,7 @@ control 'V-61463' do
   Restrict access to the Oracle process and software owner accounts, DBAs, and
   backup operator accounts."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   log_archive_dest = sql.query("select value from v$parameter where name = 'log_archive_dest';").column('value')
 

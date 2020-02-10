@@ -1,4 +1,4 @@
-ALLOWED_DBAOBJECT_OWNERS = attribute('allowed_dbaobject_owners')
+ALLOWED_DBAOBJECT_OWNERS = input('allowed_dbaobject_owners')
 control 'V-61673' do
   title 'Database objects must be owned by accounts authorized for ownership.'
   desc  "Within the database, object ownership implies full privileges to the
@@ -57,7 +57,7 @@ control 'V-61673' do
 
   Re-assign ownership of authorized objects to authorized object owner accounts."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   dba_object_owners = sql.query('select DISTINCT owner from dba_objects;').column('owner').uniq
   if dba_object_owners .empty?
@@ -69,7 +69,7 @@ control 'V-61673' do
     dba_object_owners .each do |owner|
       describe "oracle datbase object owner: #{owner}" do
         subject { owner }
-        it { should be_in attribute('allowed_dbaobject_owners') }
+        it { should be_in input('allowed_dbaobject_owners') }
       end
     end
   end

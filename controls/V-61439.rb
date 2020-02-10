@@ -83,7 +83,7 @@ control 'V-61439' do
 
   grant [privilege name] to [user role] on [object name];"
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   users_with_public_access = sql.query("select DISTINCT owner from dba_tab_privs where grantee = 'PUBLIC';").column('owner').uniq
 
@@ -96,7 +96,7 @@ control 'V-61439' do
     users_with_public_access.each do |user|
       describe "oracle user: #{user} with access to PUBLIC" do
         subject { user }
-        it { should be_in attribute('users_allowed_access_to_public')}
+        it { should be_in input('users_allowed_access_to_public')}
       end
     end
   end

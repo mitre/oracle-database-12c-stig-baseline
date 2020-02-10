@@ -142,7 +142,7 @@ control 'V-61599' do
   tag "fix": "Remove permissions from DBAs and other administrative users
   beyond those required for administrative functions."
 
-  sql = oracledb_session(user: attribute('user'), password: attribute('password'), host: attribute('host'), service: attribute('service'), sqlplus_bin: attribute('sqlplus_bin'))
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   users_with_admin_privs = sql.query("SELECT
   username,
@@ -189,7 +189,7 @@ control 'V-61599' do
     users_with_admin_privs.each do |user|
       describe "oracle database users: #{user} with administative privileges" do
         subject { user }
-        it { should be_in attribute('allowed_users_with_admin_privs')}
+        it { should be_in input('allowed_users_with_admin_privs')}
       end
     end
   end
