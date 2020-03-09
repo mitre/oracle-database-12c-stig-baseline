@@ -13,7 +13,7 @@ inputs:
 
   - name: password
     description: 'password Oracle DB'
-    value: 'xvIA7zonxGM=1'
+    value: ''
 
   - name: host
     description: 'hostname Oracle DB'
