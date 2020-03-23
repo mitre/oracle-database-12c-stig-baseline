@@ -123,7 +123,7 @@ How to run on docker container
 Inspec exec oracle-database-12c-stig-baseline -t docker://DOCKER_CONTAINER_ID --input-file oracle-database-12c-stig-baseline/inputs.example.yml --reporter cli json:oracle-database-12c-stig-baseliner-results.json
 ```
 
-To run it locally on the target with InSpec installed (JBOSS and InSpec installed on same box)
+To run it locally on the target with InSpec installed (Oracle and InSpec installed on same box)
 ```bash
 # How to run 
 $ inspec exec oracle-database-12c-stig-baseline --input-file oracle-database-12c-stig-baseline/inputs.example.yml --reporter cli json:oracle-database-12c-stig-baseliner-results.json
