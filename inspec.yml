@@ -9,7 +9,7 @@ version: 0.1.0
 inputs:
   - name: user
     description: 'username Oracle DB'
-    value: 'system'
+    value: ''
 
   - name: password
     description: 'password Oracle DB'
@@ -17,15 +17,15 @@ inputs:
 
   - name: host
     description: 'hostname Oracle DB'
-    value: 'localhost'
+    value: ''
 
   - name: service
     description: 'service name Oracle DB'
-    value: 'ORCLCDB'
+    value: ''
 
   - name: sqlplus_bin
     description: 'Location of sqlplus tool'
-    value: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus'
+    value: ''
 
   - name: standard_auditing_used
     description: 'Set to true if standard auditing is used'
