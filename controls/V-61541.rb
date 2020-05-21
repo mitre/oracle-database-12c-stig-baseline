@@ -52,15 +52,15 @@ unauthorized access to database installations.
 
   sys_dba_users_with_defpwd = sql.query(' SELECT username FROM SYS.DBA_USERS_WITH_DEFPWD;').column('username').uniq
 
-  sys_dba_users_with_defpwd.each do |user|
-    describe "The oracle system database user: #{user} with a default password" do
-      subject { user }
-      it { should cmp 'XS$NULL' }
+  describe.one do
+    sys_dba_users_with_defpwd.each do |user|
+      describe "The oracle system database user: #{user} with a default password" do
+        subject { user }
+        it { should cmp 'XS$NULL' }
+      end
     end
-  end
-  if sys_dba_users_with_defpwd.empty?
-    describe 'There are no sysdba users with default passwords, therefore this control is NA' do
-      skip 'There are no sysdba users with default passwords, therefore this control is NA'
-    end
+    
+    describe sys_dba_users_with_defpwd do
+      it { should be_empty }
   end
 end
