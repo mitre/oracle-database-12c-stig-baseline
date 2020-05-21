@@ -90,7 +90,7 @@ control 'V-61717' do
 
     describe "The oracle database account password life time for profile: #{profile}" do
       subject { password_life_time }
-      it { should cmp <= 35 }
+      it { should cmp <= input('account_inactivity_age') }
     end
   end
   if user_profiles.empty?
