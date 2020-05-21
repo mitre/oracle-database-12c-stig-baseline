@@ -80,7 +80,7 @@ control 'V-61603' do
   user_profiles.each do |profile|
     password_lock_time = sql.query(format(query, profile: profile)).column('limit')
 
-    describe 'The oracle database account password lock time' do
+    describe "The oracle database account password lock time for profile: #{profile}" do
       subject { password_lock_time }
       it { should cmp 'UNLIMITED' }
     end

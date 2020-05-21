@@ -85,7 +85,7 @@ control 'V-61607' do
   user_profiles.each do |profile|
     password_lock_time = sql.query(format(query, profile: profile)).column('limit')
 
-    describe 'The oracle database limit for failed login attempts' do
+    describe "The oracle database limit for failed login attempts for profile: #{profile}" do
       subject { password_lock_time }
       it { should cmp <= 3 }
     end
