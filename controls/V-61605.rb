@@ -85,8 +85,8 @@ control 'V-61605' do
     password_lock_time = sql.query(format(query, profile: profile)).column('limit')
 
     describe 'The oracle database limit for failed login attempts' do
-      subject { password_lock_time }
-      it { should cmp <= 3 }
+      subject { password_lock_time.first }
+      it { should cmp <= input('failed_logon_attempts') }
     end
   end
   if user_profiles.empty?
