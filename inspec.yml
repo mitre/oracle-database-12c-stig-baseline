@@ -63,7 +63,7 @@ inputs:
 
   - name: allowed_application_owners
     description: 'List of application owners'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_unlocked_oracledb_accounts
