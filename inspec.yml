@@ -108,17 +108,17 @@ inputs:
 
   - name: failed_logon_attempts
     description: "Amount of allowed failed logon attempts"
-    type: string
+    type: Number
     value: 3
 
   - name: password_life_time
     description: "Amount of time before password expires"
-    type: string
+    type: Number
     value: 35
 
   - name: account_inactivity_age
     description: "Amount of time before account is listed as inactive"
-    type: string
+    type: Number
     value: 35
 
   - name: emergency_profile_list
