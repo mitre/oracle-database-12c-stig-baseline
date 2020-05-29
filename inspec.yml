@@ -29,17 +29,17 @@ inputs:
 
   - name: standard_auditing_used
     description: 'Set to true if standard auditing is used'
-    type: boolean
+    type: Boolean
     value: true 
 
   - name: unified_auditing_used
     description: 'Set to true if unified auditing is used'
-    type: boolean
+    type: Boolean
     value: false
 
   - name: allowed_db_links
     description: 'List of allowed database links'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_dbadmin_users
@@ -48,17 +48,17 @@ inputs:
 
   - name: users_allowed_access_to_public
     description: 'List of users allowed access to PUBLIC'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_users_dba_role
     description: 'List of users allowed the dba role'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_users_system_tablespace
     description: 'List of users allowed the system tablespace'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_application_owners
@@ -68,62 +68,62 @@ inputs:
 
   - name: allowed_unlocked_oracledb_accounts
     description: 'List of allowed unlocked oracle db accounts'
-    type: array
+    type: Array
     value: []
 
   - name: users_allowed_access_to_dictionary_table
     description: 'List of users allowed access to the dictionary table'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_users_with_admin_privs
     description: 'List of users allowed admin privileges'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_audit_users
     description: 'List of users allowed audit access'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_dbaobject_owners
     description: 'List of allowed dba object owners'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_oracledb_components
     description: 'List of allowed oracle db components'
-    type: array
+    type: Array
     value: []
 
   - name: allowed_oracledb_components_integrated_into_dbms
     description: 'List of oracle db components allowed to be intregrated into the dbms'
-    type: array
+    type: Array
     value: []
 
   - name: oracle_dbas
     description: "List of allowed oracle dba's"
-    type: array
+    type: Array
     value: []
 
   - name: failed_logon_attempts
     description: "Amount of allowed failed logon attempts"
-    type: Number
+    type: Numeric
     value: 3
 
   - name: password_life_time
     description: "Amount of time before password expires"
-    type: Number
+    type: Numeric
     value: 35
 
   - name: account_inactivity_age
     description: "Amount of time before account is listed as inactive"
-    type: Number
+    type: Numeric
     value: 35
 
   - name: emergency_profile_list
     description: ""
-    type: array
+    type: Array
     value: []
 
 
