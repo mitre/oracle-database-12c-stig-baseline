@@ -87,7 +87,7 @@ control 'V-61607' do
 
     describe "The oracle database limit for failed login attempts for profile: #{profile}" do
       subject { password_lock_time }
-      it { should cmp <= 3 }
+      it { should cmp <= input('failed_logon_attempts') }
     end
   end
   if user_profiles.empty?
