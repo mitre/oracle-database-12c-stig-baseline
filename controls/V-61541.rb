@@ -62,5 +62,6 @@ unauthorized access to database installations.
     
     describe sys_dba_users_with_defpwd do
       it { should be_empty }
+    end
   end
 end
