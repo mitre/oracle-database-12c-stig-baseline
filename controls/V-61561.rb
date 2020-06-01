@@ -94,7 +94,7 @@ control 'V-61561' do
 
   if !user_profiles.empty?
     user_profiles.each do |profile|
-      next if input('emergency_profile_list').include(profile)
+      next if input('emergency_profile_list').include?(profile)
       password_life_time = sql.query(format(query, profile: profile)).column('limit')
 
       describe "The oracle database account password life time for profile: #{profile}" do
