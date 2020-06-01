@@ -122,7 +122,7 @@ inputs:
     value: 35
 
   - name: emergency_profile_list
-    description: ""
+    description: "Org-specific profiles used to manage emergency or temporary accounts"
     type: Array
     value: []
 

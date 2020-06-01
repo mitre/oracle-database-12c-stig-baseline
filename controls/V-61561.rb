@@ -94,7 +94,15 @@ control 'V-61561' do
 
   if !user_profiles.empty?
     user_profiles.each do |profile|
-      next if input('emergency_profile_list').include?(profile)
+      unless input('emergency_profile_list').include?(profile)
+      	describe "The profile #{profile} " do
+	  subject { profile }
+	  it "should not be in the org-defined list of profiles for emergency or temporary account management" do
+	    expect(subject).should_not be_in(input('emergency_profile_list')) 
+	  end
+        end
+	next
+      end
       password_life_time = sql.query(format(query, profile: profile)).column('limit')
 
       describe "The oracle database account password life time for profile: #{profile}" do
