@@ -109,7 +109,7 @@ control 'V-61747' do
 
   FIPS 140-2 documentation can be downloaded from
   http://csrc.nist.gov/publications/PubsFIPS.html#140-2  "
-  sql = oracledb_session(user: 'system', password: 'xvIA7zonxGM=1', host: 'localhost', service: 'ORCLCDB', sqlplus_bin: '/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus')
+  sql = oracledb_session(user: input('user'), password: input('password'), host: input('host'), service: input('service'), sqlplus_bin: input('sqlplus_bin'))
 
   version = sql.query('select version from v$instance;').column('version')
 
