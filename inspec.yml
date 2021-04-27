@@ -1,25 +1,28 @@
-name: Oracle Database 12c Security Technical Implementation Guide
-title: Oracle Database 12c Security Technical Implementation Guide
+name: oracle-database-12c-stig-baseline
+title: oracle-database-12c-stig-baseline
 maintainer: The Authors
 copyright: The Authors
 copyright_email: you@example.com
 license: Apache-2.0
-summary: "This Security Technical Implementation Guide is published as a tool to improve the security of Department of Defense (DoD) information systems. The requirements are derived from the National Institute of Standards and Technology (NIST) 800-53 and related documents. Comments or proposed revisions to this document should be sent via e-mail to the following address: disa.stig_spt@mail.mil."
-version: 0.1.0
+summary: "Inspec Validation Profile for Oracle Database 12c STIG"
+version: 1.12.0
 inspec_version: ">= 4.0"
 
 inputs:
   - name: user
     description: 'username Oracle DB'
     value: ''
+    sensitive: true
 
   - name: password
     description: 'password Oracle DB'
     value: ''
+    sensitive: true
 
   - name: host
     description: 'hostname Oracle DB'
     value: ''
+    sensitive: true
 
   - name: service
     description: 'service name Oracle DB'
@@ -28,6 +31,7 @@ inputs:
   - name: sqlplus_bin
     description: 'Location of sqlplus tool'
     value: ''
+    sensitive: true
 
   - name: standard_auditing_used
     description: 'Set to true if standard auditing is used'
@@ -67,11 +71,13 @@ inputs:
     description: 'List of application owners'
     type: Array
     value: []
+    sensitive: true
 
   - name: allowed_unlocked_oracledb_accounts
     description: 'List of allowed unlocked oracle db accounts'
     type: Array
     value: []
+    sensitive: true
 
   - name: users_allowed_access_to_dictionary_table
     description: 'List of users allowed access to the dictionary table'
@@ -82,6 +88,7 @@ inputs:
     description: 'List of users allowed admin privileges'
     type: Array
     value: []
+    sensitive: true
 
   - name: allowed_audit_users
     description: 'List of users allowed audit access'
@@ -107,6 +114,7 @@ inputs:
     description: "List of allowed oracle dba's"
     type: Array
     value: []
+    sensitive: true
 
   - name: failed_logon_attempts
     description: "Amount of allowed failed logon attempts"
@@ -127,7 +135,3 @@ inputs:
     description: "Org-specific profiles used to manage emergency or temporary accounts"
     type: Array
     value: []
-
-
-
-
