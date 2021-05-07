@@ -1,6 +1,6 @@
 # oracle-database-12c-stig-baseline
 
-InSpec profile to validate the secure configuration of MongoDB Enterprised Advanced, against [DISA](https://iase.disa.mil/stigs/)'s **Oracle Database 12c Security Technical Implementation Guide (STIG) Version 1, Release 12**.
+InSpec profile to validate the secure configuration of MongoDB Enterprised Advanced, against [DISA](https://iase.disa.mil/stigs/)'s Oracle Database 12c Security Technical Implementation Guide (STIG) Version 1, Release 12.
 
 ## Getting Started  
 It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__ or __SSH__.
@@ -9,9 +9,9 @@ __For the best security of the runner, always install on the runner the _latest 
 
 Latest versions and installation options are available at the [InSpec](http://inspec.io/) site.
 
+## Tailoring to Your Environment
 The following inputs must be configured in an inputs file for the profile to run correctly. More information about InSpec inputs can be found in the [InSpec Profile Documentation](https://www.inspec.io/docs/reference/profiles/).
 
-### Configuring the inputs in your inputs.yml file
 ```yaml
 # description: Username Oracle DB (e.g., 'system')
 user: ''
@@ -87,7 +87,7 @@ Runs this profile over winrm to the host at IP address <hostip> as a privileged 
     
 The following is an example of using this command. 
 
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://$winhostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://$winhostip --user '<admin-account>' --password=<password> --reporter cli json:oracle-database-12c-stig-baseliner-results.json
 
 ### Using SSH
 
@@ -97,68 +97,59 @@ Runs this profile over ssh to the host at IP address <hostip> as a privileged us
     
 The following is an example of using this command. 
 
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://$hostip --user 'Administrator' --password=Pa55w0rd --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://$hostip --user '<admin-account>' --password=<password> --reporter cli json:oracle-database-12c-stig-baseliner-results.json
 
-### Additional InSpec Exec commands depending on your target
-How to run on a remote target using ssh
-```bash
-# How to run 
-$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input-file oracle-database-12c-stig-baseline/inputs.example.yml --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+### Different Run Options
+
+  [Full exec options](https://docs.chef.io/inspec/cli/#options-3)
+
+## Running This Baseline from a local Archive copy 
+
+If your runner is not always expected to have direct access to GitHub, use the following steps to create an archive bundle of this baseline and all of its dependent tests:
+
+(Git is required to clone the InSpec profile using the instructions below. Git can be downloaded from the [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) site.)
+
+When the __"runner"__ host uses this profile baseline for the first time, follow these steps: 
+
 ```
-
-If you need to run your profile with escalated privileges
-```bash
-# How to run 
-$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME:TARGET_PASSWORD@TARGET_IP:TARGET_PORT --input-file oracle-database-12c-stig-baseline/inputs.example.yml --sudo --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+mkdir profiles
+cd profiles
+git clone https://github.com/mitre/oracle-database-12c-stig-baseline
+inspec archive oracle-database-12c-stig-baseline
+inspec exec <name of generated archive> -t ssh://$hostip --user '<admin-account>' --password=<password> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
+For every successive run, follow these steps to always have the latest version of this baseline:
 
-How to run on a remote target using pem key
-```bash
-# How to run 
-$ inspec exec oracle-database-12c-stig-baseline -t ssh://TARGET_USERNAME@TARGET_IP:TARGET_PORT -i PEM_KEY --input-file oracle-database-12c-stig-baseline/inputs.example.yml --reporter cli json:oracle-database-12c-stig-baseliner-results.json
 ```
-
-How to run on docker container
-```bash
-Inspec exec oracle-database-12c-stig-baseline -t docker://DOCKER_CONTAINER_ID --input-file oracle-database-12c-stig-baseline/inputs.example.yml --reporter cli json:oracle-database-12c-stig-baseliner-results.json
-```
-
-To run it locally on the target with InSpec installed (Oracle and InSpec installed on same box)
-```bash
-# How to run 
-$ inspec exec oracle-database-12c-stig-baseline --input-file oracle-database-12c-stig-baseline/inputs.example.yml --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+cd oracle-database-12c-stig-baseline
+git pull
+cd ..
+inspec archive oracle-database-12c-stig-baseline --overwrite
+inspec exec <name of generated archive> -t ssh://$hostip --user '<admin-account>' --password=<password> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
 ## Viewing the JSON Results
 
-The JSON results output file can be loaded into __[heimdall-lite](https://mitre.github.io/heimdall-lite/)__ for a user-interactive, graphical view of the InSpec results. 
+The JSON results output file can be loaded into __[heimdall-lite](https://heimdall-lite.mitre.org/)__ for a user-interactive, graphical view of the InSpec results. 
 
-The JSON InSpec results file may also be loaded into a __full heimdall server__, allowing for additional functionality such as to store and compare multiple profile runs.
+The JSON InSpec results file may also be loaded into a __[full heimdall server](https://github.com/mitre/heimdall)__, allowing for additional functionality such as to store and compare multiple profile runs.
 
 ## Authors
-- Alicia Sturtevant
-- Krishna Kola, DIFZ
+* Alicia Sturtevant - [asturtevant](https://github.com/asturtevant)
+* Krishna Kola, DIFZ
 
-## Special Thanks
-
-- The MITRE InSpec Team
+## Special Thanks 
+* Mohamed El-Sharkawi - [HackerShark](https://github.com/HackerShark)
+* Shivani Karikar - [karikarshivani](https://github.com/karikarshivani)
 
 ## Contributing and Getting Help
 To report a bug or feature request, please open an [issue](https://github.com/mitre/oracle-database-12c-stig-baseline/issues/new).
 
-For other help, please send a message to [inspec@mitre.org](mailto:inspec@mitre.org).
-
-To contribute, please review the [contribution guidelines](https://github.com/mitre/docs-mitre-inspec/blob/master/CONTRIBUTING.md).
-
-## License 
-
-This project is licensed under the terms of the [Apache 2.0 license](https://github.com/mitre/oracle-database-12c-stig-baseline/blob/master/LICENSE.md).
-
 ### NOTICE
 
-© 2019 The MITRE Corporation.  
+© 2018-2020 The MITRE Corporation.
 
-Approved for Public Release; Distribution Unlimited. Case Number 18-3678.  
+Approved for Public Release; Distribution Unlimited. Case Number 18-3678.
 
 ### NOTICE
 MITRE hereby grants express written permission to use, reproduce, distribute, modify, and otherwise leverage this software to the extent permitted by the licensed terms provided in the LICENSE.md file included with this project.
