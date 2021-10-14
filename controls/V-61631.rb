@@ -121,7 +121,7 @@ control 'V-61631' do
   end
 
   audit_trail = sql.query("select value from v$parameter where name = 'audit_trail';").column('value')
-  audit_info_captured = sql.query('SELECT * FROM UNIFIED_AUDIT_TRAIL;').column('EVENT_TIMESTAMP')
+  audit_info_captured = sql.query('SELECT EVENT_TIMESTAMP FROM UNIFIED_AUDIT_TRAIL ORDER BY EVENT_TIMESTAMP DESC FETCH FIRST 10 ROWS ONLY;').column('event_timestamp')
 
   if standard_auditing_used
     describe 'The oracle database audit_trail parameter' do
