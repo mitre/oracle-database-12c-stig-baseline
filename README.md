@@ -2,7 +2,7 @@
 
 InSpec profile to validate the secure configuration of Oracle 12c, against [DISA](https://iase.disa.mil/stigs/)'s Oracle Database 12c Security Technical Implementation Guide (STIG) Version 1, Release 12.
 
-#### Container-Ready: Profile updated to adapt checks when the running against a containerized instance of MongoDB, based on reference container: (docker pull tekintian/oracle12c)
+#### Container-Ready: Profile updated to adapt checks when the running against a containerized instance of Oracle 12c, based on reference container: (docker pull tekintian/oracle12c)
 
 ## Getting Started  
 It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__ or __SSH__.
