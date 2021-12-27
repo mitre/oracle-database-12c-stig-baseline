@@ -5,7 +5,7 @@ copyright: The Authors
 copyright_email: you@example.com
 license: Apache-2.0
 summary: "Inspec Validation Profile for Oracle Database 12c STIG"
-version: 1.12.0
+version: 1.12.1
 inspec_version: ">= 4.0"
 
 inputs:
