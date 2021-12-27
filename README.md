@@ -2,6 +2,8 @@
 
 InSpec profile to validate the secure configuration of Oracle 12c, against [DISA](https://iase.disa.mil/stigs/)'s Oracle Database 12c Security Technical Implementation Guide (STIG) Version 1, Release 12.
 
+#### Container-Ready: Profile updated to adapt checks when the running against a containerized instance of MongoDB, based on reference container: (docker pull tekintian/oracle12c)
+
 ## Getting Started  
 It is intended and recommended that InSpec run this profile from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target remotely over __winrm__ or __SSH__.
 
@@ -81,23 +83,21 @@ oracle_dbas: []
 
 ### Using winrm
 
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://<hostip> --user '<admin-account>' --password=<password> --input-file <path_to_your_input_file/name_of_your_input_file.yml> --reporter cli json:<filename>.json
 
 Runs this profile over winrm to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
-    
-The following is an example of using this command. 
-
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t winrm://$winhostip --user '<admin-account>' --password=<password> --reporter cli json:oracle-database-12c-stig-baseliner-results.json
 
 ### Using SSH
 
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://<hostip> --user '<admin-account>' --password=<password> --reporter cli json:<filename>.json
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://<hostip> --user '<admin-account>' --password=<password> --input-file <path_to_your_input_file/name_of_your_input_file.yml> --reporter cli json:<filename>.json
 
-Runs this profile over ssh to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file. 
-    
-The following is an example of using this command. 
+Runs this profile over ssh to the host at IP address <hostip> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file.
 
-    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t ssh://$hostip --user '<admin-account>' --password=<password> --reporter cli json:oracle-database-12c-stig-baseliner-results.json
+### Using Docker
+
+    inspec exec https://github.com/mitre/oracle-database-12c-stig-baseline/archive/master.tar.gz -t docker://<containerid> --user '<admin-account>' --password=<password> --input-file <path_to_your_input_file/name_of_your_input_file.yml> --reporter cli json:<filename>.json
+
+Runs this profile over docker transport to the container ID <containerid> as a privileged user account (i.e., an account with administrative privileges), reporting results to both the command line interface (cli) and to a machine-readable JSON file.
 
 ### Different Run Options
 
